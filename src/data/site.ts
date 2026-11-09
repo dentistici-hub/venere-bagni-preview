@@ -11,7 +11,7 @@ export const site = {
   tagline: 'Dalla vasca alla doccia in un giorno',
   title: 'Trasformazione vasca in doccia a Torino e in Piemonte | Venere Bagni',
   description:
-    'Sostituiamo la vasca con una doccia sicura in un giorno, a Torino e in tutto il Piemonte. Sopralluogo gratuito, prezzo scritto e fisso, da 3.500 €.',
+    'Togliamo la vasca e montiamo una doccia sicura in un giorno, a Torino e in Piemonte. Sopralluogo gratuito, prezzo fisso scritto, da 3.500 €.',
   area: 'Torino e tutto il Piemonte',
   // Provinces served, Torino first (order is used in the zone lists and the schema).
   areas: ['Torino', 'Cuneo', 'Novara', 'Alessandria', 'Asti', 'Biella', 'Vercelli', 'Verbano-Cusio-Ossola'],

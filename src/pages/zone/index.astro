@@ -17,14 +17,14 @@ const crumbs = [{ name: 'Zone', path: '/zone/' }];
     crumbs={crumbs}
     eyebrow="Zone servite"
     title="Lavoriamo in tutto il Piemonte"
-    lead="Partiamo da Torino e dalla sua provincia e arriviamo nelle altre province."
-    formTitle="Verifichiamo se la sua zona è servita"
+    lead="Partiamo da Torino, copriamo tutta la provincia e andiamo anche nelle altre province del Piemonte."
+    formTitle="Vediamo se arriviamo nella tua zona"
   >
     <ul class="zones">
       {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.name} e provincia</a></li>)}
       {site.areas.filter((a) => !zones.some((z) => z.name === a)).map((a) => <li><span>{a}</span></li>)}
     </ul>
-    <p style="margin-top:20px">Non vede la sua zona? Scriva il CAP nel modulo e Le diciamo subito se possiamo venire.</p>
+    <p style="margin-top:20px">La tua zona non c’è? Scrivi il CAP nel modulo e ti diciamo subito se possiamo venire.</p>
   </PageHero>
 
   <CtaBand />

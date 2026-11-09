@@ -14,10 +14,10 @@ const quando = [
   ['Serve un bagno caldo per dolori articolari', 'Si resta seduti con l’acqua fino alle spalle'],
 ];
 const faqs = [
-  { q: 'Come funziona una vasca con sportello?', a: 'La vasca con sportello di Venere Bagni ha una porta stagna sul fianco. Ci si siede, si chiude lo sportello e si riempie la vasca. Prima di uscire bisogna svuotarla. Così non si scavalca il bordo e si evitano le cadute.' },
-  { q: 'Quanto tempo serve per installare una vasca con sportello?', a: 'Venere Bagni installa la vasca con sportello in [DA CONFERMARE: 1 o 2 giorni] di lavoro. Il tempo esatto dipende dal bagno. Al sopralluogo gratuito Le diciamo i tempi e li troverà scritti nel preventivo.' },
-  { q: 'La vasca con sportello è adatta a una persona anziana?', a: 'Sì, è pensata proprio per chi ha difficoltà a scavalcare il bordo. Venere Bagni la monta con maniglioni e fondo antiscivolo. Se la persona non riesce a stare seduta da sola, al sopralluogo valutiamo insieme se una doccia con seggiolino sia più sicura.' },
-  { q: 'Posso tenere la vasca che ho e aggiungere solo lo sportello?', a: 'In genere no, perché lo sportello va costruito nella vasca stessa. Venere Bagni sostituisce la vasca con un modello nuovo dello stesso ingombro, così non tocca il resto del bagno.' },
+  { q: 'Come funziona una vasca con sportello?', a: 'La vasca con sportello di Venere Bagni ha una porta stagna sul fianco. Ti siedi, chiudi lo sportello e riempi la vasca; prima di uscire la devi svuotare. Così il bordo non lo scavalchi mai ed eviti di cadere entrando e uscendo.' },
+  { q: 'Quanto tempo serve per installare una vasca con sportello?', a: 'Venere Bagni installa la vasca con sportello in [DA CONFERMARE: 1 o 2 giorni] di lavoro, a seconda del bagno. I tempi esatti te li diciamo al sopralluogo gratuito e li trovi scritti nel preventivo.' },
+  { q: 'La vasca con sportello è adatta a una persona anziana?', a: 'Sì, è fatta apposta per chi non riesce più a scavalcare il bordo. Venere Bagni la monta con maniglioni e fondo antiscivolo. Se la persona non riesce a stare seduta da sola, al sopralluogo vediamo insieme se è più sicura una doccia con seggiolino.' },
+  { q: 'Posso tenere la vasca che ho e aggiungere solo lo sportello?', a: 'Di solito no, perché lo sportello fa parte della vasca. Venere Bagni sostituisce la vecchia vasca con un modello nuovo della stessa misura, così il resto del bagno non si tocca.' },
 ];
 ---
 <Base
@@ -31,10 +31,10 @@ const faqs = [
     crumbs={crumbs}
     eyebrow="Torino e tutto il Piemonte"
     title="Vasca con sportello: si entra senza scavalcare il bordo"
-    lead="Per chi vuole tenere la vasca ma non riesce più ad alzare la gamba. Montiamo noi tutto, con prezzo fisso scritto."
+    lead="Per chi vuole continuare a fare il bagno ma non riesce più ad alzare la gamba oltre il bordo. Togliamo la vecchia vasca e montiamo la nuova, con il prezzo scritto prima."
     chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', 'Si entra da seduti']}
     img="solSportello"
-    formTitle="Prenoti il sopralluogo gratuito"
+    formTitle="Prenota il sopralluogo gratuito"
   />
 
   <section class="section" id="cos-e">
@@ -42,8 +42,8 @@ const faqs = [
       <div>
         <p class="eyebrow">Che cos’è</p>
         <h2>Una vasca vera, con una porta sul lato</h2>
-        <p>La vasca con sportello ha una porta stagna sul lato. Si apre, ci si siede sul seggiolino interno e si richiude. Poi la vasca si riempie. Per uscire si svuota prima e poi si apre la porta.</p>
-        <p>È pensata per chi ama il bagno caldo ma ha difficoltà con le articolazioni o con l’equilibrio. Si entra con un passo basso, seduti.</p>
+        <p>Ha una porta stagna sul lato: la apri, ti siedi sul seggiolino interno, richiudi e la vasca si riempie. Per uscire prima la svuoti, poi apri la porta.</p>
+        <p>La scelgono soprattutto persone a cui piace il bagno caldo ma che hanno problemi alle articolazioni o di equilibrio. Si entra con un passo basso e ci si siede subito.</p>
       </div>
       <BeforeAfter before="prima3" after="dopo3" caption="[CITTÀ] · vasca con sportello · [DURATA]" />
     </div>
@@ -51,8 +51,7 @@ const faqs = [
 
   <section class="section section--sand" id="quando">
     <div class="wrap narrow">
-      <p class="eyebrow">Quando conviene</p>
-      <h2>La vasca con sportello è la scelta giusta se:</h2>
+      <h2>Quando ha senso tenere la vasca</h2>
       <div class="tbl-wrap">
         <table class="tbl">
           <caption>Quando conviene la vasca con sportello</caption>
@@ -60,27 +59,25 @@ const faqs = [
           <tbody>{quando.map(([a, b]) => <tr><td>{a}</td><td>{b}</td></tr>)}</tbody>
         </table>
       </div>
-      <p>Se invece il bagno si usa solo per la doccia, di solito conviene la <a href={u('/vasca-in-doccia/')}>trasformazione in doccia</a>, che costa meno e si pulisce più in fretta. Al sopralluogo Le diciamo quale delle due è più adatta al suo caso.</p>
+      <p>Se in bagno ci si fa solo la doccia, di solito conviene la <a href={u('/vasca-in-doccia/')}>trasformazione in doccia</a>: costa meno e si pulisce più in fretta. Al sopralluogo ti diciamo quale delle due va meglio nel tuo caso.</p>
     </div>
   </section>
 
   <section class="section" id="lavoro">
     <div class="wrap narrow">
-      <p class="eyebrow">Come si lavora</p>
-      <h2>Dalla vecchia vasca a quella con sportello</h2>
-      <p set:html={h('Smontiamo la vecchia vasca, posiamo la vasca con sportello, colleghiamo scarico e rubinetteria e ripristiniamo le pareti intorno. Il tempo di lavoro è di [DA CONFERMARE: 1 o 2 giorni]. Chi la usa deve aspettare lo svuotamento prima di aprire lo sportello.')} />
+      <h2>Come la montiamo</h2>
+      <p set:html={h('Smontiamo la vecchia vasca, posiamo quella con sportello, colleghiamo scarico e rubinetteria e sistemiamo le pareti intorno. Servono [DA CONFERMARE: 1 o 2 giorni] di lavoro. Quando poi la usi, ricorda che lo sportello si apre solo dopo che la vasca si è svuotata.')} />
     </div>
   </section>
 
   <section class="section section--sand" id="prezzo">
     <div class="wrap narrow">
-      <p class="eyebrow">Quanto costa</p>
-      <h2>Il prezzo, scritto dopo il sopralluogo</h2>
+      <h2>Quanto costa</h2>
       <div class="price-box">
         <p class="from"><small>Prezzo a partire da</small><span set:html={h('[DA X €]')} /></p>
         <div>
-          <p>Per la fornitura e l’installazione, secondo il modello e le misure. Il prezzo preciso Le viene scritto dopo il sopralluogo gratuito.</p>
-          <a class="link-arrow" href={u('/prezzi/')}>Vede tutti i prezzi</a>
+          <p>Il prezzo comprende fornitura e installazione e cambia con il modello e le misure. Quello preciso te lo scriviamo dopo il sopralluogo gratuito.</p>
+          <a class="link-arrow" href={u('/prezzi/')}>Tutti i prezzi</a>
         </div>
       </div>
     </div>
@@ -93,5 +90,5 @@ const faqs = [
     </div>
   </section>
 
-  <CtaBand title="Vuole vedere come entra nel suo bagno?" text="Veniamo a misurare e Le mostriamo il modello adatto. Il sopralluogo è gratuito." />
+  <CtaBand title="Vuoi vedere se ci sta nel tuo bagno?" text="Veniamo a misurare e ti facciamo vedere il modello adatto. Il sopralluogo è gratuito." />
 </Base>

@@ -5,10 +5,10 @@ import { site } from '../data/site';
 import { u } from '../lib/url';
 import { h } from '../lib/txt';
 interface Props { id: string; title?: string; sub?: string; next1?: string }
-const { id, title = 'Verifichiamo se la sua zona è servita', sub = 'Bastano 3 domande e meno di un minuto.', next1 = 'Avanti' } = Astro.props;
+const { id, title = 'Vediamo se arriviamo nella tua zona', sub = 'Sono 3 domande, ci vuole meno di un minuto.', next1 = 'Avanti' } = Astro.props;
 const interventi = ['Da vasca a doccia', 'Vasca con sportello', 'Bagno completo', 'Non lo so ancora'];
 const tempi = ['Entro 1 mese', 'Tra 1 e 3 mesi', 'Sto solo valutando'];
-const labels = ['La sua zona', 'Il suo bagno', 'I suoi contatti'];
+const labels = ['La tua zona', 'Il tuo bagno', 'I tuoi contatti'];
 ---
 <form class="lf card" id={id} data-lead-form data-caps={site.capPrefixes.join(',')} data-thanks={u('/grazie/')} novalidate>
   <p class="lf__title">{title}</p>
@@ -18,24 +18,24 @@ const labels = ['La sua zona', 'Il suo bagno', 'I suoi contatti'];
   <div class="hp" aria-hidden="true"><label>Lascia vuoto <input name="hp_url" type="text" tabindex="-1" autocomplete="off" /></label></div>
 
   <div class="lf__step" data-step="1">
-    <label class="fld fld--cap"><span>Il suo CAP</span>
+    <label class="fld fld--cap"><span>Il tuo CAP</span>
       <input name="cap" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="ad es. 10100" />
-      <small class="help">Serve solo per capire se arriviamo da Lei.</small>
+      <small class="help">Ci serve solo per sapere se arriviamo da te.</small>
     </label>
     <div class="lf__out" data-out hidden>
-      <h4>Per ora non arriviamo nella sua zona</h4>
-      <p>Il suo CAP non è tra quelli che serviamo oggi. Se vuole, lasci comunque il suo contatto: La avvisiamo se ci allarghiamo nella sua zona.</p>
+      <h4>Per ora non arriviamo nella tua zona</h4>
+      <p>Il tuo CAP non è tra quelli che serviamo oggi. Puoi lasciarci comunque il tuo contatto: se cominciamo a lavorare anche lì, ti avvisiamo.</p>
     </div>
     <div class="lf__nav"><button class="btn btn--block" type="button" data-next>{next1}</button></div>
   </div>
 
   <div class="lf__step" data-step="2" hidden>
     <fieldset>
-      <legend>Cosa vuole cambiare?</legend>
+      <legend>Cosa vuoi cambiare?</legend>
       <div class="opts">{interventi.map((o) => <label class="opt"><input type="radio" name="intervento" value={o} /><span>{o}</span></label>)}</div>
     </fieldset>
     <fieldset>
-      <legend>Quando vorrebbe farlo?</legend>
+      <legend>Quando vorresti farlo?</legend>
       <div class="opts">{tempi.map((o) => <label class="opt"><input type="radio" name="tempi" value={o} /><span>{o}</span></label>)}</div>
     </fieldset>
     <div class="lf__nav"><button class="btn btn--ghost" type="button" data-prev>Indietro</button><button class="btn" type="button" data-next>Avanti</button></div>
@@ -43,16 +43,16 @@ const labels = ['La sua zona', 'Il suo bagno', 'I suoi contatti'];
 
   <div class="lf__step" data-step="3" hidden>
     <p class="q">A chi telefoniamo?</p>
-    <label class="fld"><span>Il suo nome</span><input name="name" type="text" autocomplete="name" maxlength="120" /></label>
-    <label class="fld"><span>Il suo numero di telefono</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" />
-      <small class="help" set:html={h('La chiamiamo entro [X ORE] per fissare il sopralluogo gratuito.')} /></label>
-    <label class="fld"><span>La sua email (facoltativa)</span><input name="email" type="email" autocomplete="email" maxlength="200" /></label>
+    <label class="fld"><span>Il tuo nome</span><input name="name" type="text" autocomplete="name" maxlength="120" /></label>
+    <label class="fld"><span>Il tuo numero di telefono</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" />
+      <small class="help" set:html={h('Ti chiamiamo entro [X ORE] per fissare il sopralluogo gratuito.')} /></label>
+    <label class="fld"><span>La tua email (facoltativa)</span><input name="email" type="email" autocomplete="email" maxlength="200" /></label>
     <label class="check"><input type="checkbox" name="privacy_consent" /><span>Ho letto l'<a href={u('/privacy/')} target="_blank" rel="noopener">informativa sulla privacy</a> e accetto che {site.brand} usi i miei dati per contattarmi sulla mia richiesta.</span></label>
     <label class="check"><input type="checkbox" name="marketing_consent" /><span>Voglio ricevere ogni tanto novità e offerte di {site.brand} (facoltativo).</span></label>
     <div class="lf__nav"><button class="btn btn--ghost" type="button" data-prev>Indietro</button><button class="btn" type="submit" data-submit>Prenota il sopralluogo gratuito</button></div>
-    <p class="lf__note">Nessun impegno. Il sopralluogo è gratuito.</p>
+    <p class="lf__note">Il sopralluogo è gratuito e non ti impegna.</p>
   </div>
 
   <p class="lf__msg" role="status" aria-live="polite" data-msg hidden></p>
-  <noscript><p class="lf__msg is-err">Per inviare la richiesta serve JavaScript. Ci chiami al numero in alto.</p></noscript>
+  <noscript><p class="lf__msg is-err">Per inviare la richiesta serve JavaScript. Chiamaci al numero in alto.</p></noscript>
 </form>

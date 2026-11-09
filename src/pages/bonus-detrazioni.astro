@@ -41,8 +41,8 @@ const esempi = [
     crumbs={crumbs}
     eyebrow="Bonus e detrazioni 2026"
     title="Detrazioni per la doccia al posto della vasca: cosa vale nel 2026"
-    lead="Sostituire la vasca con una doccia può dare diritto a una detrazione fiscale, ma non sempre. Dipende da come è fatta la doccia, da chi paga e dalla casa in cui si interviene."
-    formTitle="Vuole sapere quanto Le costerebbe davvero?"
+    lead="Cambiare la vasca con una doccia a volte dà diritto a una detrazione fiscale, a volte no. Conta prima di tutto come è fatta la doccia, poi chi paga e in che casa si fanno i lavori."
+    formTitle="Vuoi sapere quanto spenderesti davvero?"
     contacts={false}
   >
     <p class="updated">Aggiornato a novembre 2026</p>
@@ -50,17 +50,15 @@ const esempi = [
 
   <section class="section" id="in-breve">
     <div class="wrap narrow">
-      <p class="eyebrow">In breve</p>
-      <h2>Che cosa vale nel 2026, in poche righe</h2>
+      <h2>Cosa vale nel 2026, in breve</h2>
       <div class="note"><p set:html={h(bonusShort)} /></div>
-      <p style="margin-top:20px" set:html={h('Qui sotto trova le regole in vigore nel 2026, spiegate con i numeri, e quelle che invece sono finite. Le condizioni valgono caso per caso: prima di decidere conviene verificarle insieme al suo commercialista, e noi Le forniamo la documentazione tecnica della doccia che realizziamo [DA CONFERMARE].')} />
+      <p style="margin-top:20px" set:html={h('Qui sotto trovi le regole in vigore nel 2026, con i numeri, e quelle che sono finite. Le condizioni vanno verificate caso per caso con il tuo commercialista, prima di decidere. Noi ti diamo la documentazione tecnica della doccia che montiamo [DA CONFERMARE].')} />
     </div>
   </section>
 
   <section class="section section--sand" id="cosa-vale">
     <div class="wrap">
       <div class="head">
-        <p class="eyebrow">Il quadro 2026</p>
         <h2>Cosa c’è e cosa non c’è più nel 2026</h2>
       </div>
       <div class="tbl-wrap">
@@ -75,8 +73,7 @@ const esempi = [
 
   <section class="section" id="vasca-doccia">
     <div class="wrap narrow">
-      <p class="eyebrow">Riepilogo per caso</p>
-      <h2>La sostituzione della vasca con la doccia: quando rientra nel bonus</h2>
+      <h2>Quando la doccia al posto della vasca rientra nel bonus</h2>
       <p>Per l’Agenzia delle Entrate, sostituire la vasca con un’altra vasca con sportello, o con un box doccia, non dà diritto alla detrazione quando è un intervento isolato e la doccia non ha le caratteristiche tecniche previste per eliminare le barriere architettoniche.</p>
       <p>La stessa Agenzia riconosce invece la detrazione per gli interventi che eliminano le barriere architettoniche, anche in assenza di persone con disabilità in casa. Il riferimento tecnico è il decreto ministeriale 236 del 1989, che per la doccia chiede tre cose: doccia a pavimento, sedile ribaltabile, doccia a telefono. Lo stesso decreto prevede, negli adeguamenti, la sostituzione della vasca con una doccia a pavimento.</p>
       <p set:html={h('Non c’è una soglia di età né una invalidità da dimostrare. Conta che la doccia e il lavoro rispettino quelle caratteristiche e che il lavoro sia documentato [DA CONFERMARE CON IL COMMERCIALISTA].')} />
@@ -96,13 +93,13 @@ const esempi = [
     <div class="wrap narrow">
       <p class="eyebrow">Bonus ristrutturazione</p>
       <h2>La detrazione del 50% e del 36%</h2>
-      <p>La detrazione per i lavori di ristrutturazione riduce l’IRPEF che Lei deve pagare. Non è un rimborso immediato: l’importo si recupera in dieci rate annuali di pari valore, a partire dalla dichiarazione dei redditi dell’anno in cui paga.</p>
-      <p>Per le spese pagate nel 2026 la percentuale è del 50% se i lavori riguardano la casa in cui Lei vive, ed è Lei il proprietario o il titolare di un diritto come l’usufrutto. Negli altri casi è del 36%. Il limite di spesa è di 96.000 euro per ogni unità immobiliare, e comprende tutti i lavori di questo tipo fatti nella stessa casa.</p>
+      <p>La detrazione per i lavori di ristrutturazione riduce l’IRPEF che paghi. I soldi non tornano subito: l’importo si recupera in dieci rate annuali uguali, a partire dalla dichiarazione dei redditi dell’anno in cui paghi i lavori.</p>
+      <p>Per le spese pagate nel 2026 la percentuale è del 50% se i lavori riguardano la casa in cui vivi e ne sei proprietario o titolare di un diritto come l’usufrutto. Negli altri casi è del 36%. Il limite di spesa è di 96.000 euro per ogni unità immobiliare, e comprende tutti i lavori di questo tipo fatti nella stessa casa.</p>
       <p>Chi abita in affitto o in comodato, o un familiare convivente che sostiene la spesa, può avere la detrazione, ma al 36%.</p>
-      <p>Chi ha un reddito complessivo superiore a 75.000 euro trova un tetto sulle detrazioni totali, calcolato con regole proprie: su questo è meglio rivolgersi a chi segue la sua dichiarazione.</p>
+      <p>Con un reddito complessivo sopra i 75.000 euro c’è un tetto alle detrazioni totali, calcolato con regole proprie: in quel caso chiedi a chi ti segue la dichiarazione.</p>
       <div class="tbl-wrap">
         <table class="tbl tbl--stack">
-          <caption>Esempi di calcolo (calcolo semplice, non è una garanzia di diritto)</caption>
+          <caption>Esempi di calcolo, se la detrazione spetta</caption>
           <thead><tr><th scope="col">Spesa pagata nel 2026</th><th scope="col">Aliquota</th><th scope="col">Detrazione totale</th><th scope="col">Quota annuale per 10 anni</th></tr></thead>
           <tbody>{esempi.map((r) => <tr>{r.map((c, i) => <td class="num" data-label={['Spesa', 'Aliquota', 'Detrazione totale', 'Quota annuale'][i]}>{c}</td>)}</tr>)}</tbody>
         </table>
@@ -123,7 +120,7 @@ const esempi = [
     <div class="wrap narrow">
       <p class="eyebrow">IVA</p>
       <h2>IVA agevolata sui lavori</h2>
-      <p>Nei lavori di manutenzione e di ristrutturazione di una casa, l’IVA sul lavoro dell’impresa è del 10% invece del 22%. Questo vale se i materiali sono forniti dall’impresa che esegue i lavori. Se li compra Lei direttamente, o li fornisce un altro soggetto, l’agevolazione sui materiali non c’è.</p>
+      <p>Nei lavori di manutenzione e di ristrutturazione di una casa, l’IVA sul lavoro dell’impresa è del 10% invece del 22%. Questo vale se i materiali sono forniti dall’impresa che esegue i lavori. Se li compri tu direttamente, o li fornisce qualcun altro, sui materiali l’agevolazione non c’è.</p>
       <p set:html={h('Per i sanitari e la rubinetteria da bagno esiste una regola particolare. Questi beni sono chiamati “beni significativi” e hanno l’IVA al 10% solo fino al valore del lavoro, al netto del loro costo. Sulla parte che supera quel valore l’IVA è del 22%. In fattura l’impresa deve indicare il valore di questi beni [DA CONFERMARE CON IL COMMERCIALISTA: piatto e box doccia come beni significativi].')} />
       <p set:html={h('Per i lavori che eliminano le barriere architettoniche esiste una aliquota ridotta al 4%. Si applica ai lavori eseguiti con un contratto di appalto, che rispettano le caratteristiche tecniche del DM 236/1989. Secondo le indicazioni più recenti dell’Agenzia, non vale per la sola vendita di prodotti con posa [DA CONFERMARE CON IL COMMERCIALISTA].')} />
       <div class="tbl-wrap">
@@ -153,11 +150,9 @@ const esempi = [
 
   <section class="section section--sand" id="come-si-ottiene">
     <div class="wrap narrow">
-      <p class="eyebrow">I passaggi</p>
       <h2>Come si ottiene la detrazione</h2>
-      <p>Per avere la detrazione servono pochi passaggi, tutti documentabili.</p>
-      <p>Il pagamento va fatto con bonifico bancario o postale “parlante”. Nel bonifico devono comparire la causale, con il riferimento alla norma sulla ristrutturazione, il codice fiscale di chi chiede la detrazione e la partita IVA o il codice fiscale dell’impresa. La banca trattiene una quota dell’11% sull’importo che l’impresa riceve: è una ritenuta che riguarda l’impresa, non Lei.</p>
-      <p set:html={h('Vanno conservati la ricevuta del bonifico e le fatture. Nella dichiarazione dei redditi si indicano i dati catastali dell’immobile. Se il lavoro non richiede un titolo edilizio, serve una dichiarazione sostitutiva firmata da Lei con la data di inizio lavori [DA CONFERMARE CON IL COMMERCIALISTA: titolo edilizio richiesto]. Per questo tipo di lavoro non si invia la comunicazione all’ENEA, perché non riguarda il risparmio energetico.')} />
+      <p>Il pagamento va fatto con bonifico bancario o postale “parlante”. Nel bonifico devono comparire la causale, con il riferimento alla norma sulla ristrutturazione, il codice fiscale di chi chiede la detrazione e la partita IVA o il codice fiscale dell’impresa. La banca trattiene l’11% sull’importo che arriva all’impresa: è una ritenuta a carico dell’impresa, a te non cambia niente.</p>
+      <p set:html={h('Vanno conservati la ricevuta del bonifico e le fatture. Nella dichiarazione dei redditi si indicano i dati catastali dell’immobile. Se il lavoro non richiede un titolo edilizio, serve una dichiarazione sostitutiva firmata da te con la data di inizio lavori [DA CONFERMARE CON IL COMMERCIALISTA: titolo edilizio richiesto]. Per questo tipo di lavoro non si invia la comunicazione all’ENEA, perché non riguarda il risparmio energetico.')} />
       <p>Lo sconto in fattura e la cessione del credito per questi lavori non sono più possibili dal 17 febbraio 2023.</p>
     </div>
   </section>
@@ -166,15 +161,15 @@ const esempi = [
     <div class="wrap narrow">
       <p class="eyebrow">Pagare a rate</p>
       <h2>Finanziamento</h2>
-      <p>Per questi lavori non esiste un finanziamento pubblico agevolato per i privati, oltre al contributo regionale descritto sopra. Se sceglie di pagare a rate, il finanziamento è un’offerta commerciale di una società finanziaria, con un tasso, un costo totale e un esempio rappresentativo che la finanziaria deve indicare per legge. La detrazione resta possibile se la finanziaria paga l’impresa con bonifico parlante completo e Lei conserva la ricevuta del bonifico.</p>
+      <p>Per questi lavori non esiste un finanziamento pubblico agevolato per i privati, oltre al contributo regionale descritto sopra. Se scegli di pagare a rate, il finanziamento è un’offerta commerciale di una società finanziaria, che per legge deve indicarti tasso, costo totale e un esempio rappresentativo. La detrazione resta possibile se la finanziaria paga l’impresa con bonifico parlante completo e tu conservi la ricevuta del bonifico.</p>
     </div>
   </section>
 
   <section class="section section--sand" id="come-aiutiamo">
     <div class="wrap narrow">
-      <p class="eyebrow">Come La aiutiamo noi</p>
-      <h2>Documenti chiari per la sua pratica</h2>
-      <p set:html={h('Venere Bagni Le consegna una fattura e una documentazione chiare per la pratica. Per la verifica del suo caso specifico serve il suo commercialista o un CAF. [DA CONFERMARE: l’azienda offre assistenza alla pratica?]')} />
+      <p class="eyebrow">Cosa facciamo noi</p>
+      <h2>I documenti per la pratica</h2>
+      <p set:html={h('Venere Bagni ti consegna la fattura e la documentazione che servono per la pratica. A verificare il tuo caso deve essere il tuo commercialista o un CAF. [DA CONFERMARE: l’azienda offre assistenza alla pratica?]')} />
     </div>
   </section>
 
@@ -185,5 +180,5 @@ const esempi = [
     </div>
   </section>
 
-  <CtaBand title="Vuole sapere quanto Le costerebbe davvero?" text="Al sopralluogo Le diamo il preventivo scritto, da portare al suo commercialista." />
+  <CtaBand title="Vuoi sapere quanto spenderesti davvero?" text="Al sopralluogo ti lasciamo il preventivo scritto, da far vedere al tuo commercialista." />
 </Base>

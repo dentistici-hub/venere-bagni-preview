@@ -32,7 +32,7 @@ const m = img ? media[img] : undefined;
       {lead && <p class="lead" set:html={h(lead)} />}
       {chips && <ul class="chips-row">{chips.map((c) => <li><Icon n="check" /><span set:html={h(c)} /></li>)}</ul>}
       <slot />
-      {contacts && <p class="hero__alt" set:html={h(`Preferisce parlare con una persona? Chiami il ${site.phone} oppure scriva su WhatsApp al ${site.whatsappLabel}.`)} />}
+      {contacts && <p class="hero__alt" set:html={h(`Preferisci parlare con qualcuno? Chiama il ${site.phone} oppure scrivi su WhatsApp al ${site.whatsappLabel}.`)} />}
     </div>
     {(m || form) && (
       <div class="hero__media">

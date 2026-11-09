@@ -11,7 +11,7 @@ const here = Astro.url.pathname;
 <div class="topbar">
   <div class="wrap">
     <span class="t-left">Torino e tutto il Piemonte · Sopralluogo gratuito</span>
-    <span>Chiami ora: <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} /> <span class="t-left">· {site.hours.startsWith('[') ? '' : site.hours}</span></span>
+    <span>Chiama: <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} /> <span class="t-left">· {site.hours.startsWith('[') ? '' : site.hours}</span></span>
   </div>
 </div>
 <header class={`hdr${minimal ? ' lp-hdr' : ''}`}>

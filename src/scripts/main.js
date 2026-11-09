@@ -108,20 +108,20 @@ $$('[data-lead-form]').forEach((form) => {
     $$('[aria-invalid]', form).forEach((el) => el.removeAttribute('aria-invalid'));
     if (n === 1) {
       const cap = f.cap.value.trim();
-      if (!cap) return bad(f.cap, 'Scriva il CAP del luogo dove farebbe il lavoro.');
-      if (!/^\d{5}$/.test(cap)) return bad(f.cap, 'Il CAP deve avere 5 numeri. Ricontrolli, per favore.');
+      if (!cap) return bad(f.cap, 'Scrivi il CAP della casa dove vuoi fare il lavoro.');
+      if (!/^\d{5}$/.test(cap)) return bad(f.cap, 'Il CAP ha 5 cifre, ricontrollalo.');
       outOfArea = !caps.some((p) => cap.startsWith(p));
       return true;
     }
     if (n === 2) {
-      if (!f.intervento.value || !f.tempi.value) { say('Scelga una delle opzioni per continuare.', 'err'); return false; }
+      if (!f.intervento.value || !f.tempi.value) { say('Scegli una risposta per ogni domanda.', 'err'); return false; }
       return true;
     }
-    if (!f.name.value.trim()) return bad(f.name, 'Scriva il suo nome.');
-    if (!f.phone.value.trim()) return bad(f.phone, 'Scriva il suo numero di telefono.');
-    if (!phoneOk(f.phone.value.trim())) return bad(f.phone, 'Il numero non sembra corretto. Controlli le cifre.');
-    if (!emailOk(f.email.value.trim())) return bad(f.email, "L'indirizzo email non sembra corretto.");
-    if (!f.privacy_consent.checked) return bad(f.privacy_consent, "Per continuare serve accettare l'informativa sulla privacy.");
+    if (!f.name.value.trim()) return bad(f.name, 'Scrivi il tuo nome.');
+    if (!f.phone.value.trim()) return bad(f.phone, 'Scrivi il tuo numero di telefono.');
+    if (!phoneOk(f.phone.value.trim())) return bad(f.phone, 'Il numero non sembra giusto, controlla le cifre.');
+    if (!emailOk(f.email.value.trim())) return bad(f.email, "L'indirizzo email non sembra giusto.");
+    if (!f.privacy_consent.checked) return bad(f.privacy_consent, "Per andare avanti devi accettare l'informativa sulla privacy.");
     return true;
   };
 
@@ -176,7 +176,7 @@ $$('[data-lead-form]').forEach((form) => {
       track('lead');
       location.href = `${form.dataset.thanks}?cap=${encodeURIComponent(payload.cap)}`;
     } catch {
-      say('Non siamo riusciti a inviare la richiesta. Riprovi tra un momento oppure ci chiami.', 'err');
+      say('Non siamo riusciti a inviare la richiesta. Riprova tra poco oppure chiamaci.', 'err');
     } finally {
       form.classList.remove('is-busy');
       submit.disabled = false;

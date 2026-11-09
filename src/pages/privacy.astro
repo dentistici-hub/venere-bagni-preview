@@ -1,0 +1,14 @@
+---
+// Placeholder only: the legal text comes from the client or their consultant. Do not write it here.
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { hv as h } from '../lib/txt';
+---
+<Base title="Informativa privacy | Venere Bagni" description="Informativa sul trattamento dei dati personali di Venere Bagni." noindex>
+  <section class="section">
+    <div class="wrap narrow prose">
+      <h1>Informativa privacy</h1>
+      <div class="note"><p set:html={h(`[TESTO DELL’INFORMATIVA PRIVACY] Il testo legale sarà fornito dal cliente o dal suo consulente. Titolare del trattamento: ${site.legalName}, P.IVA ${site.vat}, sede ${site.street}.`)} /></div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,30 @@
+---
+import { site, nav } from '../data/site';
+import { u } from '../lib/url';
+import { h } from '../lib/txt';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+interface Props { minimal?: boolean }
+const { minimal = false } = Astro.props;
+const here = Astro.url.pathname;
+---
+<div class="topbar">
+  <div class="wrap">
+    <span class="t-left">Torino e tutto il Piemonte · Sopralluogo gratuito</span>
+    <span>Chiami ora: <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} /> <span class="t-left">· {site.hours.startsWith('[') ? '' : site.hours}</span></span>
+  </div>
+</div>
+<header class={`hdr${minimal ? ' lp-hdr' : ''}`}>
+  <div class="wrap">
+    <Logo />
+    {!minimal && (
+      <>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
+        <nav class="nav" id="menu" aria-label="Menu principale">
+          {nav.map((l) => <a href={u(l.href)} aria-current={here.endsWith(l.href) ? 'page' : undefined}>{l.label}</a>)}
+        </nav>
+      </>
+    )}
+    <a class="btn btn--hdr" href="#prenota" style={minimal ? 'margin-left:auto' : ''}><Icon n="calendar" /> Sopralluogo gratuito</a>
+  </div>
+</header>

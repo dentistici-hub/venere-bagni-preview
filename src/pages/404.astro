@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url';
+---
+<Base title="Pagina non trovata | Venere Bagni" description="La pagina che cercava non esiste o è stata spostata." noindex>
+  <section class="section">
+    <div class="wrap narrow">
+      <p class="eyebrow">Errore 404</p>
+      <h1>Questa pagina non c’è</h1>
+      <p class="lead">L’indirizzo potrebbe essere sbagliato, oppure la pagina è stata spostata.</p>
+      <div class="contacts" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px">
+        <a class="btn" href={u('/#prenota')}>Prenoti il sopralluogo gratuito</a>
+        <a class="btn btn--ghost" href={u('/')}>Torna alla pagina iniziale</a>
+      </div>
+    </div>
+  </section>
+</Base>

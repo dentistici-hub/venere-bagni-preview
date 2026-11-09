@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Faq from '../../components/Faq.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { media } from '../../data/media';
+import { site, euro } from '../../data/site';
+import { zonePages, type ZonePage } from '../../data/zone-pages';
+import { u } from '../../lib/url';
+import { hv as h } from '../../lib/txt';
+
+export function getStaticPaths() {
+  return zonePages.map((z) => ({ params: { slug: z.slug }, props: { z } }));
+}
+const { z } = Astro.props as { z: ZonePage };
+const crumbs = [{ name: 'Zone', path: '/zone/' }, { name: z.name, path: `/zone/${z.slug}/` }];
+const others = zonePages.filter((o) => o.slug !== z.slug);
+const m = media[z.img];
+---
+<Base
+  title={z.title}
+  description={z.description}
+  faqs={z.faqs}
+  crumbs={crumbs}
+  service={{ name: `Trasformazione vasca in doccia a ${z.name}`, description: `Trasformazione della vasca in doccia a ${z.name} e provincia: sopralluogo gratuito, preventivo scritto a prezzo fisso e lavoro in un giorno.`, minPrice: site.priceFrom }}
+>
+  <PageHero
+    crumbs={crumbs}
+    eyebrow={`${z.name} e provincia`}
+    title={`Trasformazione vasca in doccia a ${z.name}`}
+    lead={z.lead}
+    chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', `Da ${euro(site.priceFrom)}`]}
+    img="hero"
+    formTitle={`Prenoti il sopralluogo gratuito a ${z.name}`}
+  />
+
+  <section class="section" id="zona">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">{z.name}</p>
+        <h2>{z.introTitle}</h2>
+        {z.intro.map((p) => <p set:html={h(p)} />)}
+        <p class="small" set:html={h(z.realData)} />
+      </div>
+      <Image src={m.src} alt={m.alt} widths={[640, 960]} sizes="(max-width: 960px) 100vw, 560px" />
+    </div>
+  </section>
+
+  <section class="section section--sand" id="comuni">
+    <div class="wrap narrow">
+      <p class="eyebrow">Comuni serviti</p>
+      <h2>Dove lavoriamo in provincia di {z.name}</h2>
+      {z.slug === 'torino' && <p>Torino città e, in provincia:</p>}
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <caption>Comuni serviti da Venere Bagni in provincia di {z.name}</caption>
+          <thead><tr><th scope="col">Zona</th><th scope="col">Comuni</th></tr></thead>
+          <tbody>{z.towns.map(([a, b]) => <tr><th scope="row">{a}</th><td>{b}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p class="small" set:html={h('[DA CONFERMARE: elenco definitivo dei comuni serviti]')} />
+      <p>Non vede il suo comune? Scriva il CAP nel modulo e Le diciamo subito se possiamo venire.</p>
+    </div>
+  </section>
+
+  <section class="section" id="prezzo">
+    <div class="wrap narrow">
+      <p class="eyebrow">Prezzi</p>
+      <h2>{z.pricesTitle}</h2>
+      <div class="price-box">
+        <p class="from"><small>Prezzo a partire da</small>{euro(site.priceFrom)}</p>
+        <div>
+          <p set:html={h(z.prices)} />
+          <a class="link-arrow" href={u('/prezzi/')}>Prezzi completi</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="recensioni">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Recensioni</p><h2>Cosa dicono i clienti{z.slug === 'torino' ? ' di Torino' : ''}</h2>
+        {z.rating && <p class="muted" set:html={h('Valutazione Google: [VOTO GOOGLE] su 5, [N° RECENSIONI] recensioni.')} />}
+      </div>
+      <figure class="review card review--solo">
+        <span class="stars" aria-label="5 stelle su 5">★★★★★</span>
+        <blockquote set:html={h(z.review.text)} />
+        <footer>{z.review.name}<span>{z.review.town} · <mark class="ph">recensione di esempio</mark></span></footer>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="domande">
+    <div class="wrap narrow">
+      <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Domande frequenti a {z.name}</h2></div>
+      <Faq items={z.faqs} open verbose />
+      <p style="margin-top:28px" class="muted">Lavoriamo anche a {others.map((o, i) => <>{i > 0 && ' e '}<a href={u(`/zone/${o.slug}/`)}>{o.name}</a></>)}, e nelle altre province del Piemonte.</p>
+    </div>
+  </section>
+
+  <CtaBand title={`Prenoti il sopralluogo gratuito a ${z.name}`} text="Un tecnico viene a casa sua a misurare. Il preventivo è scritto e il prezzo è fisso." />
+</Base>

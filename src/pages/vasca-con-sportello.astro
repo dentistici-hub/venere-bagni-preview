@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { u } from '../lib/url';
+import { hv as h } from '../lib/txt';
+
+const crumbs = [{ name: 'Vasca con sportello', path: '/vasca-con-sportello/' }];
+const quando = [
+  ['Alla persona piace fare il bagno e non vuole rinunciarci', 'Resta una vasca vera'],
+  ['Il bagno è troppo stretto per un piatto doccia comodo', 'Si usa lo spazio della vasca esistente'],
+  ['Serve un bagno caldo per dolori articolari', 'Si resta seduti con l’acqua fino alle spalle'],
+];
+const faqs = [
+  { q: 'Come funziona una vasca con sportello?', a: 'La vasca con sportello di Venere Bagni ha una porta stagna sul fianco. Ci si siede, si chiude lo sportello e si riempie la vasca. Prima di uscire bisogna svuotarla. Così non si scavalca il bordo e si evitano le cadute.' },
+  { q: 'Quanto tempo serve per installare una vasca con sportello?', a: 'Venere Bagni installa la vasca con sportello in [DA CONFERMARE: 1 o 2 giorni] di lavoro. Il tempo esatto dipende dal bagno. Al sopralluogo gratuito Le diciamo i tempi e li troverà scritti nel preventivo.' },
+  { q: 'La vasca con sportello è adatta a una persona anziana?', a: 'Sì, è pensata proprio per chi ha difficoltà a scavalcare il bordo. Venere Bagni la monta con maniglioni e fondo antiscivolo. Se la persona non riesce a stare seduta da sola, al sopralluogo valutiamo insieme se una doccia con seggiolino sia più sicura.' },
+  { q: 'Posso tenere la vasca che ho e aggiungere solo lo sportello?', a: 'In genere no, perché lo sportello va costruito nella vasca stessa. Venere Bagni sostituisce la vasca con un modello nuovo dello stesso ingombro, così non tocca il resto del bagno.' },
+];
+---
+<Base
+  title="Vasca con sportello per anziani, Torino | Venere Bagni"
+  description="Vasca con sportello laterale per entrare senza scavalcare il bordo. Installazione a Torino e in Piemonte, sopralluogo gratuito e prezzo fisso."
+  faqs={faqs}
+  crumbs={crumbs}
+  service={{ name: 'Installazione vasca con sportello', description: 'Sostituzione della vecchia vasca con una vasca con sportello laterale e seggiolino interno, per entrare senza scavalcare il bordo, a Torino e in Piemonte.' }}
+>
+  <PageHero
+    crumbs={crumbs}
+    eyebrow="Torino e tutto il Piemonte"
+    title="Vasca con sportello: si entra senza scavalcare il bordo"
+    lead="Per chi vuole tenere la vasca ma non riesce più ad alzare la gamba. Montiamo noi tutto, con prezzo fisso scritto."
+    chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', 'Si entra da seduti']}
+    img="solSportello"
+    formTitle="Prenoti il sopralluogo gratuito"
+  />
+
+  <section class="section" id="cos-e">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Che cos’è</p>
+        <h2>Una vasca vera, con una porta sul lato</h2>
+        <p>La vasca con sportello ha una porta stagna sul lato. Si apre, ci si siede sul seggiolino interno e si richiude. Poi la vasca si riempie. Per uscire si svuota prima e poi si apre la porta.</p>
+        <p>È pensata per chi ama il bagno caldo ma ha difficoltà con le articolazioni o con l’equilibrio. Si entra con un passo basso, seduti.</p>
+      </div>
+      <BeforeAfter before="prima3" after="dopo3" caption="[CITTÀ] · vasca con sportello · [DURATA]" />
+    </div>
+  </section>
+
+  <section class="section section--sand" id="quando">
+    <div class="wrap narrow">
+      <p class="eyebrow">Quando conviene</p>
+      <h2>La vasca con sportello è la scelta giusta se:</h2>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <caption>Quando conviene la vasca con sportello</caption>
+          <thead><tr><th scope="col">Situazione</th><th scope="col">Perché</th></tr></thead>
+          <tbody>{quando.map(([a, b]) => <tr><td>{a}</td><td>{b}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p>Se invece il bagno si usa solo per la doccia, di solito conviene la <a href={u('/vasca-in-doccia/')}>trasformazione in doccia</a>, che costa meno e si pulisce più in fretta. Al sopralluogo Le diciamo quale delle due è più adatta al suo caso.</p>
+    </div>
+  </section>
+
+  <section class="section" id="lavoro">
+    <div class="wrap narrow">
+      <p class="eyebrow">Come si lavora</p>
+      <h2>Dalla vecchia vasca a quella con sportello</h2>
+      <p set:html={h('Smontiamo la vecchia vasca, posiamo la vasca con sportello, colleghiamo scarico e rubinetteria e ripristiniamo le pareti intorno. Il tempo di lavoro è di [DA CONFERMARE: 1 o 2 giorni]. Chi la usa deve aspettare lo svuotamento prima di aprire lo sportello.')} />
+    </div>
+  </section>
+
+  <section class="section section--sand" id="prezzo">
+    <div class="wrap narrow">
+      <p class="eyebrow">Quanto costa</p>
+      <h2>Il prezzo, scritto dopo il sopralluogo</h2>
+      <div class="price-box">
+        <p class="from"><small>Prezzo a partire da</small><span set:html={h('[DA X €]')} /></p>
+        <div>
+          <p>Per la fornitura e l’installazione, secondo il modello e le misure. Il prezzo preciso Le viene scritto dopo il sopralluogo gratuito.</p>
+          <a class="link-arrow" href={u('/prezzi/')}>Vede tutti i prezzi</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="domande">
+    <div class="wrap narrow">
+      <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Domande sulla vasca con sportello</h2></div>
+      <Faq items={faqs} open verbose />
+    </div>
+  </section>
+
+  <CtaBand title="Vuole vedere come entra nel suo bagno?" text="Veniamo a misurare e Le mostriamo il modello adatto. Il sopralluogo è gratuito." />
+</Base>

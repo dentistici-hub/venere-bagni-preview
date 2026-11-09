@@ -1,0 +1,45 @@
+---
+// Inner-page hero: breadcrumb, H1, lead, optional chips, and on the right an image and/or the first
+// lead form (id "prenota"), overlapping the image like on the home page so it is reachable on mobile.
+import { Image } from 'astro:assets';
+import { media } from '../data/media';
+import { site } from '../data/site';
+import { u } from '../lib/url';
+import { hv as h } from '../lib/txt';
+import LeadForm from './LeadForm.astro';
+import Icon from './Icon.astro';
+interface Props {
+  title: string; lead?: string; eyebrow?: string; crumbs: { name: string; path: string }[];
+  img?: string; badge?: [string, string]; form?: boolean; formTitle?: string; chips?: string[]; contacts?: boolean;
+}
+const { title, lead, eyebrow, crumbs, img, badge, form = true, formTitle, chips, contacts = true } = Astro.props;
+const m = img ? media[img] : undefined;
+---
+<section class="phero">
+  <div class={`wrap phero__grid${form ? ' phero__grid--form' : ''}`}>
+    <div>
+      <nav class="crumbs" aria-label="Percorso">
+        <a href={u('/')}>Home</a>
+        {crumbs.map((c, i) => (
+          <>
+            <span aria-hidden="true"> › </span>
+            {i < crumbs.length - 1 ? <a href={u(c.path)}>{c.name}</a> : <span aria-current="page">{c.name}</span>}
+          </>
+        ))}
+      </nav>
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1 set:html={h(title)} />
+      {lead && <p class="lead" set:html={h(lead)} />}
+      {chips && <ul class="chips-row">{chips.map((c) => <li><Icon n="check" /><span set:html={h(c)} /></li>)}</ul>}
+      <slot />
+      {contacts && <p class="hero__alt" set:html={h(`Preferisce parlare con una persona? Chiami il ${site.phone} oppure scriva su WhatsApp al ${site.whatsappLabel}.`)} />}
+    </div>
+    {(m || form) && (
+      <div class="hero__media">
+        {m && <div class="hero__img"><Image src={m.src} alt={m.alt} widths={[640, 960, 1400]} sizes="(max-width: 960px) 100vw, 520px" loading="eager" fetchpriority="high" /></div>}
+        {m && badge && <p class="hero__badge">{badge[0]}<span>{badge[1]}</span></p>}
+        {form && <div class={m ? 'hero__form' : ''}><LeadForm id="prenota" title={formTitle} /></div>}
+      </div>
+    )}
+  </div>
+</section>

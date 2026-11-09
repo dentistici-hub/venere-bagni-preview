@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+import { h } from '../lib/txt';
+import LeadForm from './LeadForm.astro';
+interface Props { id?: string; title?: string; text?: string }
+const { id = 'prenota-2', title = 'Veniamo noi a misurare il suo bagno, gratis', text = 'Lasci il CAP e un numero di telefono. Un nostro tecnico Le fissa il sopralluogo quando Le fa comodo.' } = Astro.props;
+---
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>{title}</h2>
+        <p>{text}</p>
+        <div class="contacts">
+          <a class="btn btn--light" href={`tel:${site.phoneHref}`}>Chiami il <span set:html={h(site.phone)} /></a>
+          <a class="btn btn--wa" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <LeadForm id={id} title="Prenoti il sopralluogo gratuito" />
+    </div>
+  </div>
+</section>

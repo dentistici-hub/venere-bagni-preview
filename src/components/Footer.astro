@@ -1,0 +1,51 @@
+---
+import { site, nav, zones } from '../data/site';
+import { u } from '../lib/url';
+import { h } from '../lib/txt';
+import Logo from './Logo.astro';
+import { isPreview } from '../lib/url';
+// minimal: ads landing footer (company data, phone, hours, legal links only; no navigation)
+interface Props { minimal?: boolean }
+const { minimal = false } = Astro.props;
+---
+<footer class="ftr">
+  <div class="wrap">
+    {minimal ? (
+      <p set:html={h(`${site.brand} · ${site.legalName} · P.IVA ${site.vat} · ${site.street}`)} />
+      <p>Telefono <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} /> · <span set:html={h(`Orari ${site.hours}`)} /></p>
+    ) : (
+    <div class="ftr__grid">
+      <div>
+        <Logo />
+        <p>Trasformazione vasca in doccia, vasca con sportello e bagno sicuro a Torino e in tutto il Piemonte.</p>
+        <p set:html={h(`${site.legalName} · ${site.street}, ${site.postalCode} ${site.locality} · P.IVA ${site.vat}`)} />
+      </div>
+      <div>
+        <h3>Servizi</h3>
+        <ul>{nav.map((l) => <li><a href={u(l.href)}>{l.label}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>Zone servite</h3>
+        <ul>
+          {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>Vasca in doccia a {z.name}</a></li>)}
+          <li>Alessandria, Asti, Biella, Vercelli, VCO</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contatti</h3>
+        <ul>
+          <li>Telefono <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} /></li>
+          <li>WhatsApp <a href={`https://wa.me/${site.whatsapp}`} set:html={h(site.whatsappLabel)} /></li>
+          <li set:html={h(`Email ${site.email}`)} />
+          <li set:html={h(`Orari ${site.hours}`)} />
+          <li><a href={u('/contatti/')}>Pagina contatti</a></li>
+        </ul>
+      </div>
+    </div>
+    )}
+    <div class="ftr__legal">
+      <span>© {new Date().getFullYear()} {site.brand} · <a href={u('/privacy/')}>Privacy</a> · <a href={u('/cookie/')}>Cookie</a> · <button type="button" data-consent-open>Gestisci cookie</button></span>
+      <span>{isPreview ? 'Anteprima: foto di esempio da siti internazionali, da sostituire con lavori reali.' : 'In collaborazione con Profilo Marketing'}</span>
+    </div>
+  </div>
+</footer>

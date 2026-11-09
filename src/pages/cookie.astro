@@ -1,0 +1,14 @@
+---
+// Placeholder only: the cookie policy and consent tool come from the client or their consultant.
+import Base from '../layouts/Base.astro';
+import { hv as h } from '../lib/txt';
+---
+<Base title="Cookie policy | Venere Bagni" description="Cookie policy del sito di Venere Bagni." noindex>
+  <section class="section">
+    <div class="wrap narrow prose">
+      <h1>Cookie policy</h1>
+      <div class="note"><p set:html={h('[TESTO DELLA COOKIE POLICY] Il testo legale della cookie policy e lo strumento di consenso saranno forniti dal cliente o dal suo consulente.')} /></div>
+      <p style="margin-top:20px">Può rivedere le sue scelte sui cookie in qualsiasi momento: <button type="button" class="btn btn--sm btn--line" data-consent-open>Gestisci cookie</button></p>
+    </div>
+  </section>
+</Base>

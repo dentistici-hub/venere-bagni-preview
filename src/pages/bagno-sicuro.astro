@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { media } from '../data/media';
+import { bonusShort } from '../data/bonus';
+import { u } from '../lib/url';
+import { hv as h } from '../lib/txt';
+
+const crumbs = [{ name: 'Bagno sicuro', path: '/bagno-sicuro/' }];
+const elementi = [
+  ['Piatto doccia a filo pavimento', 'Niente scalino da scavalcare. Si entra anche con un deambulatore o una sedia da doccia'],
+  ['Superficie antiscivolo', 'Il fondo non scivola, anche con il sapone'],
+  ['Maniglioni', 'Un appoggio sicuro per entrare, alzarsi e girarsi'],
+  ['Seggiolino ribaltabile', 'Si fa la doccia seduti e poi si ribalta a parete'],
+  ['Box con apertura larga', 'Il passaggio è comodo e non si sbatte'],
+  ['Miscelatore termostatico', 'L’acqua non diventa troppo calda all’improvviso [DA CONFERMARE: incluso o opzionale]'],
+  ['Luce e interruttori accessibili', 'Si accende senza cercare al buio [DA CONFERMARE: servizio offerto?]'],
+];
+const faqs = [
+  { q: 'Che cosa rende sicuro un bagno per una persona anziana?', a: 'Un bagno sicuro di Venere Bagni ha una doccia a filo pavimento senza scalino, un fondo antiscivolo, maniglioni ben posizionati e un seggiolino ribaltabile. Questi elementi riducono il rischio di caduta, che nel bagno è più alto che nel resto della casa.' },
+  { q: 'Posso chiedere io il preventivo per mio padre o mia madre?', a: 'Sì. Venere Bagni parla anche con i figli. Può prenotare Lei il sopralluogo, essere presente o collegarsi al telefono e ricevere il preventivo scritto. Decidete insieme: non ci sono pressioni né costi per il sopralluogo.' },
+  { q: 'Il lavoro è faticoso o rumoroso per una persona anziana?', a: 'La squadra di Venere Bagni lavora per una giornata e il bagno è inutilizzabile in quel tempo. Il rumore c’è nella fase di rimozione della vasca, di mattina. Se il genitore preferisce, può passare la giornata da un parente. Concordiamo l’orario che crea meno disagio.' },
+  { q: 'I maniglioni vanno bene per qualsiasi parete?', a: 'I maniglioni vanno fissati su una parete solida. Venere Bagni controlla la parete al sopralluogo e, se serve, la rinforza prima di montarli. Questo evita che un maniglione ceda proprio quando serve.' },
+];
+---
+<Base
+  title="Bagno sicuro per anziani a Torino | Venere Bagni"
+  description="Doccia a filo pavimento, maniglioni e seggiolino per un bagno sicuro. Per anziani e per i figli che scelgono per loro. Sopralluogo gratuito in Piemonte."
+  faqs={faqs}
+  crumbs={crumbs}
+  service={{ name: 'Bagno sicuro per anziani', description: 'Adattamento del bagno per chi ha difficoltà a muoversi: doccia a filo pavimento, fondo antiscivolo, maniglioni e seggiolino ribaltabile, a Torino e in Piemonte.' }}
+>
+  <PageHero
+    crumbs={crumbs}
+    eyebrow="Per Lei o per un genitore"
+    title="Un bagno sicuro, per Lei o per un suo genitore"
+    lead="Il bagno è la stanza dove si cade di più. Lo adattiamo in un giorno [DA CONFERMARE], con un prezzo scritto e senza rifare tutta la casa."
+    chips={['Sopralluogo gratuito', 'Anche con il familiare', 'Prezzo fisso scritto']}
+    img="hero"
+    badge={['Doccia sicura con seggiolino', 'montata al posto della vasca']}
+    formTitle="Prenoti il sopralluogo gratuito"
+  />
+
+  <section class="section" id="per-chi">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Per chi è pensato</p>
+        <h2>Per chi fa fatica con la vasca, e per i figli</h2>
+        <p>Lo cerca chi ha più di 65 anni e fa fatica a scavalcare la vasca. Lo cercano anche i figli, che spesso sono loro a telefonare. Se è il suo caso, può essere presente al sopralluogo anche senza vivere nella casa: collega il genitore per telefono o con un messaggio e concordiamo l’orario.</p>
+        <div class="note"><p>Se Lei è un figlio o una figlia: possiamo parlare con Lei, prenotare con il suo genitore e inviare il preventivo a Lei. Decide la famiglia, con calma.</p></div>
+      </div>
+      <Image src={media.famiglia.src} alt={media.famiglia.alt} widths={[640, 960]} sizes="(max-width: 960px) 100vw, 560px" />
+    </div>
+  </section>
+
+  <section class="section section--sand" id="cosa">
+    <div class="wrap narrow">
+      <p class="eyebrow">Che cosa mettiamo</p>
+      <h2>Gli elementi di un bagno sicuro</h2>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <caption>Che cosa installiamo e a che cosa serve</caption>
+          <thead><tr><th scope="col">Elemento</th><th scope="col">A che cosa serve</th></tr></thead>
+          <tbody>{elementi.map(([a, b]) => <tr><th scope="row">{a}</th><td set:html={h(b)} /></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="come">
+    <div class="wrap split">
+      <Image src={media.sopralluogo.src} alt={media.sopralluogo.alt} widths={[640, 960]} sizes="(max-width: 960px) 100vw, 560px" />
+      <div>
+        <p class="eyebrow">Come ci muoviamo</p>
+        <h2>Un preventivo su misura della persona</h2>
+        <p>Al sopralluogo guardiamo come si muove la persona che userà la doccia: se usa un bastone, se si siede, se ha un lato più debole. Posizioniamo i maniglioni di conseguenza. Per questo il preventivo è su misura e non un pacchetto uguale per tutti.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="prezzo">
+    <div class="wrap narrow">
+      <p class="eyebrow">Prezzo</p>
+      <h2>Quanto costa il bagno sicuro</h2>
+      <div class="price-box">
+        <p class="from"><small>Pacchetto bagno sicuro</small><span set:html={h('[DA X €]')} /></p>
+        <div>
+          <p>Il prezzo cambia secondo gli elementi che sceglie.</p>
+          <a class="link-arrow" href={u('/prezzi/')}>Vede tutti i prezzi</a>
+        </div>
+      </div>
+      <h3 style="margin-top:36px">Sulle detrazioni disponibili</h3>
+      <div class="note"><p set:html={h(bonusShort)} /></div>
+      <p style="margin-top:16px"><a class="link-arrow" href={u('/bonus-detrazioni/')}>Tutto sulle detrazioni 2026</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="domande">
+    <div class="wrap narrow">
+      <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Domande sul bagno sicuro</h2></div>
+      <Faq items={faqs} open verbose />
+    </div>
+  </section>
+
+  <CtaBand title="Parliamo di un bagno più sicuro" text="Venga a conoscerci con una telefonata o un messaggio. Fissiamo un sopralluogo gratuito, anche con il familiare che decide." />
+</Base>

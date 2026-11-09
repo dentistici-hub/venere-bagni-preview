@@ -1,0 +1,22 @@
+---
+import { Picture } from 'astro:assets';
+import { media } from '../data/media';
+
+interface Props { k: string; sizes: string; eager?: boolean; class?: string }
+const { k, sizes, eager = false, class: cls } = Astro.props;
+const m = media[k];
+const widths = [480, 800, 1200, 1600].filter((w) => w <= m.src.width + 1);
+---
+
+<Picture
+  src={m.src}
+  alt={m.alt}
+  formats={['avif', 'webp']}
+  fallbackFormat={m.src.format === 'png' ? 'png' : 'jpeg'}
+  widths={widths}
+  sizes={sizes}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : 'auto'}
+  decoding="async"
+  class={cls}
+/>

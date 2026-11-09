@@ -1,0 +1,14 @@
+---
+import { h } from '../lib/txt';
+interface Props { items: { text: string; name: string; town: string }[] }
+const { items } = Astro.props;
+---
+<div class="reviews">
+  {items.map((r) => (
+    <figure class="review card">
+      <span class="stars" aria-label="5 stelle su 5">★★★★★</span>
+      <blockquote set:html={h(r.text)} />
+      <footer>{r.name}<span>{r.town} · <mark class="ph">recensione di esempio</mark></span></footer>
+    </figure>
+  ))}
+</div>

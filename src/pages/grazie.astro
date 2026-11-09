@@ -1,0 +1,39 @@
+---
+// Thank-you page after the lead form. Reads ?cap= to prefill the WhatsApp message; ?anteprima=1 (preview build)
+// shows a note that nothing was sent.
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { u } from '../lib/url';
+import { hv as h } from '../lib/txt';
+
+const waText = 'Buongiorno, ho appena inviato la richiesta di sopralluogo dal sito di Venere Bagni.';
+---
+<Base title="Grazie, richiesta ricevuta | Venere Bagni" description="Abbiamo ricevuto la sua richiesta di sopralluogo gratuito." noindex>
+  <section class="section">
+    <div class="wrap thanks">
+      <Icon n="check" class="thanks__icon" />
+      <p class="note" data-preview-note hidden style="text-align:left;margin-bottom:24px">Questa è l’anteprima del sito: la richiesta non è stata inviata a nessuno.</p>
+      <h1>Grazie, abbiamo ricevuto la sua richiesta</h1>
+      <p class="lead" style="margin-inline:auto" set:html={h('La chiamiamo entro [X ORE] per fissare il sopralluogo gratuito. Se preferisce scrivere, ci trova su WhatsApp.')} />
+      <div class="contacts">
+        <a class="btn btn--wa" data-wa data-number={site.whatsapp} data-text={waText} href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener">
+          <Icon n="wa" /> <span set:html={h(`Ci scriva su WhatsApp (${site.whatsappLabel})`)} />
+        </a>
+      </div>
+      <p class="muted" set:html={h(`Se la sua richiesta è urgente, chiami il ${site.phone} negli orari ${site.hours}.`)} />
+      <p style="margin-top:28px"><a class="link-arrow" href={u('/')}>Torna alla pagina iniziale</a></p>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const q = new URLSearchParams(location.search);
+  const cap = (q.get('cap') || '').replace(/\D/g, '').slice(0, 5);
+  const wa = document.querySelector<HTMLAnchorElement>('[data-wa]');
+  if (wa && /^\d{5}$/.test(cap)) {
+    const text = `${wa.dataset.text} CAP: ${cap}.`;
+    wa.href = `https://wa.me/${wa.dataset.number}?text=${encodeURIComponent(text)}`;
+  }
+  if (q.get('anteprima') === '1') document.querySelector<HTMLElement>('[data-preview-note]')?.removeAttribute('hidden');
+</script>

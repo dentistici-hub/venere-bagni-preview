@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, zones } from '../data/site';
+import { u } from '../lib/url';
+import { hv as h } from '../lib/txt';
+
+const crumbs = [{ name: 'Contatti', path: '/contatti/' }];
+const recapiti: [string, string, string?][] = [
+  ['Telefono', site.phone, `tel:${site.phoneHref}`],
+  ['WhatsApp', site.whatsappLabel, `https://wa.me/${site.whatsapp}`],
+  ['Indirizzo', site.street],
+  ['Orari', site.hours],
+  ['Azienda', `${site.legalName}, P.IVA ${site.vat}`],
+];
+---
+<Base
+  title="Contatti | Venere Bagni, Torino e Piemonte"
+  description="Telefono, WhatsApp e modulo per prenotare il sopralluogo gratuito di Venere Bagni. Lavoriamo a Torino e in tutto il Piemonte."
+  crumbs={crumbs}
+>
+  <PageHero
+    crumbs={crumbs}
+    eyebrow="Torino e tutto il Piemonte"
+    title="Contatti"
+    lead="Ci chiami, ci scriva su WhatsApp o lasci il CAP nel modulo. Rispondiamo entro [X ORE]."
+    formTitle="Prenoti il sopralluogo gratuito"
+    contacts={false}
+  >
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <caption>Recapiti di Venere Bagni</caption>
+        <tbody>
+          {recapiti.map(([k, v, href]) => (
+            <tr><th scope="row">{k}</th><td>{href ? <a href={href} set:html={h(v)} /> : <span set:html={h(v)} />}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </PageHero>
+
+  <section class="section" id="zone">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Dove lavoriamo</p>
+        <h2>Lavoriamo in tutto il Piemonte</h2>
+        <p>Vede le pagine per zona:</p>
+        <ul class="zones">{zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.name}</a></li>)}</ul>
+      </div>
+      <div class="map-ph"><p class="muted" set:html={h('[MAPPA GOOGLE: inserire dopo conferma dell’indirizzo]')} /></div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,18 @@
+---
+import { Image } from 'astro:assets';
+import { media } from '../data/media';
+import { h } from '../lib/txt';
+interface Props { before: string; after: string; caption: string }
+const { before, after, caption } = Astro.props;
+const b = media[before]; const a = media[after];
+---
+<figure class="ba">
+  <div class="ba__frame" data-ba>
+    <Image src={b.src} alt={b.alt} widths={[480, 800, 1200]} sizes="(max-width: 960px) 100vw, 380px" loading="lazy" />
+    <Image class="ba__after" src={a.src} alt={a.alt} widths={[480, 800, 1200]} sizes="(max-width: 960px) 100vw, 380px" loading="lazy" />
+    <span class="ba__tag ba__tag--l">Prima</span><span class="ba__tag ba__tag--r">Dopo</span>
+    <span class="ba__line"></span>
+    <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sposta per confrontare prima e dopo" />
+  </div>
+  <figcaption set:html={h(caption)} />
+</figure>

@@ -1,0 +1,57 @@
+---
+import { site } from '../data/site';
+import { u } from '../lib/url';
+
+// The banner exists only when there is something to ask about: at least one tracker ID is set.
+// In dev (npm run dev) it is always rendered so the design can be reviewed before any ID exists.
+const dev = import.meta.env.DEV;
+const hasGA = Boolean(site.ga4Id);
+const hasPx = Boolean(site.metaPixelId);
+const active = hasGA || hasPx || dev;
+const showGA = hasGA || dev;
+const showPx = hasPx || dev;
+---
+
+<div id="consent-config" hidden data-ga4={site.ga4Id} data-pixel={site.metaPixelId}></div>
+
+{active && (
+  <div class="cc" data-consent role="dialog" aria-modal="false" aria-labelledby="cc-title" hidden>
+    <div data-consent-main>
+      <h2 id="cc-title" class="cc__t">Cookie e privacy</h2>
+      <p class="cc__p">
+        Usiamo cookie tecnici per far funzionare la pagina. Se acconsente, usiamo anche cookie di statistica e di marketing per capire come viene usata e misurare le nostre campagne. Può cambiare scelta quando vuole da «Gestisci cookie» in fondo alla pagina. <a href={u(site.privacyUrl)} target="_blank" rel="noopener">Informativa</a>
+      </p>
+      <div class="cc__row">
+        <button type="button" class="btn btn--sm btn--line" data-consent-reject>Rifiuta</button>
+        <button type="button" class="btn btn--sm btn--line" data-consent-accept>Accetta</button>
+      </div>
+      <button type="button" class="cc__link" data-consent-customize>Personalizza</button>
+    </div>
+
+    <div data-consent-prefs hidden>
+      <h2 class="cc__t">Le sue scelte</h2>
+      <ul class="cc__list">
+        <li class="cc__opt">
+          <div><strong>Necessari</strong><span>Servono al funzionamento della pagina. Sempre attivi.</span></div>
+          <label class="sw"><input type="checkbox" checked disabled /><i></i><span class="sr">Necessari, sempre attivi</span></label>
+        </li>
+        {showGA && (
+          <li class="cc__opt">
+            <div><strong>Statistiche</strong><span>Google Analytics: pagine viste e provenienza delle visite, in forma aggregata.</span></div>
+            <label class="sw"><input type="checkbox" name="consent-analytics" /><i></i><span class="sr">Statistiche</span></label>
+          </li>
+        )}
+        {showPx && (
+          <li class="cc__opt">
+            <div><strong>Marketing</strong><span>Meta Pixel: misura le richieste che arrivano dalle nostre inserzioni.</span></div>
+            <label class="sw"><input type="checkbox" name="consent-marketing" /><i></i><span class="sr">Marketing</span></label>
+          </li>
+        )}
+      </ul>
+      <div class="cc__row">
+        <button type="button" class="btn btn--sm btn--line" data-consent-back>Indietro</button>
+        <button type="button" class="btn btn--sm btn--ink" data-consent-save>Salva scelte</button>
+      </div>
+    </div>
+  </div>
+)}

@@ -1,0 +1,209 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import Faq from '../components/Faq.astro';
+import Reviews from '../components/Reviews.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { media } from '../data/media';
+import { site, zones, euro } from '../data/site';
+import { bonusShort } from '../data/bonus';
+import { u } from '../lib/url';
+import { h } from '../lib/txt';
+
+const faqs = [
+  { q: 'Quanto tempo ci vuole per trasformare la vasca in doccia?', a: 'Con Venere Bagni la trasformazione di una vasca in doccia richiede un solo giorno di lavoro [DA CONFERMARE]. La squadra arriva la mattina, toglie la vasca, monta piatto, pareti e box, e la sera la doccia è pronta. Prima serve un sopralluogo gratuito di circa [DURATA] minuti per prendere le misure.' },
+  { q: 'Quanto costa trasformare la vasca in doccia a Torino?', a: 'A Torino una trasformazione standard della vasca in doccia con Venere Bagni parte da 3.500 € [DA CONFERMARE: IVA inclusa?]. Il prezzo finale dipende dalla misura del bagno, dal tipo di piatto e dal rivestimento. Dopo il sopralluogo gratuito riceve un preventivo scritto a prezzo fisso, con ogni voce indicata.' },
+  { q: 'Il sopralluogo è davvero gratuito?', a: 'Sì. Il sopralluogo di Venere Bagni è gratuito e senza impegno. Un tecnico viene a casa sua in Piemonte, misura il bagno, Le mostra le soluzioni possibili e Le lascia un preventivo scritto. Se non Le interessa, non deve nulla.' },
+  { q: 'Devo rifare anche il pavimento e le piastrelle?', a: 'Di solito no. Venere Bagni posa il nuovo piatto doccia e le pareti nello spazio della vasca, quindi il resto del bagno resta com’è. Dopo il sopralluogo Le diciamo se nel suo bagno serve qualche ripristino e lo troverà scritto nel preventivo.' },
+  { q: 'Fate lavori anche per persone anziane o con difficoltà a camminare?', a: 'Sì. Venere Bagni installa piatti doccia a filo pavimento, maniglioni, seggiolini e pareti antiscivolo, pensati per chi ha difficoltà a scavalcare il bordo della vasca. Può contattarci anche se cerca una soluzione sicura per un genitore.' },
+  { q: 'Quali province del Piemonte servite?', a: 'Venere Bagni lavora a Torino e provincia, Cuneo, Novara, Alessandria, Asti, Biella, Vercelli e nel Verbano-Cusio-Ossola. Se vuole sapere se arriviamo nel suo comune, inserisca il CAP nel modulo: Le rispondiamo subito.' },
+];
+const reviews = [
+  { text: 'Mi hanno misurato il bagno il lunedì e il giovedì avevo la doccia nuova. Il prezzo era quello scritto sul foglio.', name: 'Maria', town: 'Moncalieri' },
+  { text: 'Mia madre non riusciva più a entrare nella vasca. Adesso fa la doccia seduta, da sola, e io sono più tranquillo.', name: 'Giorgio', town: 'Rivoli' },
+  { text: 'Sono venuti in due, hanno lavorato tutto il giorno e hanno lasciato il bagno pulito. Mi hanno chiamato anche il giorno dopo per sapere se andava bene.', name: 'Lucia', town: 'Collegno' },
+  { text: 'Volevo solo sapere quanto costava. Il tecnico ha misurato, ha spiegato e se n’è andato senza insistere.', name: 'Franco', town: 'Carmagnola' },
+];
+const day = [
+  ['8:00', 'Arriva la squadra e protegge casa e pavimenti'],
+  ['10:00', 'La vasca è rimossa'],
+  ['13:00', 'Piatto doccia e pareti sono montati'],
+  ['16:00', 'Box, rubinetteria e accessori sono al loro posto'],
+  ['18:00', 'Pulizia finale e consegna'],
+];
+const prices = [
+  ['Vasca in doccia, versione standard', `da ${euro(site.priceFrom)}`],
+  ['Vasca in doccia con piatto a filo pavimento', '[DA X €]'],
+  ['Vasca con sportello', '[DA X €]'],
+  ['Pacchetto bagno sicuro', '[DA X €]'],
+];
+---
+<Base
+  title="Vasca in doccia a Torino in 1 giorno | Venere Bagni"
+  description="Trasformiamo la vasca in doccia in un giorno, a Torino e in Piemonte. Sopralluogo gratuito a casa sua e preventivo scritto a prezzo fisso, da 3.500 €."
+  faqs={faqs}
+  service={{ name: 'Trasformazione vasca in doccia', description: site.description, minPrice: site.priceFrom }}
+>
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <p class="eyebrow">Torino e tutto il Piemonte</p>
+        <h1>Dalla vasca alla doccia in un solo giorno, a casa sua</h1>
+        <p class="lead" set:html={h('Veniamo da Lei per il sopralluogo gratuito, Le lasciamo un preventivo scritto a prezzo fisso e facciamo il lavoro in un giorno [DA CONFERMARE]. Un’unica persona La segue dall’inizio alla fine.')} />
+        <ul class="chips-row">
+          <li><Icon n="check" />Sopralluogo gratuito</li>
+          <li><Icon n="check" />Prezzo fisso scritto</li>
+          <li><Icon n="check" />Da {euro(site.priceFrom)}</li>
+        </ul>
+        <p class="trust-line"><span class="stars" aria-hidden="true">★★★★★</span><span set:html={h('[VOTO GOOGLE] su 5 da [N° RECENSIONI] recensioni Google')} /></p>
+        <p class="hero__alt" set:html={h(`Preferisce parlare con una persona? Chiami il ${site.phone} oppure scriva su WhatsApp al ${site.whatsappLabel}.`)} />
+      </div>
+      <div class="hero__media">
+        <div class="hero__img"><Image src={media.hero.src} alt={media.hero.alt} widths={[640, 960, 1400]} sizes="(max-width: 960px) 100vw, 560px" loading="eager" fetchpriority="high" /></div>
+        <p class="hero__badge">Doccia sicura con seggiolino<span>montata al posto della vasca</span></p>
+        <div class="hero__form"><LeadForm id="prenota" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="promises" aria-label="Le nostre promesse">
+    <div class="wrap">
+      <ul>
+        <li><Icon n="home" /><div><strong>Sopralluogo gratuito</strong><span>Misuriamo il bagno a casa sua, senza impegno.</span></div></li>
+        <li><Icon n="doc" /><div><strong>Prezzo fisso scritto</strong><span>La cifra che legge è la cifra che paga.</span></div></li>
+        <li><Icon n="clock" /><div><strong>Un giorno di lavoro</strong><span set:html={h('Alla sera può usare la doccia nuova [DA CONFERMARE].')} /></div></li>
+        <li><Icon n="shield" /><div><strong set:html={h('Garanzia [ANNI] anni')} /><span>Per iscritto, sul lavoro e sui materiali.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="prima-dopo">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Prima e dopo</p>
+        <h2>Tre bagni in Piemonte, prima e dopo il nostro intervento</h2>
+        <p class="muted">Sposti la barra al centro di ogni foto per vedere la differenza.</p>
+      </div>
+      <div class="ba-grid">
+        <BeforeAfter before="prima1" after="dopo1" caption="[CITTÀ] · vasca in doccia con pareti effetto marmo · [DURATA]" />
+        <BeforeAfter before="prima2" after="dopo2" caption="[CITTÀ] · doccia con seggiolino e maniglione · [DURATA]" />
+        <BeforeAfter before="prima3" after="dopo3" caption="[CITTÀ] · vasca con sportello · [DURATA]" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="come-funziona">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Come funziona</p>
+        <h2>Dal primo contatto alla doccia pronta</h2>
+        <p class="lead" set:html={h('Pochi passaggi chiari. Il lavoro vero e proprio occupa una sola giornata [DA CONFERMARE].')} />
+      </div>
+      <ol class="steps">
+        <li><h3>Ci scrive o ci chiama</h3><p set:html={h('Indica il CAP e cosa vuole cambiare. Le rispondiamo entro [X ORE].')} /></li>
+        <li><h3>Sopralluogo gratuito</h3><p>Un nostro tecnico viene a casa sua, misura il bagno e Le mostra le soluzioni adatte.</p></li>
+        <li><h3>Preventivo scritto</h3><p>Riceve un prezzo fisso con l’elenco di tutto ciò che è compreso. Decide con calma.</p></li>
+        <li><h3>Il giorno del lavoro</h3><p>Smontiamo la vasca, posiamo piatto e pareti, montiamo box e rubinetteria, puliamo.</p></li>
+      </ol>
+      <div class="timeline">
+        <h3 set:html={h('La giornata di lavoro, ora per ora [DA CONFERMARE]')} />
+        <ol>{day.map(([t, d]) => <li><b>{t}</b><span>{d}</span></li>)}</ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="soluzioni">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Le nostre soluzioni</p><h2>Scelga quello che fa per Lei</h2></div>
+      <div class="cards">
+        <article class="card sol">
+          <Image src={media.solDoccia.src} alt={media.solDoccia.alt} widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" />
+          <div class="sol__body"><h3>Vasca in doccia</h3><p>Togliamo la vasca e mettiamo al suo posto un piatto doccia comodo, anche a filo pavimento. Un solo giorno di lavoro.</p><a class="link-arrow" href={u('/vasca-in-doccia/')}>Scopra la trasformazione</a></div>
+        </article>
+        <article class="card sol">
+          <Image src={media.solSportello.src} alt={media.solSportello.alt} widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" />
+          <div class="sol__body"><h3>Vasca con sportello</h3><p>Per chi vuole restare con la vasca ma non riesce più a scavalcare il bordo. Si entra dallo sportello e ci si siede.</p><a class="link-arrow" href={u('/vasca-con-sportello/')}>Scopra la vasca con sportello</a></div>
+        </article>
+        <article class="card sol">
+          <Image src={media.solSicuro.src} alt={media.solSicuro.alt} widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" />
+          <div class="sol__body"><h3>Bagno sicuro</h3><p>Maniglioni, seggiolino e piatto antiscivolo per muoversi senza paura di cadere. Per chi ha più di 65 anni e per i figli che vogliono stare tranquilli.</p><a class="link-arrow" href={u('/bagno-sicuro/')}>Scopra il bagno sicuro</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="costi">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Quanto costa</p>
+        <h2>Prezzi chiari, scritti prima di iniziare</h2>
+        <p set:html={h('Una trasformazione standard da vasca a doccia parte da 3.500 € [DA CONFERMARE: IVA inclusa?]. Il prezzo finale dipende dalla misura del bagno, dal tipo di piatto e dal rivestimento. Lo stabiliamo dopo il sopralluogo e lo mettiamo per iscritto.')} />
+        <a class="link-arrow" href={u('/prezzi/')}>Vede il listino completo e cosa cambia il prezzo</a>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th scope="col">Intervento</th><th scope="col">Prezzo</th></tr></thead>
+          <tbody>{prices.map(([a, b]) => <tr><td>{a}</td><td class="num" set:html={h(b)} /></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bonus">
+    <div class="wrap narrow">
+      <p class="eyebrow">Bonus e detrazioni 2026</p>
+      <h2>Le agevolazioni, spiegate senza giri di parole</h2>
+      <div class="note"><p set:html={h(bonusShort)} /></div>
+      <p style="margin-top:16px"><a class="link-arrow" href={u('/bonus-detrazioni/')}>Tutto sulle detrazioni 2026</a></p>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="perche">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Perché Venere Bagni</p>
+        <h2>Un’azienda del Piemonte che risponde con nome e cognome</h2>
+        <ul class="ticks">
+          <li><span><strong>Una sola persona di riferimento.</strong> Dal sopralluogo al collaudo parla sempre con lo stesso responsabile.</span></li>
+          <li><span><strong>Prezzo fisso scritto.</strong> Il preventivo elenca ogni voce. Se durante il lavoro serve altro, lo concordiamo con Lei prima.</span></li>
+          <li><span set:html={h('**Posatori nostri.** I lavori li fa la nostra squadra, non subappaltatori sconosciuti [DA CONFERMARE].')} /></li>
+          <li><span set:html={h('**Recensioni vere su Google.** [VOTO GOOGLE] su 5, da [N° RECENSIONI] clienti. Può leggerle e controllare.')} /></li>
+          <li><span><strong>Nessuna pressione a casa sua.</strong> Il tecnico misura e spiega. Il preventivo resta sul tavolo e decide quando vuole.</span></li>
+        </ul>
+        <p class="muted" set:html={h('[ANNI DI ESPERIENZA] anni di lavoro e [N° INSTALLAZIONI] bagni rifatti in Piemonte.')} />
+      </div>
+      <Image src={media.sopralluogo.src} alt={media.sopralluogo.alt} widths={[640, 960]} sizes="(max-width: 960px) 100vw, 560px" />
+    </div>
+  </section>
+
+  <section class="section" id="recensioni">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Recensioni</p><h2>Cosa dicono i clienti</h2><p class="muted" set:html={h('[VOTO GOOGLE] su 5 · [N° RECENSIONI] recensioni su Google')} /></div>
+      <Reviews items={reviews} />
+    </div>
+  </section>
+
+  <section class="section section--sand" id="zone">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Zone servite</p><h2>Lavoriamo in tutto il Piemonte</h2><p>Partiamo da Torino e dalla sua provincia e arriviamo nelle altre province.</p></div>
+      <ul class="zones">
+        {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.name} e provincia</a></li>)}
+        {site.areas.filter((a) => !zones.some((z) => z.name === a)).map((a) => <li><span>{a}</span></li>)}
+      </ul>
+      <p style="margin-top:20px">Non vede la sua zona? Scriva il CAP nel modulo e Le diciamo subito se possiamo venire.</p>
+    </div>
+  </section>
+
+  <section class="section" id="domande">
+    <div class="wrap narrow">
+      <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Le domande che ci fanno più spesso</h2></div>
+      <Faq items={faqs} open />
+      <p style="margin-top:20px"><a class="link-arrow" href={u('/domande-frequenti/')}>Tutte le domande</a></p>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

@@ -1,0 +1,107 @@
+---
+// Ads landing: no navigation (Base landing), noindex, form above the fold on mobile.
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import Faq from '../components/Faq.astro';
+import Reviews from '../components/Reviews.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { media } from '../data/media';
+import { site, euro } from '../data/site';
+import { hv as h } from '../lib/txt';
+
+const faqs = [
+  { q: 'Quanto costa trasformare la vasca in doccia?', a: 'Una trasformazione standard con Venere Bagni parte da 3.500 €. Il prezzo fisso lo trova nel preventivo scritto, dopo il sopralluogo gratuito a casa sua.' },
+  { q: 'Quanto dura il lavoro?', a: 'Un giorno di lavoro [DA CONFERMARE]. La squadra di Venere Bagni arriva la mattina e la sera la doccia è pronta.' },
+  { q: 'Il sopralluogo mi impegna?', a: 'No. Il sopralluogo di Venere Bagni è gratuito e senza impegno. Riceve il preventivo e decide quando vuole.' },
+  { q: 'Lavorate anche nella mia zona?', a: 'Venere Bagni lavora a Torino, Cuneo, Novara e nelle altre province del Piemonte. Inserisca il CAP nel modulo e Le diciamo subito se arriviamo.' },
+];
+const reviews = [
+  { text: 'Misurato il lunedì, finito il giovedì. Il prezzo era quello scritto.', name: 'Maria', town: 'Moncalieri' },
+  { text: 'Mia madre ora fa la doccia seduta e da sola.', name: 'Giorgio', town: 'Rivoli' },
+  { text: 'Hanno lasciato il bagno pulito e mi hanno richiamata dopo.', name: 'Lucia', town: 'Collegno' },
+];
+---
+<Base
+  title="Vasca in doccia in 1 giorno | Offerta Venere Bagni"
+  description="Sostituisca la vasca con la doccia in un giorno. Sopralluogo gratuito a casa sua in Piemonte e preventivo scritto a prezzo fisso, da 3.500 €."
+  landing
+  noindex
+>
+  <p class="offer-band" set:html={h('[OFFERTA DEL MESE: DA DEFINIRE, scadenza gg/mm]')} />
+
+  <section class="lp-hero">
+    <div class="wrap lp-hero__grid">
+      <div class="lp-hero__text">
+        <h1>Sostituisca la vasca con la doccia in un giorno</h1>
+        <p class="lead" set:html={h('Sopralluogo gratuito a casa sua in Piemonte e preventivo scritto a prezzo fisso. Da 3.500 € [DA CONFERMARE: IVA inclusa?].')} />
+      </div>
+      <div class="lp-hero__form"><LeadForm id="prenota" title="Verifichiamo se la sua zona è servita" next1="Inizia con il CAP" /></div>
+        <div class="lp-hero__more">
+          <ul class="chips-row">
+            <li><Icon n="check" />Sopralluogo gratuito</li>
+            <li><Icon n="check" />Prezzo fisso scritto</li>
+            <li><Icon n="check" />Da {euro(site.priceFrom)}</li>
+          </ul>
+          <p class="trust-line"><span class="stars" aria-hidden="true">★★★★★</span><span set:html={h('[VOTO GOOGLE] su 5 da [N° RECENSIONI] recensioni Google')} /></p>
+          <p class="hero__alt" set:html={h(`Preferisce telefonare? Chiami il ${site.phone}.`)} />
+          <div class="lp-hero__img"><Image src={media.hero.src} alt={media.hero.alt} widths={[640, 960, 1400]} sizes="(max-width: 960px) 100vw, 560px" /></div>
+        </div>
+    </div>
+  </section>
+
+  <section class="promises promises--3" aria-label="Perché sceglierci">
+    <div class="wrap">
+      <ul>
+        <li><Icon n="home" /><div><strong>Sopralluogo gratuito</strong><span>Misuriamo a casa sua, senza impegno.</span></div></li>
+        <li><Icon n="doc" /><div><strong>Prezzo fisso scritto</strong><span>Sa quanto spende prima di decidere.</span></div></li>
+        <li><Icon n="clock" /><div><strong>Un giorno di lavoro</strong><span set:html={h('La sera la doccia è pronta [DA CONFERMARE].')} /></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="prima-dopo">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Prima e dopo</p>
+        <h2>Un bagno di una casa in Piemonte, prima e dopo</h2>
+        <p class="muted">Sposti la barra al centro di ogni foto per vedere la differenza.</p>
+      </div>
+      <div class="ba-grid">
+        <BeforeAfter before="prima1" after="dopo1" caption="[FOTO PRIMA/DOPO: bagno 1, città]" />
+        <BeforeAfter before="prima2" after="dopo2" caption="[FOTO PRIMA/DOPO: bagno 2, città]" />
+        <BeforeAfter before="prima3" after="dopo3" caption="[FOTO PRIMA/DOPO: bagno 3, città]" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="come-funziona">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Come funziona</p><h2>Quattro passi, un giorno di lavoro</h2></div>
+      <ol class="steps">
+        <li><h3>Ci lascia il CAP e il telefono</h3><p set:html={h('Le rispondiamo entro [X ORE].')} /></li>
+        <li><h3>Veniamo a misurare, gratis</h3><p>Le mostriamo le soluzioni adatte.</p></li>
+        <li><h3>Riceve il preventivo scritto</h3><p>Il prezzo è fisso, decide con calma.</p></li>
+        <li><h3>Facciamo il lavoro in un giorno</h3><p>Alla sera usa la doccia nuova.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="recensioni">
+    <div class="wrap reviews--3">
+      <div class="head"><p class="eyebrow">Recensioni</p><h2>Cosa dicono i clienti</h2><p class="muted" set:html={h('[VOTO GOOGLE] su 5 · [N° RECENSIONI] recensioni su Google')} /></div>
+      <Reviews items={reviews} />
+    </div>
+  </section>
+
+  <section class="section section--sand" id="domande">
+    <div class="wrap narrow">
+      <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Prima di prenotare</h2></div>
+      <Faq items={faqs} open verbose />
+    </div>
+  </section>
+
+  <CtaBand title="Prenoti il sopralluogo gratuito" text="Lasci il CAP e un numero di telefono. Un nostro tecnico Le fissa il sopralluogo quando Le fa comodo." />
+</Base>

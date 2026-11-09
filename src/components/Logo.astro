@@ -1,0 +1,16 @@
+---
+// Placeholder mark: a scallop shell (Venus) drawn as water lines. To be replaced by the real logo.
+import { site } from '../data/site';
+import { u } from '../lib/url';
+interface Props { tag?: string }
+const { tag = 'Bagni sicuri in un giorno' } = Astro.props;
+---
+<a class="logo" href={u('/')} aria-label={`${site.brand}, pagina iniziale`}>
+  <svg viewBox="0 0 48 48" aria-hidden="true">
+    <circle cx="24" cy="24" r="23" fill="currentColor" opacity=".08" />
+    <path d="M24 38 L9 20 a16 14 0 0 1 30 0 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" />
+    <path d="M24 38 L16 16 M24 38 L24 12 M24 38 L32 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    <path d="M14 40h20" stroke="#b04e2a" stroke-width="2.6" stroke-linecap="round" />
+  </svg>
+  <span><b>{site.brand}</b><small>{tag}</small></span>
+</a>

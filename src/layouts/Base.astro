@@ -1,0 +1,61 @@
+---
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource/atkinson-hyperlegible/400.css';
+import '@fontsource/atkinson-hyperlegible/700.css';
+import '../styles/global.css';
+import { site } from '../data/site';
+import { buildGraph, type Faq } from '../lib/schema';
+import { u, isPreview } from '../lib/url';
+import { plain } from '../lib/txt';
+import Consent from '../components/Consent.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+
+interface Props {
+  title?: string; description?: string; faqs?: Faq[]; crumbs?: { name: string; path: string }[];
+  service?: { name: string; description: string; minPrice?: number }; landing?: boolean; noindex?: boolean;
+}
+const { title = site.title, description = site.description, faqs, crumbs, service, landing = false, noindex = false } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.slice(base.length) || '/';
+const canonical = new URL(u(path), site.url).toString();
+const ogImage = new URL(u('/og-image.jpg'), site.url).toString();
+const graph = JSON.stringify(buildGraph({ path, faqs, crumbs, service }));
+const index = site.indexable && !noindex && !isPreview;
+---
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{plain(title)}</title>
+    <meta name="description" content={plain(description)} />
+    <meta name="theme-color" content="#0a3843" />
+    <meta name="robots" content={index ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, nofollow'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:title" content={plain(title)} />
+    <meta property="og:description" content={plain(description)} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="alternate" type="text/plain" href={u('/llms.txt')} title="llms.txt" />
+    <script type="application/ld+json" set:html={graph} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Vai al contenuto</a>
+    {isPreview && <div class="preview-ribbon"><strong>Anteprima del progetto</strong> · foto di esempio e dati da confermare (evidenziati in giallo) · il modulo non invia dati</div>}
+    <Header minimal={landing} />
+    <main id="main"><slot /></main>
+    <Footer minimal={landing} />
+    <MobileBar />
+    <Consent />
+    <script>
+      import '../scripts/main.js';
+    </script>
+  </body>
+</html>

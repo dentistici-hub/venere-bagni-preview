@@ -1,0 +1,189 @@
+---
+// Content from ../../research/agevolazioni-2026.md, Part B (checked 2026-11-09). Points the client's
+// commercialista must close before launch are tagged [DA CONFERMARE CON IL COMMERCIALISTA].
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { bonusShort, bonusFaq } from '../data/bonus';
+import { u } from '../lib/url';
+import { hv as h } from '../lib/txt';
+
+const crumbs = [{ name: 'Bonus e detrazioni', path: '/bonus-detrazioni/' }];
+const stato = [
+  ['Detrazione per ristrutturazione, 50%', 'In vigore', 'Proprietari (o titolari di usufrutto, uso, abitazione) che fanno lavori nell’abitazione principale'],
+  ['Detrazione per ristrutturazione, 36%', 'In vigore', 'Tutti gli altri casi: seconde case, inquilini, familiari conviventi che pagano'],
+  ['Bonus barriere architettoniche 75%', 'Finito il 31 dicembre 2025', 'Non più richiedibile per le spese dal 1 gennaio 2026'],
+  ['IVA agevolata 10%', 'In vigore', 'Lavori di manutenzione e ristrutturazione su abitazioni, con condizioni'],
+  ['IVA agevolata 4%', 'In vigore, condizioni stringenti', 'Lavori in appalto per eliminare barriere architettoniche, che rispettano il DM 236/1989'],
+  ['Sconto in fattura e cessione del credito', 'Non disponibili', 'Per questi lavori dal 17 febbraio 2023'],
+  ['Contributo regionale legge 13/1989', 'Attivo, con fondi annuali', 'Persone con invalidità certificata, domanda prima dei lavori'],
+];
+const casi = [
+  ['Sostituzione della vasca con altra vasca o box doccia, senza requisiti tecnici e senza altri lavori', 'No'],
+  ['Doccia a pavimento con sedile ribaltabile e doccia a telefono, che rispetta il DM 236/1989', 'Sì, con la documentazione tecnica del lavoro'],
+  ['Rifacimento del bagno con lavori di manutenzione straordinaria', 'Per la parte che rientra in quei lavori'],
+];
+const esempi = [
+  ['6.000 euro', '50%', '3.000 euro', '300 euro'],
+  ['6.000 euro', '36%', '2.160 euro', '216 euro'],
+  ['10.000 euro', '50%', '5.000 euro', '500 euro'],
+  ['10.000 euro', '36%', '3.600 euro', '360 euro'],
+];
+---
+<Base
+  title="Detrazioni vasca in doccia 2026 | Venere Bagni"
+  description="Quali agevolazioni fiscali valgono nel 2026 per sostituire la vasca con la doccia. Riepilogo aggiornato e come procedere con Venere Bagni."
+  faqs={bonusFaq}
+  crumbs={crumbs}
+>
+  <PageHero
+    crumbs={crumbs}
+    eyebrow="Bonus e detrazioni 2026"
+    title="Detrazioni per la doccia al posto della vasca: cosa vale nel 2026"
+    lead="Sostituire la vasca con una doccia può dare diritto a una detrazione fiscale, ma non sempre. Dipende da come è fatta la doccia, da chi paga e dalla casa in cui si interviene."
+    formTitle="Vuole sapere quanto Le costerebbe davvero?"
+    contacts={false}
+  >
+    <p class="updated">Aggiornato a novembre 2026</p>
+  </PageHero>
+
+  <section class="section" id="in-breve">
+    <div class="wrap narrow">
+      <p class="eyebrow">In breve</p>
+      <h2>Che cosa vale nel 2026, in poche righe</h2>
+      <div class="note"><p set:html={h(bonusShort)} /></div>
+      <p style="margin-top:20px" set:html={h('Qui sotto trova le regole in vigore nel 2026, spiegate con i numeri, e quelle che invece sono finite. Le condizioni valgono caso per caso: prima di decidere conviene verificarle insieme al suo commercialista, e noi Le forniamo la documentazione tecnica della doccia che realizziamo [DA CONFERMARE].')} />
+    </div>
+  </section>
+
+  <section class="section section--sand" id="cosa-vale">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Il quadro 2026</p>
+        <h2>Cosa c’è e cosa non c’è più nel 2026</h2>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl tbl--stack">
+          <caption>Agevolazioni per i lavori in bagno: stato nel 2026</caption>
+          <thead><tr><th scope="col">Agevolazione</th><th scope="col">Stato nel 2026</th><th scope="col">Per chi</th></tr></thead>
+          <tbody>{stato.map(([a, b, c]) => <tr><th scope="row">{a}</th><td data-label="Stato nel 2026">{b}</td><td data-label="Per chi">{c}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="vasca-doccia">
+    <div class="wrap narrow">
+      <p class="eyebrow">Riepilogo per caso</p>
+      <h2>La sostituzione della vasca con la doccia: quando rientra nel bonus</h2>
+      <p>Per l’Agenzia delle Entrate, sostituire la vasca con un’altra vasca con sportello, o con un box doccia, non dà diritto alla detrazione quando è un intervento isolato e la doccia non ha le caratteristiche tecniche previste per eliminare le barriere architettoniche.</p>
+      <p>La stessa Agenzia riconosce invece la detrazione per gli interventi che eliminano le barriere architettoniche, anche in assenza di persone con disabilità in casa. Il riferimento tecnico è il decreto ministeriale 236 del 1989, che per la doccia chiede tre cose: doccia a pavimento, sedile ribaltabile, doccia a telefono. Lo stesso decreto prevede, negli adeguamenti, la sostituzione della vasca con una doccia a pavimento.</p>
+      <p set:html={h('Non c’è una soglia di età né una invalidità da dimostrare. Conta che la doccia e il lavoro rispettino quelle caratteristiche e che il lavoro sia documentato [DA CONFERMARE CON IL COMMERCIALISTA].')} />
+      <p>Se la doccia fa parte di una ristrutturazione più ampia del bagno, con altri interventi di manutenzione straordinaria, la parte di lavoro rientra nella detrazione secondo le regole di quegli interventi.</p>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <caption>Vasca sostituita con la doccia: quando spetta la detrazione del 50% o del 36%</caption>
+          <thead><tr><th scope="col">Tipo di lavoro</th><th scope="col">Detrazione 50% o 36%</th></tr></thead>
+          <tbody>{casi.map(([a, b]) => <tr><td>{a}</td><td><strong>{b}</strong></td></tr>)}</tbody>
+        </table>
+      </div>
+      <p><a class="link-arrow" href={u('/bagno-sicuro/')}>Come realizziamo un bagno sicuro</a></p>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="detrazione">
+    <div class="wrap narrow">
+      <p class="eyebrow">Bonus ristrutturazione</p>
+      <h2>La detrazione del 50% e del 36%</h2>
+      <p>La detrazione per i lavori di ristrutturazione riduce l’IRPEF che Lei deve pagare. Non è un rimborso immediato: l’importo si recupera in dieci rate annuali di pari valore, a partire dalla dichiarazione dei redditi dell’anno in cui paga.</p>
+      <p>Per le spese pagate nel 2026 la percentuale è del 50% se i lavori riguardano la casa in cui Lei vive, ed è Lei il proprietario o il titolare di un diritto come l’usufrutto. Negli altri casi è del 36%. Il limite di spesa è di 96.000 euro per ogni unità immobiliare, e comprende tutti i lavori di questo tipo fatti nella stessa casa.</p>
+      <p>Chi abita in affitto o in comodato, o un familiare convivente che sostiene la spesa, può avere la detrazione, ma al 36%.</p>
+      <p>Chi ha un reddito complessivo superiore a 75.000 euro trova un tetto sulle detrazioni totali, calcolato con regole proprie: su questo è meglio rivolgersi a chi segue la sua dichiarazione.</p>
+      <div class="tbl-wrap">
+        <table class="tbl tbl--stack">
+          <caption>Esempi di calcolo (calcolo semplice, non è una garanzia di diritto)</caption>
+          <thead><tr><th scope="col">Spesa pagata nel 2026</th><th scope="col">Aliquota</th><th scope="col">Detrazione totale</th><th scope="col">Quota annuale per 10 anni</th></tr></thead>
+          <tbody>{esempi.map((r) => <tr>{r.map((c, i) => <td class="num" data-label={['Spesa', 'Aliquota', 'Detrazione totale', 'Quota annuale'][i]}>{c}</td>)}</tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="barriere-75">
+    <div class="wrap narrow">
+      <p class="eyebrow">Non c’è più</p>
+      <h2>Il bonus barriere architettoniche 75%</h2>
+      <p>Il bonus barriere architettoniche al 75% è terminato il 31 dicembre 2025: non è più richiedibile per le spese pagate dal 1 gennaio 2026. Dal 30 dicembre 2023 riguardava soltanto scale, rampe, ascensori, servoscala e piattaforme elevatrici, quindi non le docce e i bagni.</p>
+      <p>Per i lavori di questo tipo restano le due strade descritte sopra: la detrazione ordinaria, al 50% o al 36%, e l’IVA agevolata.</p>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="iva">
+    <div class="wrap narrow">
+      <p class="eyebrow">IVA</p>
+      <h2>IVA agevolata sui lavori</h2>
+      <p>Nei lavori di manutenzione e di ristrutturazione di una casa, l’IVA sul lavoro dell’impresa è del 10% invece del 22%. Questo vale se i materiali sono forniti dall’impresa che esegue i lavori. Se li compra Lei direttamente, o li fornisce un altro soggetto, l’agevolazione sui materiali non c’è.</p>
+      <p set:html={h('Per i sanitari e la rubinetteria da bagno esiste una regola particolare. Questi beni sono chiamati “beni significativi” e hanno l’IVA al 10% solo fino al valore del lavoro, al netto del loro costo. Sulla parte che supera quel valore l’IVA è del 22%. In fattura l’impresa deve indicare il valore di questi beni [DA CONFERMARE CON IL COMMERCIALISTA: piatto e box doccia come beni significativi].')} />
+      <p set:html={h('Per i lavori che eliminano le barriere architettoniche esiste una aliquota ridotta al 4%. Si applica ai lavori eseguiti con un contratto di appalto, che rispettano le caratteristiche tecniche del DM 236/1989. Secondo le indicazioni più recenti dell’Agenzia, non vale per la sola vendita di prodotti con posa [DA CONFERMARE CON IL COMMERCIALISTA].')} />
+      <div class="tbl-wrap">
+        <table class="tbl tbl--stack">
+          <caption>Esempio dalla guida ufficiale (importi in euro)</caption>
+          <thead><tr><th scope="col">Voce</th><th scope="col">Importo</th><th scope="col">IVA</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Costo totale dell’intervento</th><td class="num" data-label="Importo">10.000</td><td></td></tr>
+            <tr><th scope="row">Manodopera</th><td class="num" data-label="Importo">4.000</td><td data-label="IVA">10%</td></tr>
+            <tr><th scope="row">Beni significativi (sanitari, rubinetteria)</th><td class="num" data-label="Importo">6.000</td><td data-label="IVA">10% sulla parte pari a 4.000, 22% sui restanti 2.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="regione-piemonte">
+    <div class="wrap narrow">
+      <p class="eyebrow">Contributo a fondo perduto</p>
+      <h2>Contributo della Regione Piemonte (legge 13/1989)</h2>
+      <p>La legge 13 del 1989 prevede contributi a fondo perduto per eliminare le barriere architettoniche negli edifici privati esistenti. In Piemonte la Regione assegna ogni anno le risorse ai Comuni; nel 2025 sono stati assegnati circa 1,7 milioni di euro.</p>
+      <p>Il contributo è pensato per persone con disabilità motoria o non vedenti, con certificazione di invalidità, che risiedono nell’immobile. Per chi abita a Torino, la domanda si presenta all’ATC del Piemonte Centrale.</p>
+      <p>La domanda va presentata prima di iniziare i lavori. Il Comune forma ogni anno l’elenco delle domande ammissibili entro il 1 marzo. Essere in elenco non dà diritto automatico al contributo: dipende dai fondi disponibili, e le domande non finanziate restano valide per gli anni successivi.</p>
+      <p set:html={h('L’importo viene calcolato sulla spesa effettiva e ha un massimo fissato dalla Regione. Il contributo viene pagato dopo l’esecuzione dei lavori, su fatture quietanzate [DA CONFERMARE CON IL COMMERCIALISTA: importo massimo e cumulo con la detrazione].')} />
+    </div>
+  </section>
+
+  <section class="section section--sand" id="come-si-ottiene">
+    <div class="wrap narrow">
+      <p class="eyebrow">I passaggi</p>
+      <h2>Come si ottiene la detrazione</h2>
+      <p>Per avere la detrazione servono pochi passaggi, tutti documentabili.</p>
+      <p>Il pagamento va fatto con bonifico bancario o postale “parlante”. Nel bonifico devono comparire la causale, con il riferimento alla norma sulla ristrutturazione, il codice fiscale di chi chiede la detrazione e la partita IVA o il codice fiscale dell’impresa. La banca trattiene una quota dell’11% sull’importo che l’impresa riceve: è una ritenuta che riguarda l’impresa, non Lei.</p>
+      <p set:html={h('Vanno conservati la ricevuta del bonifico e le fatture. Nella dichiarazione dei redditi si indicano i dati catastali dell’immobile. Se il lavoro non richiede un titolo edilizio, serve una dichiarazione sostitutiva firmata da Lei con la data di inizio lavori [DA CONFERMARE CON IL COMMERCIALISTA: titolo edilizio richiesto]. Per questo tipo di lavoro non si invia la comunicazione all’ENEA, perché non riguarda il risparmio energetico.')} />
+      <p>Lo sconto in fattura e la cessione del credito per questi lavori non sono più possibili dal 17 febbraio 2023.</p>
+    </div>
+  </section>
+
+  <section class="section" id="finanziamento">
+    <div class="wrap narrow">
+      <p class="eyebrow">Pagare a rate</p>
+      <h2>Finanziamento</h2>
+      <p>Per questi lavori non esiste un finanziamento pubblico agevolato per i privati, oltre al contributo regionale descritto sopra. Se sceglie di pagare a rate, il finanziamento è un’offerta commerciale di una società finanziaria, con un tasso, un costo totale e un esempio rappresentativo che la finanziaria deve indicare per legge. La detrazione resta possibile se la finanziaria paga l’impresa con bonifico parlante completo e Lei conserva la ricevuta del bonifico.</p>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="come-aiutiamo">
+    <div class="wrap narrow">
+      <p class="eyebrow">Come La aiutiamo noi</p>
+      <h2>Documenti chiari per la sua pratica</h2>
+      <p set:html={h('Venere Bagni Le consegna una fattura e una documentazione chiare per la pratica. Per la verifica del suo caso specifico serve il suo commercialista o un CAF. [DA CONFERMARE: l’azienda offre assistenza alla pratica?]')} />
+    </div>
+  </section>
+
+  <section class="section" id="domande">
+    <div class="wrap narrow">
+      <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Domande su bonus e detrazioni</h2></div>
+      <Faq items={bonusFaq} open verbose />
+    </div>
+  </section>
+
+  <CtaBand title="Vuole sapere quanto Le costerebbe davvero?" text="Al sopralluogo Le diamo il preventivo scritto, da portare al suo commercialista." />
+</Base>

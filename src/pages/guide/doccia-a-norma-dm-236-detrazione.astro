@@ -1,0 +1,93 @@
+---
+// Guide A. Facts only from ../../research/agevolazioni-2026.md (Part A: G-RIS guida AdE febbraio 2026, R-147,
+// DM 236/1989 punto 8.1.6, SCH-16bis luglio 2026, RP-WEB). Open points of that file stay tagged
+// [DA CONFERMARE CON IL COMMERCIALISTA]: uncertain point 1 (other measures of 8.1.6), 3 (IVA 4%), 10 (titolo edilizio).
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import GuideLinks from '../../components/GuideLinks.astro';
+import { guideBySlug, guideUpdated, updatedLabel } from '../../data/guides';
+import { u } from '../../lib/url';
+import { hv as h } from '../../lib/txt';
+
+const g = guideBySlug('doccia-a-norma-dm-236-detrazione');
+const crumbs = [{ name: 'Guide', path: '/guide/' }, { name: 'Doccia a norma DM 236', path: `/guide/${g.slug}/` }];
+const requisiti = [
+  ['Doccia a pavimento', 'Il piatto sta al livello del pavimento: non c’è un bordo da scavalcare'],
+  ['Sedile ribaltabile', 'Ti siedi per lavarti e poi lo alzi contro la parete'],
+  ['Doccia a telefono', 'Il doccino con il tubo flessibile, che puoi tenere in mano'],
+];
+const casi = [
+  ['Vasca sostituita con una vasca con sportello o con un box doccia, senza le caratteristiche del DM 236 e senza altri lavori', 'No'],
+  ['Doccia a pavimento con sedile ribaltabile e doccia a telefono, come chiede il DM 236', 'Sì, con la documentazione tecnica del lavoro'],
+  ['Doccia dentro un rifacimento del bagno con lavori di manutenzione straordinaria', 'Per la parte che rientra in quei lavori'],
+];
+const esempio = [
+  ['6.000 €', '50%', '3.000 €', '300 €'],
+  ['6.000 €', '36%', '2.160 €', '216 €'],
+];
+---
+<Base title={g.title} description={g.description} crumbs={crumbs} article={{ headline: g.h1, published: g.published }}>
+  <PageHero crumbs={crumbs} eyebrow="Guida" title={g.h1} img={g.img} form={false} contacts={false}>
+    <p class="updated">{updatedLabel(guideUpdated(g.slug))}</p>
+    <div class="note answer"><p><strong>In breve.</strong> <Fragment set:html={h(g.answer)} /></p></div>
+  </PageHero>
+
+  <article class="section article">
+    <div class="wrap narrow prose">
+      <h2>Cosa chiede il DM 236 alla doccia?</h2>
+      <p>Il decreto del Ministero dei lavori pubblici n. 236 del 14 giugno 1989 fissa le regole per togliere le barriere architettoniche nelle case. Per la doccia, al punto 8.1.6, chiede tre cose.</p>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <caption>I requisiti della doccia secondo il DM 236/1989, punto 8.1.6</caption>
+          <thead><tr><th scope="col">Requisito</th><th scope="col">Cosa vuol dire in pratica</th></tr></thead>
+          <tbody>{requisiti.map(([a, b]) => <tr><th scope="row">{a}</th><td>{b}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p>Lo stesso punto, quando si adatta un bagno che esiste già, permette di togliere il bidet e di sostituire la vasca con una doccia a pavimento, per lasciare spazio di fianco al WC. Il caso della vasca trasformata in doccia è quindi previsto dal decreto.</p>
+      <p set:html={h('Il punto 8.1.6 dà anche le misure degli spazi intorno a WC e lavabo e l’altezza dei sanitari. Le fonti ufficiali non chiariscono se, quando cambi solo la vasca, debbano essere rispettate anche quelle [DA CONFERMARE CON IL COMMERCIALISTA: basta la doccia o servono anche le altre misure del bagno].')} />
+      <p>Se ti stai chiedendo se un piatto con un bordo basso conti come “doccia a pavimento”, ne parliamo nella guida su <a href={u('/guide/piatto-doccia-filo-pavimento-o-ribassato/')}>piatto a filo pavimento o ribassato</a>.</p>
+
+      <h2>Cambiare la vasca con la doccia dà diritto alla detrazione?</h2>
+      <p>Dipende da come è fatta la doccia. Per l’Agenzia delle Entrate, sostituire la vasca con una vasca con sportello o con un box doccia senza le caratteristiche del DM 236 non conta come eliminazione delle barriere. Se resta un lavoro isolato è manutenzione ordinaria, che sulla singola abitazione non si detrae.</p>
+      <p>Se invece la doccia ha le caratteristiche del DM 236, il lavoro conta come eliminazione delle barriere architettoniche (articolo 16-bis del TUIR, lettera e) e la detrazione può spettare. La guida dell’Agenzia di febbraio 2026 lo dice in modo esplicito: vale anche se in casa non vive nessuna persona con disabilità.</p>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <caption>Vasca sostituita con la doccia: quando spetta la detrazione del 50% o del 36%</caption>
+          <thead><tr><th scope="col">Tipo di lavoro</th><th scope="col">Detrazione</th></tr></thead>
+          <tbody>{casi.map(([a, b]) => <tr><td>{a}</td><td><strong>{b}</strong></td></tr>)}</tbody>
+        </table>
+      </div>
+
+      <h2>Quanto si recupera nel 2026?</h2>
+      <p>Per le spese pagate nel 2026 la detrazione è del 50% se il lavoro è nella casa dove abiti e ne sei proprietario, o hai un diritto come l’usufrutto. In tutti gli altri casi è del 36%: seconda casa, inquilino, figlio convivente che paga i lavori. Il tetto di spesa è di 96.000 € per abitazione.</p>
+      <p>I soldi non tornano subito. La detrazione riduce l’IRPEF e si divide in dieci quote uguali, una per ogni dichiarazione dei redditi a partire dall’anno in cui paghi.</p>
+      <div class="tbl-wrap">
+        <table class="tbl tbl--stack">
+          <caption>Esempio di calcolo, se la detrazione spetta</caption>
+          <thead><tr><th scope="col">Spesa pagata nel 2026</th><th scope="col">Aliquota</th><th scope="col">Detrazione totale</th><th scope="col">Quota annuale per 10 anni</th></tr></thead>
+          <tbody>{esempio.map((r) => <tr>{r.map((c, i) => <td class="num" data-label={['Spesa', 'Aliquota', 'Detrazione totale', 'Quota annuale'][i]}>{c}</td>)}</tr>)}</tbody>
+        </table>
+      </div>
+      <p>Chi paga poca IRPEF, per esempio con una pensione bassa, rischia di non riuscire a usare tutta la quota di ogni anno. Con un reddito sopra i 75.000 € c’è invece un tetto alle detrazioni totali. In tutti e due i casi conviene fare il conto con chi ti prepara la dichiarazione.</p>
+
+      <h2>Servono più di 65 anni o una invalidità?</h2>
+      <p>Per la detrazione del 50% o del 36% no: non c’è un limite di età e non serve un certificato. Conta come è fatta la doccia.</p>
+      <p>L’invalidità certificata serve invece per il contributo a fondo perduto della legge 13 del 1989, che in Piemonte si chiede al Comune prima di cominciare i lavori (a Torino all’ATC del Piemonte Centrale). Nelle <a href={u('/zone/')}>pagine delle province</a> trovi dove si presenta la domanda e quanti fondi sono arrivati nel 2025.</p>
+      <p>Il bonus barriere architettoniche del 75% non c’è più: valeva fino al 31 dicembre 2025 e dal 30 dicembre 2023 copriva solo scale, rampe, ascensori, servoscala e piattaforme elevatrici, quindi già prima non si usava per la doccia.</p>
+
+      <h2>Quali documenti servono per non perdere la detrazione?</h2>
+      <p>Paghi con bonifico “parlante”, quello per le ristrutturazioni: ha la causale con il riferimento alla norma, il tuo codice fiscale e la partita IVA dell’impresa. La banca trattiene l’11% all’impresa, a te non cambia niente. Conservi il bonifico e le fatture, e nella dichiarazione indichi i dati catastali della casa.</p>
+      <p set:html={h('Se il lavoro non richiede un titolo edilizio serve una tua dichiarazione sostitutiva con la data di inizio dei lavori [DA CONFERMARE CON IL COMMERCIALISTA: per la vasca in doccia serve la CILA o è edilizia libera?]. All’ENEA non si manda niente, perché il lavoro non riguarda il risparmio energetico.')} />
+      <p set:html={h('Per questa detrazione la guida dell’Agenzia non chiede l’asseverazione di un tecnico. Conviene comunque tenere con la pratica un documento che descrive la doccia e dice che rispetta il DM 236. Venere Bagni ti consegna [DA CONFERMARE: quale documentazione tecnica rilascia l’azienda].')} />
+      <p>Lo sconto in fattura e la cessione del credito per questi lavori non si possono più scegliere dal 17 febbraio 2023: la detrazione la recuperi solo in dichiarazione.</p>
+
+      <h2>E l’IVA quanto è?</h2>
+      <p set:html={h('Sui lavori in casa l’IVA è del 10% se i materiali li fornisce l’impresa che fa il lavoro, con una regola a parte per sanitari e rubinetteria. L’IVA al 4% vale solo per lavori in appalto che rispettano il DM 236, non per la semplice vendita con posa [DA CONFERMARE CON IL COMMERCIALISTA].')} />
+      <p>Tutte le aliquote, con un esempio di fattura, sono nella pagina <a href={u('/bonus-detrazioni/')}>bonus e detrazioni 2026</a>. Per sapere cosa montiamo in un bagno sicuro guarda la pagina sul <a href={u('/bagno-sicuro/')}>bagno sicuro</a>, e per i costi quella dei <a href={u('/prezzi/')}>prezzi</a>.</p>
+    </div>
+  </article>
+
+  <GuideLinks slugs={['piatto-doccia-filo-pavimento-o-ribassato', 'giorno-trasformazione-vasca-in-doccia']} title="Altre guide" sand />
+  <CtaBand id="prenota" title="Vuoi sapere se la tua doccia può rientrare?" text="Al sopralluogo gratuito ti diciamo come può essere fatta la doccia nel tuo bagno e ti lasciamo il preventivo scritto da far vedere al commercialista." />
+</Base>

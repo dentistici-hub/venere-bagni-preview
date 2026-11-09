@@ -1,0 +1,72 @@
+---
+// Guide B. General technical facts only (gravity drain needs a slope, flush tray needs depth under the floor,
+// DIN 51097 barefoot slip classes A-C, DM 236 "doccia a pavimento"). No prices: [DA X €] until the client gives them.
+// Site facts reused: filo pavimento costs more and needs the drain checked (/vasca-in-doccia/, /prezzi/),
+// recommended for balance problems or a shower chair (/vasca-in-doccia/, /bagno-sicuro/).
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import GuideLinks from '../../components/GuideLinks.astro';
+import { guideBySlug, guideUpdated, updatedLabel } from '../../data/guides';
+import { u } from '../../lib/url';
+import { hv as h } from '../../lib/txt';
+
+const g = guideBySlug('piatto-doccia-filo-pavimento-o-ribassato');
+const crumbs = [{ name: 'Guide', path: '/guide/' }, { name: 'Filo pavimento o ribassato', path: `/guide/${g.slug}/` }];
+const confronto = [
+  ['Scalino per entrare', 'Nessuno', 'Un bordo basso [DA CONFERMARE: altezza dei piatti a catalogo]'],
+  ['Sedia da doccia o deambulatore', 'Entrano senza sollevarli', 'Di solito vanno sollevati sopra il bordo'],
+  ['Scarico', 'Va sotto il livello del pavimento: serve spessore per il tubo', 'Spesso si collega allo scarico che usava la vasca'],
+  ['Acqua fuori dalla doccia', 'La trattengono la pendenza del piatto e il box', 'La trattiene anche il bordo'],
+  ['Detrazione con il DM 236', 'È una “doccia a pavimento”', '[DA CONFERMARE CON IL COMMERCIALISTA]'],
+  ['Prezzo', 'Più alto [DA X €]', '[DA X €]'],
+];
+---
+<Base title={g.title} description={g.description} crumbs={crumbs} article={{ headline: g.h1, published: g.published }}>
+  <PageHero crumbs={crumbs} eyebrow="Guida" title={g.h1} img={g.img} form={false} contacts={false}>
+    <p class="updated">{updatedLabel(guideUpdated(g.slug))}</p>
+    <div class="note answer"><p><strong>In breve.</strong> <Fragment set:html={h(g.answer)} /></p></div>
+  </PageHero>
+
+  <article class="section article">
+    <div class="wrap narrow prose">
+      <h2>Che differenza c’è tra filo pavimento e ribassato?</h2>
+      <p>Il piatto a filo pavimento è posato alla stessa quota del pavimento del bagno. Dal pavimento al piatto non c’è un gradino: si entra camminando, o spingendo una sedia da doccia.</p>
+      <p>Il piatto ribassato invece è appoggiato sopra il pavimento ed è sottile, quindi resta un bordo di pochi centimetri. Rispetto alla vasca il passo è molto più basso, ma il piede va comunque alzato.</p>
+      <div class="tbl-wrap">
+        <table class="tbl tbl--stack">
+          <caption>Piatto a filo pavimento e piatto ribassato a confronto</caption>
+          <thead><tr><th scope="col">Cosa conta</th><th scope="col">Filo pavimento</th><th scope="col">Ribassato</th></tr></thead>
+          <tbody>{confronto.map(([a, b, c]) => <tr><th scope="row">{a}</th><td data-label="Filo pavimento" set:html={h(b)} /><td data-label="Ribassato" set:html={h(c)} /></tr>)}</tbody>
+        </table>
+      </div>
+
+      <h2>Perché lo scarico decide quasi tutto?</h2>
+      <p>L’acqua della doccia scende nella colonna di scarico per gravità. Il tubo che parte dalla piletta deve avere la sua pendenza per tutto il tratto, e il sifone sotto il piatto occupa spazio in altezza.</p>
+      <p>Con il ribassato quello spazio c’è già, perché il piatto sta sopra il pavimento. Con il filo pavimento il sifone e il tubo vanno messi sotto il pavimento, nel massetto. Se il massetto è sottile, o se la colonna è lontana e il tubo non trova la sua pendenza, il filo pavimento richiede lavori più grossi.</p>
+      <p>Nei condomini di Torino degli anni ’60 e ’70 la vasca misura spesso circa 170 cm e il bagno è stretto. Lo spazio per un piatto lungo c’è quasi sempre, quello sotto il pavimento va misurato. Per questo al sopralluogo il tecnico guarda prima di tutto dove passa lo scarico della vasca e quanto spessore c’è.</p>
+
+      <h2>Qual è più sicuro per una persona anziana?</h2>
+      <p>Se chi userà la doccia ha problemi di equilibrio, cammina con il bastone o con il deambulatore, o si lava seduto su una sedia da doccia, scegli il filo pavimento. Senza bordo non si inciampa entrando e uscendo, e la sedia entra spinta.</p>
+      <p>Per chi cammina da solo il ribassato va bene. Con un maniglione vicino all’ingresso e un seggiolino ribaltabile, il bordo basso si supera senza fatica.</p>
+      <p set:html={h('Per tutti e due conta la superficie. Le classi di antiscivolo per i piedi nudi bagnati (norma DIN 51097) vanno da A a C, e la C è quella che fa più presa: chiedila quando scegli il piatto [DA CONFERMARE: classe di antiscivolo dei piatti a catalogo].')} />
+      <p>Maniglioni, seggiolino e il resto li trovi nella pagina sul <a href={u('/bagno-sicuro/')}>bagno sicuro</a>.</p>
+
+      <h2>Quale rientra nella detrazione?</h2>
+      <p>Il DM 236 del 1989 chiede una “doccia a pavimento”, con sedile ribaltabile e doccia a telefono. Il piatto a filo pavimento corrisponde a questa descrizione.</p>
+      <p set:html={h('Per il ribassato le fonti ufficiali non dicono se un bordo di pochi centimetri basti per parlare di doccia a pavimento [DA CONFERMARE CON IL COMMERCIALISTA]. Se ti interessa la detrazione del 50% o del 36%, è un motivo in più per il filo pavimento.')} />
+      <p>Le regole complete sono nella guida <a href={u('/guide/doccia-a-norma-dm-236-detrazione/')}>doccia a norma DM 236 e detrazione</a>.</p>
+
+      <h2>Quanto costa uno rispetto all’altro?</h2>
+      <p set:html={h('Il filo pavimento costa di più, perché chiede più lavoro sullo scarico e a volte sul massetto. Nel nostro listino la trasformazione standard parte da 3.500 € [DA CONFERMARE: IVA inclusa? quale piatto comprende la versione standard] e quella con piatto a filo pavimento parte da [DA X €].')} />
+      <p>Il prezzo per il tuo bagno lo scriviamo nel preventivo dopo il sopralluogo gratuito e non cambia durante il lavoro. Il listino completo è nella pagina dei <a href={u('/prezzi/')}>prezzi</a>.</p>
+
+      <h2>Come lo decidiamo al sopralluogo?</h2>
+      <p>Il tecnico misura lo spazio della vasca, controlla lo scarico e lo spessore del pavimento e ti chiede chi userà la doccia e come si muove. Se il filo pavimento si può fare senza rompere mezzo bagno e in casa serve, te lo consigliamo. Se lo scarico non lo permette, te lo diciamo prima e ti proponiamo il ribassato con maniglione e seggiolino.</p>
+      <p>Come va il giorno del lavoro lo racconta la guida sulla <a href={u('/guide/giorno-trasformazione-vasca-in-doccia/')}>giornata della trasformazione</a>. Il servizio completo è nella pagina <a href={u('/vasca-in-doccia/')}>trasformazione vasca in doccia</a>.</p>
+    </div>
+  </article>
+
+  <GuideLinks slugs={['doccia-a-norma-dm-236-detrazione', 'giorno-trasformazione-vasca-in-doccia']} title="Altre guide" sand />
+  <CtaBand id="prenota" title="Vuoi sapere quale piatto ci sta nel tuo bagno?" text="Al sopralluogo gratuito misuriamo lo scarico e lo spazio, e ti lasciamo il preventivo scritto per la soluzione che ci sta." />
+</Base>

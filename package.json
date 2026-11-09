@@ -8,7 +8,9 @@
     "dev": "astro dev --port 4325",
     "build": "astro build",
     "preview": "astro preview --port 4325",
-    "astro": "astro"
+    "astro": "astro",
+    "og": "python scripts/make-og.py",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

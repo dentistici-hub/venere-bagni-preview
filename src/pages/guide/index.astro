@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { guides, guideUpdated, updatedLabel } from '../../data/guides';
+import { u } from '../../lib/url';
+import { hv as h } from '../../lib/txt';
+
+const crumbs = [{ name: 'Guide', path: '/guide/' }];
+---
+<Base
+  title="Guide su vasca in doccia e bagno sicuro | Venere Bagni"
+  description="Guide pratiche per chi vuole togliere la vasca: doccia a norma DM 236 e detrazione, piatto filo pavimento o ribassato, la giornata di lavoro ora per ora."
+  crumbs={crumbs}
+  pageType="CollectionPage"
+>
+  <PageHero
+    crumbs={crumbs}
+    eyebrow="Guide"
+    title="Guide per chi vuole togliere la vasca"
+    lead="Le domande che ci fanno più spesso al sopralluogo, con le risposte scritte per esteso: detrazioni, scelta del piatto doccia, come va il giorno del lavoro."
+    formTitle="Prenota il sopralluogo gratuito"
+  >
+    <ul class="guide-list">
+      {guides.map((g) => (
+        <li>
+          <a href={u(`/guide/${g.slug}/`)}>{g.h1}</a>
+          <span set:html={h(g.card)} />
+          <span class="small">{updatedLabel(guideUpdated(g.slug))}</span>
+        </li>
+      ))}
+    </ul>
+  </PageHero>
+
+  <CtaBand />
+</Base>

@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
+import GuideLinks from '../components/GuideLinks.astro';
 import { media } from '../data/media';
 import { bonusShort } from '../data/bonus';
 import { u } from '../lib/url';
@@ -101,6 +102,8 @@ const faqs = [
       <Faq items={faqs} open verbose />
     </div>
   </section>
+
+  <GuideLinks slugs={['piatto-doccia-filo-pavimento-o-ribassato', 'doccia-a-norma-dm-236-detrazione']} sand />
 
   <CtaBand title="Prenota il sopralluogo gratuito" text="Chiamaci o scrivici su WhatsApp. Fissiamo il sopralluogo gratuito, anche insieme al familiare che decide." />
 </Base>

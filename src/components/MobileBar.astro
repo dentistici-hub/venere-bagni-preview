@@ -1,10 +1,12 @@
 ---
 import { site } from '../data/site';
 import Icon from './Icon.astro';
+interface Props { formHref?: string }
+const { formHref = '#prenota' } = Astro.props;
 const wa = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent('Buongiorno, vorrei informazioni per trasformare la vasca in doccia.')}`;
 ---
 <nav class="mbar" aria-label="Contatti rapidi">
   <a href={`tel:${site.phoneHref}`}><Icon n="phone" />Chiama</a>
   <a class="mbar__wa" href={wa} target="_blank" rel="noopener"><Icon n="wa" />WhatsApp</a>
-  <a class="mbar__go" href="#prenota"><Icon n="calendar" />Sopralluogo gratis</a>
+  <a class="mbar__go" href={formHref}><Icon n="calendar" />Sopralluogo gratis</a>
 </nav>

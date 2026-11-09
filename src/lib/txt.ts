@@ -15,3 +15,12 @@ export const hv = (s: string): string =>
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\[DA CONFERMARE([^\]]*)\]/g, (_m, d: string) => `<mark class="ph ph--note">da confermare${d.trim().startsWith(':') ? d.trim().replace(/^:\s*/, ': ') : d.trim() ? ` ${d.trim()}` : ''}</mark>`)
     .replace(/\[([^\]]+)\]/g, '<mark class="ph">$1</mark>');
+// Text for llms.txt / llms-full.txt. Returns null when the string still holds a value placeholder like [TELEFONO]
+// or [DA X €] (the caller leaves that item out). "[DA CONFERMARE...]" notes are kept: they mark a stated fact the
+// client still has to confirm, and they disappear from the files once removed from the source text.
+export const llm = (s: string): string | null => {
+  // Markdown links [text](url) are not placeholders.
+  const rest = s.replace(/\[DA CONFERMARE[^\]]*\]/g, '').replace(/\[[^\]]*\]\(/g, '(');
+  if (/\[[^\]]*\]/.test(rest)) return null;
+  return s.replace(/\*\*/g, '').replace(/\s{2,}/g, ' ').trim();
+};

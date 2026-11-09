@@ -4,8 +4,8 @@ import { u } from '../lib/url';
 import { h } from '../lib/txt';
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
-interface Props { minimal?: boolean }
-const { minimal = false } = Astro.props;
+interface Props { minimal?: boolean; formHref?: string }
+const { minimal = false, formHref = '#prenota' } = Astro.props;
 const here = Astro.url.pathname;
 ---
 <div class="topbar">
@@ -25,6 +25,6 @@ const here = Astro.url.pathname;
         </nav>
       </>
     )}
-    <a class="btn btn--hdr" href="#prenota" style={minimal ? 'margin-left:auto' : ''}><Icon n="calendar" /> Sopralluogo gratuito</a>
+    <a class="btn btn--hdr" href={formHref} style={minimal ? 'margin-left:auto' : ''}><Icon n="calendar" /> Sopralluogo gratuito</a>
   </div>
 </header>

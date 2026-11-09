@@ -3,28 +3,16 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
+import GuideLinks from '../components/GuideLinks.astro';
 import { site, euro } from '../data/site';
 import { bonusShort } from '../data/bonus';
+import { priceList, priceFactors } from '../data/prices';
 import { u } from '../lib/url';
 import { hv as h } from '../lib/txt';
 
 const crumbs = [{ name: 'Prezzi', path: '/prezzi/' }];
-const listino = [
-  ['Trasformazione vasca in doccia, versione standard', `da ${euro(site.priceFrom)}`, '1 giorno [DA CONFERMARE]', '/vasca-in-doccia/'],
-  ['Vasca in doccia con piatto a filo pavimento', '[DA X €]', '[DA X]', '/vasca-in-doccia/'],
-  ['Vasca con sportello', '[DA X €]', '[DA X]', '/vasca-con-sportello/'],
-  ['Pacchetto bagno sicuro (maniglioni, seggiolino, antiscivolo)', '[DA X €]', '[DA X]', '/bagno-sicuro/'],
-  ['Sostituzione del solo box doccia', '[DA X €]', '[DA X]', ''],
-  ['Bagno completo', '[DA X €]', '[DA X]', ''],
-];
-const fattori = [
-  ['Misura del bagno', 'Un piatto più grande o su misura costa di più'],
-  ['Tipo di piatto', 'Il filo pavimento richiede più lavoro sullo scarico'],
-  ['Finiture e colori', 'Le pareti e le finiture speciali aumentano il costo'],
-  ['Box doccia', 'Scorrevole, a battente o a nicchia hanno prezzi diversi'],
-  ['Stato dello scarico e della parete', 'Se vanno rifatti, si aggiungono ore di lavoro'],
-  ['Accessori di sicurezza', 'Maniglioni, seggiolino e miscelatore termostatico si sommano al prezzo base'],
-];
+const listino = priceList.map((r) => [r.name, r.price, r.time, r.href]);
+const fattori = priceFactors;
 const incluso = [
   'sopralluogo gratuito e preventivo scritto',
   'rimozione e smaltimento della vasca',
@@ -124,6 +112,8 @@ const faqs = [
       <Faq items={faqs} open verbose />
     </div>
   </section>
+
+  <GuideLinks slugs={['piatto-doccia-filo-pavimento-o-ribassato', 'doccia-a-norma-dm-236-detrazione']} sand />
 
   <CtaBand title="Vuoi il prezzo per il tuo bagno?" text="Il sopralluogo è gratuito e il preventivo te lo lasciamo scritto." />
 </Base>

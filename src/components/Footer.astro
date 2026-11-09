@@ -11,14 +11,14 @@ const { minimal = false } = Astro.props;
 <footer class="ftr">
   <div class="wrap">
     {minimal ? (
-      <p set:html={h(`${site.brand} · ${site.legalName} · P.IVA ${site.vat} · ${site.street}`)} />
+      <p set:html={h(`${site.brand} · ${site.legalName} · P.IVA ${site.vat} · REA ${site.rea} · ${site.street}`)} />
       <p>Telefono <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} /> · <span set:html={h(`Orari ${site.hours}`)} /></p>
     ) : (
     <div class="ftr__grid">
       <div>
         <Logo />
         <p>Trasformazione vasca in doccia, vasca con sportello e bagno sicuro a Torino e in tutto il Piemonte.</p>
-        <p set:html={h(`${site.legalName} · ${site.street}, ${site.postalCode} ${site.locality} · P.IVA ${site.vat}`)} />
+        <p set:html={h(`${site.legalName} · ${site.street}, ${site.postalCode} ${site.locality} · P.IVA ${site.vat} · REA ${site.rea}`)} />
       </div>
       <div>
         <h3>Servizi</h3>
@@ -31,8 +31,10 @@ const { minimal = false } = Astro.props;
         </ul>
       </div>
       <div>
-        <h3>Contatti</h3>
+        <h3>Azienda e contatti</h3>
         <ul>
+          <li><a href={u('/chi-siamo/')}>Chi siamo</a></li>
+          <li><a href={u('/guide/')}>Guide</a></li>
           <li>Telefono <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} /></li>
           <li>WhatsApp <a href={`https://wa.me/${site.whatsapp}`} set:html={h(site.whatsappLabel)} /></li>
           <li set:html={h(`Email ${site.email}`)} />

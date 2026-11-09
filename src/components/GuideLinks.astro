@@ -1,0 +1,18 @@
+---
+// "Da leggere" block: links to guides from service, price, bonus and province pages, and between guides.
+import { guides } from '../data/guides';
+import { u } from '../lib/url';
+interface Props { slugs?: string[]; title?: string; sand?: boolean }
+const { slugs, title = 'Da leggere prima del sopralluogo', sand = false } = Astro.props;
+const list = slugs ? slugs.map((s) => guides.find((g) => g.slug === s)!).filter(Boolean) : guides;
+---
+<section class={`section section--tight${sand ? ' section--sand' : ''}`} aria-labelledby="guide-correlate">
+  <div class="wrap narrow">
+    <h2 id="guide-correlate" class="h3">{title}</h2>
+    <ul class="guide-list">
+      {list.map((g) => (
+        <li><a href={u(`/guide/${g.slug}/`)}>{g.h1}</a><span>{g.card}</span></li>
+      ))}
+    </ul>
+  </div>
+</section>

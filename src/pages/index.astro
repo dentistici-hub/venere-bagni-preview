@@ -6,10 +6,12 @@ import BeforeAfter from '../components/BeforeAfter.astro';
 import Faq from '../components/Faq.astro';
 import Reviews from '../components/Reviews.astro';
 import CtaBand from '../components/CtaBand.astro';
+import GuideLinks from '../components/GuideLinks.astro';
 import Icon from '../components/Icon.astro';
 import { media } from '../data/media';
-import { site, zones, euro } from '../data/site';
+import { site, zones, euro, ratingValue, ratingCount } from '../data/site';
 import { bonusShort } from '../data/bonus';
+import { priceList } from '../data/prices';
 import { u } from '../lib/url';
 import { h } from '../lib/txt';
 
@@ -34,12 +36,7 @@ const day = [
   ['16:00', 'Box, rubinetteria e accessori sono al loro posto'],
   ['18:00', 'Pulizia finale e consegna'],
 ];
-const prices = [
-  ['Vasca in doccia, versione standard', `da ${euro(site.priceFrom)}`],
-  ['Vasca in doccia con piatto a filo pavimento', '[DA X €]'],
-  ['Vasca con sportello', '[DA X €]'],
-  ['Pacchetto bagno sicuro', '[DA X €]'],
-];
+const prices = priceList.filter((r) => r.home).map((r) => [r.short ?? r.name, r.price]);
 ---
 <Base
   title="Vasca in doccia a Torino in 1 giorno | Venere Bagni"
@@ -58,7 +55,7 @@ const prices = [
           <li><Icon n="check" />Prezzo fisso scritto</li>
           <li><Icon n="check" />Da {euro(site.priceFrom)}</li>
         </ul>
-        <p class="trust-line"><span class="stars" aria-hidden="true">★★★★★</span><span set:html={h('[VOTO GOOGLE] su 5 da [N° RECENSIONI] recensioni Google')} /></p>
+        <p class="trust-line"><span class="stars" aria-hidden="true">★★★★★</span><span set:html={h(`${ratingValue} su 5 da ${ratingCount} recensioni Google`)} /></p>
         <p class="hero__alt" set:html={h(`Preferisci parlare con qualcuno? Chiama il ${site.phone} oppure scrivi su WhatsApp al ${site.whatsappLabel}.`)} />
       </div>
       <div class="hero__media">
@@ -168,7 +165,7 @@ const prices = [
           <li><span>Nel preventivo c’è ogni voce. Se durante il lavoro salta fuori qualcosa che prima non si poteva vedere, ti chiamiamo e ci accordiamo prima di andare avanti.</span></li>
           <li><span>Il tecnico misura e spiega, poi ti lascia il preventivo e decidi tu quando.</span></li>
         </ul>
-        <p class="muted" set:html={h('[ANNI DI ESPERIENZA] anni di lavoro e [N° INSTALLAZIONI] bagni rifatti in Piemonte. Su Google abbiamo [VOTO GOOGLE] su 5 da [N° RECENSIONI] clienti, e le recensioni puoi leggerle tutte.')} />
+        <p class="muted" set:html={h(`[ANNI DI ESPERIENZA] anni di lavoro e [N° INSTALLAZIONI] bagni rifatti in Piemonte. Su Google abbiamo ${ratingValue} su 5 da ${ratingCount} clienti, e le recensioni puoi leggerle tutte.`)} />
       </div>
       <Image src={media.sopralluogo.src} alt={media.sopralluogo.alt} widths={[640, 960]} sizes="(max-width: 960px) 100vw, 560px" />
     </div>
@@ -176,7 +173,7 @@ const prices = [
 
   <section class="section" id="recensioni">
     <div class="wrap">
-      <div class="head"><h2>Cosa dicono i clienti</h2><p class="muted" set:html={h('[VOTO GOOGLE] su 5 · [N° RECENSIONI] recensioni su Google')} /></div>
+      <div class="head"><h2>Cosa dicono i clienti</h2><p class="muted" set:html={h(`${ratingValue} su 5 · ${ratingCount} recensioni su Google`)} /></div>
       <Reviews items={reviews} />
     </div>
   </section>
@@ -198,6 +195,8 @@ const prices = [
       <p style="margin-top:20px"><a class="link-arrow" href={u('/domande-frequenti/')}>Tutte le domande</a></p>
     </div>
   </section>
+
+  <GuideLinks sand />
 
   <CtaBand />
 </Base>

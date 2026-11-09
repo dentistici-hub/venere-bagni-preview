@@ -3,8 +3,11 @@ import '@fontsource-variable/fraunces/opsz.css';
 import '@fontsource/atkinson-hyperlegible/400.css';
 import '@fontsource/atkinson-hyperlegible/700.css';
 import '../styles/global.css';
-import { site } from '../data/site';
-import { buildGraph, type Faq } from '../lib/schema';
+import fs from 'node:fs';
+import path from 'node:path';
+import { site, filled } from '../data/site';
+import { pageUpdated } from '../data/dates.mjs';
+import { buildGraph, abs, type Faq, type PageType, type ServiceOpts } from '../lib/schema';
 import { u, isPreview } from '../lib/url';
 import { plain } from '../lib/txt';
 import Consent from '../components/Consent.astro';
@@ -14,14 +17,25 @@ import MobileBar from '../components/MobileBar.astro';
 
 interface Props {
   title?: string; description?: string; faqs?: Faq[]; crumbs?: { name: string; path: string }[];
-  service?: { name: string; description: string; minPrice?: number; areaServed?: string }; landing?: boolean; noindex?: boolean;
+  service?: ServiceOpts; landing?: boolean; noindex?: boolean; pageType?: PageType;
+  noForm?: boolean; // page has no lead form with id="prenota": header and mobile buttons go to the home page form
+  // Guides: Article schema + og:type article. Dates YYYY-MM-DD.
+  article?: { headline: string; published: string };
 }
-const { title = site.title, description = site.description, faqs, crumbs, service, landing = false, noindex = false } = Astro.props;
+const { title = site.title, description = site.description, faqs, crumbs, service, landing = false, noindex = false, pageType, article, noForm = false } = Astro.props;
+const formHref = noForm ? u('/#prenota') : '#prenota';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const path = Astro.url.pathname.slice(base.length) || '/';
-const canonical = new URL(u(path), site.url).toString();
-const ogImage = new URL(u('/og-image.jpg'), site.url).toString();
-const graph = JSON.stringify(buildGraph({ path, faqs, crumbs, service }));
+const pagePath = Astro.url.pathname.slice(base.length) || '/';
+const canonical = abs(pagePath);
+// Per-page social image public/og/<key>.jpg (made by scripts/make-og.py), key = path with "/" -> "-", "home" for "/".
+const ogKey = pagePath === '/' ? 'home' : pagePath.replace(/^\/|\/$/g, '').replace(/\//g, '-');
+const ogFile = fs.existsSync(path.join(process.cwd(), 'public', 'og', `${ogKey}.jpg`)) ? `/og/${ogKey}.jpg` : site.ogImage;
+const ogImage = abs(ogFile);
+const modified = pageUpdated(pagePath);
+const graph = JSON.stringify(buildGraph({
+  path: pagePath, title, description, image: ogImage, modified, pageType, faqs, crumbs, service,
+  article: article ? { headline: article.headline, published: article.published, modified } : undefined,
+}));
 const index = site.indexable && !noindex && !isPreview;
 ---
 <!doctype html>
@@ -35,24 +49,35 @@ const index = site.indexable && !noindex && !isPreview;
     <meta name="robots" content={index ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, nofollow'} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:locale" content="it_IT" />
     <meta property="og:site_name" content={site.brand} />
     <meta property="og:title" content={plain(title)} />
     <meta property="og:description" content={plain(description)} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={plain(title)} />
+    {article && <meta property="article:published_time" content={article.published} />}
+    {article && <meta property="article:modified_time" content={modified} />}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={plain(title)} />
+    <meta name="twitter:description" content={plain(description)} />
+    <meta name="twitter:image" content={ogImage} />
+    {filled(site.googleVerification) && <meta name="google-site-verification" content={site.googleVerification} />}
+    {filled(site.bingVerification) && <meta name="msvalidate.01" content={site.bingVerification} />}
     <link rel="alternate" type="text/plain" href={u('/llms.txt')} title="llms.txt" />
+    <link rel="sitemap" type="application/xml" href={u('/sitemap-index.xml')} />
     <script type="application/ld+json" set:html={graph} />
   </head>
   <body>
     <a class="skip" href="#main">Vai al contenuto</a>
     {isPreview && <div class="preview-ribbon"><strong>Anteprima del progetto</strong> · foto di esempio e dati da confermare (evidenziati in giallo) · il modulo non invia dati</div>}
-    <Header minimal={landing} />
+    <Header minimal={landing} formHref={formHref} />
     <main id="main"><slot /></main>
     <Footer minimal={landing} />
-    <MobileBar />
+    <MobileBar formHref={formHref} />
     <Consent />
     <script>
       import '../scripts/main.js';

@@ -4,8 +4,10 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
+import GuideLinks from '../components/GuideLinks.astro';
 import { media } from '../data/media';
 import { site, euro } from '../data/site';
+import { workday } from '../data/workday';
 import { u } from '../lib/url';
 import { hv as h } from '../lib/txt';
 
@@ -19,15 +21,7 @@ const incluso = [
   ['Accessori di sicurezza', 'Maniglione e seggiolino, se li vuoi'],
   ['Pulizia', 'Lasciamo il bagno pulito a fine giornata'],
 ];
-const day = [
-  ['8:00', 'La squadra arriva, protegge pavimenti e corridoio'],
-  ['9:00', 'Smontaggio e rimozione della vasca'],
-  ['11:00', 'Preparazione del fondo e posa dello scarico'],
-  ['13:00', 'Posa del piatto doccia'],
-  ['14:30', 'Montaggio delle pareti'],
-  ['16:00', 'Box doccia, rubinetteria, accessori'],
-  ['18:00', 'Pulizia, prova dell’acqua e consegna'],
-];
+const day = workday;
 const faqs = [
   { q: 'Quanto dura la trasformazione della vasca in doccia?', a: 'Con Venere Bagni la trasformazione della vasca in doccia dura un giorno di lavoro [DA CONFERMARE]. La squadra comincia la mattina presto e la sera la doccia si può già usare. Prima c’è il sopralluogo a casa tua, che dura circa [DURATA] minuti.' },
   { q: 'Si può fare in un bagno piccolo?', a: 'Sì. La doccia prende lo spazio della vasca e spesso ne libera un po’, perché le pareti sono più sottili. Al sopralluogo gratuito Venere Bagni misura il bagno e ti dice quale piatto ci sta, anche nei bagni stretti dei condomini di Torino.' },
@@ -85,7 +79,7 @@ const faqs = [
       <div>
         <p class="eyebrow">Le scelte</p>
         <h2>Piatto, pareti e box</h2>
-        <p>Il piatto può essere a filo pavimento, senza scalino, oppure con un bordo basso. Se in casa c’è chi ha problemi di equilibrio o userà una sedia da doccia, ti consigliamo il filo pavimento. Costa di più e lo scarico va controllato bene: lo guardiamo al sopralluogo.</p>
+        <p>Il piatto può essere a filo pavimento, senza scalino, oppure con un bordo basso. Se in casa c’è chi ha problemi di equilibrio o userà una sedia da doccia, ti consigliamo il filo pavimento. Costa di più e lo scarico va controllato bene: lo guardiamo al sopralluogo. Le differenze sono spiegate nella guida <a href={u('/guide/piatto-doccia-filo-pavimento-o-ribassato/')}>piatto a filo pavimento o ribassato</a>.</p>
         <p set:html={h('Pareti, piatto, box e rubinetteria li scegli dal catalogo: [OPZIONI DA CATALOGO: colori e finiture delle pareti, colori del piatto, tipi di box (scorrevole, a battente, a nicchia), rubinetteria]')} />
       </div>
     </div>
@@ -100,7 +94,7 @@ const faqs = [
       <div class="timeline timeline--7">
         <ol>{day.map(([t, d]) => <li><b>{t}</b><span>{d}</span></li>)}</ol>
       </div>
-      <p class="sec-intro" style="margin-top:24px">Quel giorno il bagno resta chiuso. Ti serve solo un posto dove cambiarti e, se ce l’hai, un secondo bagno da usare. Se non ce l’hai, ne parliamo al sopralluogo.</p>
+      <p class="sec-intro" style="margin-top:24px">Quel giorno il bagno resta chiuso. Ti serve solo un posto dove cambiarti e, se ce l’hai, un secondo bagno da usare. Se non ce l’hai, ne parliamo al sopralluogo. Cosa preparare e cosa succede ora per ora è nella guida sul <a href={u('/guide/giorno-trasformazione-vasca-in-doccia/')}>giorno della trasformazione</a>.</p>
     </div>
   </section>
 
@@ -124,6 +118,8 @@ const faqs = [
       <p style="margin-top:20px"><a class="link-arrow" href={u('/bagno-sicuro/')}>Il bagno sicuro con seggiolino e maniglioni</a></p>
     </div>
   </section>
+
+  <GuideLinks slugs={['giorno-trasformazione-vasca-in-doccia', 'piatto-doccia-filo-pavimento-o-ribassato']} />
 
   <CtaBand title="Prenota il sopralluogo gratuito" text="Veniamo a misurare il bagno e ti lasciamo il preventivo scritto. Non ti impegna a niente." />
 </Base>

@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import BeforeAfter from '../components/BeforeAfter.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
+import GuideLinks from '../components/GuideLinks.astro';
 import { u } from '../lib/url';
 import { hv as h } from '../lib/txt';
 
@@ -89,6 +90,8 @@ const faqs = [
       <Faq items={faqs} open verbose />
     </div>
   </section>
+
+  <GuideLinks slugs={['doccia-a-norma-dm-236-detrazione', 'giorno-trasformazione-vasca-in-doccia']} sand />
 
   <CtaBand title="Vuoi vedere se ci sta nel tuo bagno?" text="Veniamo a misurare e ti facciamo vedere il modello adatto. Il sopralluogo è gratuito." />
 </Base>

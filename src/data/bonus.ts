@@ -18,3 +18,14 @@ export const bonusFaq = [
   { q: 'Esistono contributi a fondo perduto in Piemonte per il bagno sicuro?', a: 'La legge 13 del 1989 prevede contributi per eliminare le barriere architettoniche negli edifici privati. In Piemonte la domanda si fa al Comune prima dei lavori, a Torino all’ATC del Piemonte Centrale. Servono residenza nell’immobile e certificazione di invalidità. Il contributo non è automatico: dipende dai fondi disponibili e viene pagato dopo l’esecuzione dei lavori. [DA CONFERMARE CON IL COMMERCIALISTA]' },
   { q: 'Il finanziamento a tasso zero è un incentivo pubblico?', a: 'No, è un’offerta commerciale di una società finanziaria. La pubblicità che riporta il tasso o altri costi del credito deve includere le informazioni di base previste dall’articolo 123 del TUB, con un esempio rappresentativo. La detrazione resta possibile se la finanziaria paga l’impresa con bonifico parlante completo e tu conservi la ricevuta del bonifico.' },
 ];
+
+// Status table of /bonus-detrazioni/ ("Cosa c’è e cosa non c’è più nel 2026"), also in llms-full.txt.
+export const bonusStatus: [string, string, string][] = [
+  ['Detrazione per ristrutturazione, 50%', 'In vigore', 'Proprietari (o titolari di usufrutto, uso, abitazione) che fanno lavori nell’abitazione principale'],
+  ['Detrazione per ristrutturazione, 36%', 'In vigore', 'Tutti gli altri casi: seconde case, inquilini, familiari conviventi che pagano'],
+  ['Bonus barriere architettoniche 75%', 'Finito il 31 dicembre 2025', 'Non più richiedibile per le spese dal 1 gennaio 2026'],
+  ['IVA agevolata 10%', 'In vigore', 'Lavori di manutenzione e ristrutturazione su abitazioni, con condizioni'],
+  ['IVA agevolata 4%', 'In vigore, condizioni stringenti', 'Lavori in appalto per eliminare barriere architettoniche, che rispettano il DM 236/1989'],
+  ['Sconto in fattura e cessione del credito', 'Non disponibili', 'Per questi lavori dal 17 febbraio 2023'],
+  ['Contributo regionale legge 13/1989', 'Attivo, con fondi annuali', 'Persone con invalidità certificata, domanda prima dei lavori'],
+];

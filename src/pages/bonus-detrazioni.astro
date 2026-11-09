@@ -5,20 +5,13 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { bonusShort, bonusFaq } from '../data/bonus';
+import GuideLinks from '../components/GuideLinks.astro';
+import { bonusShort, bonusFaq, bonusStatus } from '../data/bonus';
 import { u } from '../lib/url';
 import { hv as h } from '../lib/txt';
 
 const crumbs = [{ name: 'Bonus e detrazioni', path: '/bonus-detrazioni/' }];
-const stato = [
-  ['Detrazione per ristrutturazione, 50%', 'In vigore', 'Proprietari (o titolari di usufrutto, uso, abitazione) che fanno lavori nell’abitazione principale'],
-  ['Detrazione per ristrutturazione, 36%', 'In vigore', 'Tutti gli altri casi: seconde case, inquilini, familiari conviventi che pagano'],
-  ['Bonus barriere architettoniche 75%', 'Finito il 31 dicembre 2025', 'Non più richiedibile per le spese dal 1 gennaio 2026'],
-  ['IVA agevolata 10%', 'In vigore', 'Lavori di manutenzione e ristrutturazione su abitazioni, con condizioni'],
-  ['IVA agevolata 4%', 'In vigore, condizioni stringenti', 'Lavori in appalto per eliminare barriere architettoniche, che rispettano il DM 236/1989'],
-  ['Sconto in fattura e cessione del credito', 'Non disponibili', 'Per questi lavori dal 17 febbraio 2023'],
-  ['Contributo regionale legge 13/1989', 'Attivo, con fondi annuali', 'Persone con invalidità certificata, domanda prima dei lavori'],
-];
+const stato = bonusStatus;
 const casi = [
   ['Sostituzione della vasca con altra vasca o box doccia, senza requisiti tecnici e senza altri lavori', 'No'],
   ['Doccia a pavimento con sedile ribaltabile e doccia a telefono, che rispetta il DM 236/1989', 'Sì, con la documentazione tecnica del lavoro'],
@@ -85,6 +78,7 @@ const esempi = [
           <tbody>{casi.map(([a, b]) => <tr><td>{a}</td><td><strong>{b}</strong></td></tr>)}</tbody>
         </table>
       </div>
+      <p><a class="link-arrow" href={u('/guide/doccia-a-norma-dm-236-detrazione/')}>La doccia a norma DM 236, spiegata per esteso</a></p>
       <p><a class="link-arrow" href={u('/bagno-sicuro/')}>Come realizziamo un bagno sicuro</a></p>
     </div>
   </section>
@@ -179,6 +173,8 @@ const esempi = [
       <Faq items={bonusFaq} open verbose />
     </div>
   </section>
+
+  <GuideLinks slugs={['doccia-a-norma-dm-236-detrazione', 'piatto-doccia-filo-pavimento-o-ribassato']} sand />
 
   <CtaBand title="Vuoi sapere quanto spenderesti davvero?" text="Al sopralluogo ti lasciamo il preventivo scritto, da far vedere al tuo commercialista." />
 </Base>

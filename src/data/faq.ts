@@ -1,0 +1,38 @@
+// FAQ groups of /domande-frequenti/, also used by llms-full.txt. The bonus group comes from bonus.ts.
+import { site } from './site';
+import { bonusFaq } from './bonus';
+import type { Faq } from '../lib/schema';
+
+export const faqGroups: { id: string; title: string; items: Faq[] }[] = [
+  { id: 'lavori', title: 'Lavori', items: [
+    { q: 'Cosa significa trasformare la vasca in doccia?', a: 'Trasformare la vasca in doccia significa togliere la vasca e montare nello stesso spazio un piatto doccia con pareti e box. Venere Bagni lo fa senza buttare giù muri e senza rifare il bagno: il resto della stanza resta com’è.' },
+    { q: 'Devo togliere le piastrelle?', a: 'Di solito le piastrelle fuori dallo spazio della vasca restano. Venere Bagni riveste la zona della doccia con pareti sintetiche, montate sopra le piastrelle che ci sono o al loro posto, a seconda di come è messo il muro. Cosa succede nel tuo bagno te lo diciamo al sopralluogo.' },
+    { q: 'Si può fare in un condominio?', a: 'Sì. Il lavoro riguarda solo l’interno del tuo appartamento. Se serve, Venere Bagni avvisa l’amministratore, e durante il lavoro protegge scale e ascensore.' },
+    { q: 'Cosa succede ai miei mobili e ai miei pavimenti?', a: 'Venere Bagni copre i pavimenti con teli e cartoni dalla porta di casa fino al bagno. A te chiediamo solo di togliere le tue cose dal bagno e di liberare il corridoio. A fine giornata puliamo e portiamo via le macerie.' },
+  ] },
+  { id: 'prezzi', title: 'Prezzi', items: [
+    { q: 'Quanto costa trasformare la vasca in doccia?', a: 'Una trasformazione standard con Venere Bagni parte da 3.500 € [DA CONFERMARE: IVA inclusa?]. Il prezzo finale dipende da misura, piatto e finiture, e lo fissiamo nel preventivo scritto dopo il sopralluogo gratuito.' },
+    { q: 'Il prezzo del preventivo può cambiare?', a: 'No. Venere Bagni lavora a prezzo fisso. Se salta fuori un problema nascosto, come uno scarico danneggiato, ti spieghiamo cosa succede e decidiamo insieme l’eventuale costo prima di intervenire.' },
+    { q: 'Si può pagare a rate?', a: '[DA CONFERMARE: finanziamento disponibile?] Con Venere Bagni puoi pagare a rate tramite [SOCIETÀ DI FINANZIAMENTO]. Le condizioni le definiamo al sopralluogo e le scriviamo nel preventivo.' },
+  ] },
+  { id: 'tempi', title: 'Tempi', items: [
+    { q: 'Quanto dura il lavoro?', a: 'Con Venere Bagni la trasformazione della vasca in doccia dura un giorno [DA CONFERMARE]. La squadra arriva la mattina e la sera la doccia si può usare. Nei casi particolari, come un piatto a filo pavimento con lo scarico da rifare, i tempi te li scriviamo nel preventivo.' },
+    { q: 'Tra la richiesta e il lavoro quanto devo aspettare?', a: 'Ti rispondiamo entro [X ORE]. Il sopralluogo di solito si fa entro [X GIORNI] e il lavoro comincia [X GIORNI] dopo che hai accettato il preventivo [DA CONFERMARE].' },
+    { q: 'Posso usare il bagno durante il lavoro?', a: 'No, per quella giornata il bagno resta chiuso. Se in casa ne hai un secondo, nessun problema. Se no, ne parliamo al sopralluogo e troviamo insieme la soluzione più comoda per te.' },
+  ] },
+  { id: 'sicurezza', title: 'Sicurezza', items: [
+    { q: 'La doccia nuova è più sicura della vasca?', a: 'Per chi fa fatica a muoversi, sì. Il piatto doccia a filo pavimento di Venere Bagni non ha un bordo da scavalcare e ha il fondo antiscivolo. Si possono aggiungere maniglioni e seggiolino, che riducono molto il rischio di cadere.' },
+    { q: 'Il piatto è scivoloso?', a: 'Il piatto doccia di Venere Bagni ha una superficie antiscivolo [DA CONFERMARE: classe di antiscivolo del catalogo] che fa presa anche con acqua e sapone. Si pulisce con un panno.' },
+    { q: 'Si può usare con la sedia da doccia o il deambulatore?', a: 'Con il piatto a filo pavimento sì, perché non c’è lo scalino. Al sopralluogo Venere Bagni misura la larghezza del passaggio e ti dice se la sedia o il deambulatore ci passano comodi.' },
+  ] },
+  { id: 'sopralluogo', title: 'Sopralluogo', items: [
+    { q: 'Il sopralluogo è gratuito davvero?', a: 'Sì. Il sopralluogo di Venere Bagni è gratuito e non ti impegna. Un tecnico viene a casa tua, misura il bagno e ti lascia il preventivo scritto. Se non lo accetti, non paghi niente.' },
+    { q: 'Quanto dura il sopralluogo e chi viene?', a: 'Dura circa [DURATA] minuti. Viene un tecnico di Venere Bagni [DA CONFERMARE: nome e ruolo], che poi segue il tuo lavoro fino alla fine. Se vuoi, può esserci anche un familiare.' },
+    { q: 'Se non compro, mi richiamate in continuazione?', a: 'No. Dopo il sopralluogo ti lasciamo il preventivo e il tempo per pensarci. Se sei d’accordo ti chiamiamo una volta, per sapere se hai domande, e poi decidi tu.' },
+  ] },
+  { id: 'garanzia', title: 'Garanzia', items: [
+    { q: 'Che garanzia date sul lavoro?', a: 'Venere Bagni dà una garanzia di [ANNI DI GARANZIA] anni sulla posa e sui materiali, scritta nel contratto. Se nel periodo di garanzia c’è un difetto di montaggio o una perdita, torniamo a sistemarlo e tu non paghi niente [DA CONFERMARE: condizioni].' },
+    { q: 'A chi mi rivolgo se ho un problema dopo il lavoro?', a: `Alla stessa persona che ti ha seguito dall’inizio: il tuo referente di Venere Bagni ha il tuo numero e tu hai il suo. Puoi anche chiamare il ${site.phone} o scrivere su WhatsApp al ${site.whatsappLabel} [DA CONFERMARE: tempi di intervento in garanzia].` },
+  ] },
+  { id: 'bonus', title: 'Bonus e detrazioni', items: bonusFaq },
+];

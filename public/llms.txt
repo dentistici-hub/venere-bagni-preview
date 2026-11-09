@@ -21,9 +21,16 @@ Bonus 2026: il bonus barriere architettoniche del 75% è finito il 31 dicembre 2
 
 ## Zone
 
-- [Vasca in doccia a Torino](https://www.venerebagni.it/zone/torino/)
-- [Vasca in doccia a Cuneo](https://www.venerebagni.it/zone/cuneo/)
-- [Vasca in doccia a Novara](https://www.venerebagni.it/zone/novara/)
+Una pagina per provincia, con comuni serviti, CAP, quota di residenti con 65 anni o più (ISTAT 2025) e fondi della legge 13/1989 assegnati nel 2025.
+
+- [Vasca in doccia a Torino](https://www.venerebagni.it/zone/torino/): domanda legge 13 per i residenti a Torino all'ATC del Piemonte Centrale
+- [Vasca in doccia a Cuneo](https://www.venerebagni.it/zone/cuneo/): Langhe, Roero, Monregalese e valli
+- [Vasca in doccia a Novara](https://www.venerebagni.it/zone/novara/): Bassa Novarese, Borgomanero, Arona e Orta
+- [Vasca in doccia ad Alessandria](https://www.venerebagni.it/zone/alessandria/): Casale, Tortona, Novi Ligure, Acqui Terme
+- [Vasca in doccia ad Asti](https://www.venerebagni.it/zone/asti/): nord astigiano, Valle Belbo, Langa Astigiana
+- [Vasca in doccia a Biella](https://www.venerebagni.it/zone/biella/): Valle Cervo, Valle Elvo, Valdilana, Cossato
+- [Vasca in doccia a Vercelli](https://www.venerebagni.it/zone/vercelli/): pianura vercellese e Valsesia
+- [Vasca in doccia nel Verbano-Cusio-Ossola](https://www.venerebagni.it/zone/verbano-cusio-ossola/): Verbania, Omegna, Domodossola
 
 ## Contatti
 

@@ -14,7 +14,7 @@ import MobileBar from '../components/MobileBar.astro';
 
 interface Props {
   title?: string; description?: string; faqs?: Faq[]; crumbs?: { name: string; path: string }[];
-  service?: { name: string; description: string; minPrice?: number }; landing?: boolean; noindex?: boolean;
+  service?: { name: string; description: string; minPrice?: number; areaServed?: string }; landing?: boolean; noindex?: boolean;
 }
 const { title = site.title, description = site.description, faqs, crumbs, service, landing = false, noindex = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');

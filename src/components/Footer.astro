@@ -27,8 +27,7 @@ const { minimal = false } = Astro.props;
       <div>
         <h3>Zone servite</h3>
         <ul>
-          {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>Vasca in doccia a {z.name}</a></li>)}
-          <li>Alessandria, Asti, Biella, Vercelli, VCO</li>
+          {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>Vasca in doccia {z.at}</a></li>)}
         </ul>
       </div>
       <div>

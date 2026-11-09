@@ -10,19 +10,18 @@ const crumbs = [{ name: 'Zone', path: '/zone/' }];
 ---
 <Base
   title="Zone servite in Piemonte | Venere Bagni"
-  description="Trasformazione vasca in doccia a Torino, Cuneo, Novara e nelle altre province del Piemonte. Sopralluogo gratuito e preventivo scritto a prezzo fisso."
+  description="Trasformazione vasca in doccia nelle 8 province del Piemonte, da Torino al Verbano-Cusio-Ossola. Sopralluogo gratuito e preventivo scritto a prezzo fisso."
   crumbs={crumbs}
 >
   <PageHero
     crumbs={crumbs}
     eyebrow="Zone servite"
     title="Lavoriamo in tutto il Piemonte"
-    lead="Partiamo da Torino, copriamo tutta la provincia e andiamo anche nelle altre province del Piemonte."
+    lead="Partiamo da Torino e lavoriamo in tutte le otto province del Piemonte. Ogni provincia ha la sua pagina, con i comuni, i CAP e dove si chiede il contributo della legge 13."
     formTitle="Vediamo se arriviamo nella tua zona"
   >
     <ul class="zones">
-      {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.name} e provincia</a></li>)}
-      {site.areas.filter((a) => !zones.some((z) => z.name === a)).map((a) => <li><span>{a}</span></li>)}
+      {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.label}</a></li>)}
     </ul>
     <p style="margin-top:20px">La tua zona non c’è? Scrivi il CAP nel modulo e ti diciamo subito se possiamo venire.</p>
   </PageHero>

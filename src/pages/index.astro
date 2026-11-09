@@ -87,9 +87,9 @@ const prices = [
         <p class="muted">Sposta la barra su ogni foto per vedere la differenza.</p>
       </div>
       <div class="ba-grid">
-        <BeforeAfter before="prima1" after="dopo1" caption="[CITTÀ] · vasca in doccia con pareti effetto marmo · [DURATA]" />
-        <BeforeAfter before="prima2" after="dopo2" caption="[CITTÀ] · doccia con seggiolino e maniglione · [DURATA]" />
-        <BeforeAfter before="prima3" after="dopo3" caption="[CITTÀ] · vasca con sportello · [DURATA]" />
+        <BeforeAfter before="ba1p" after="ba1d" caption="[CITTÀ] · doccia a piatto basso con panca · [DURATA]" />
+        <BeforeAfter before="ba2p" after="ba2d" caption="[CITTÀ] · doccia con porta in vetro e maniglioni · [DURATA]" />
+        <BeforeAfter before="ba4p" after="ba4d" caption="[CITTÀ] · doccia walk-in a filo pavimento · [DURATA]" />
       </div>
     </div>
   </section>
@@ -185,8 +185,7 @@ const prices = [
     <div class="wrap">
       <div class="head"><h2>Dove lavoriamo</h2><p>Partiamo da Torino, copriamo tutta la provincia e andiamo anche nelle altre province del Piemonte.</p></div>
       <ul class="zones">
-        {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.name} e provincia</a></li>)}
-        {site.areas.filter((a) => !zones.some((z) => z.name === a)).map((a) => <li><span>{a}</span></li>)}
+        {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.label}</a></li>)}
       </ul>
       <p style="margin-top:20px">La tua zona non c’è? Scrivi il CAP nel modulo e ti diciamo subito se possiamo venire.</p>
     </div>

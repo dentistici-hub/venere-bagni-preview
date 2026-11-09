@@ -404,3 +404,5 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
   .tbl--stack td[data-label]::before { content: attr(data-label) ': '; font-weight: 400; color: var(--muted); }
   .tbl--stack td:empty { display: none; }
 }
+
+@media (max-width: 480px) { .hdr .wrap { gap: 12px; } .logo small { display: none; } .logo b { font-size: 1.35rem; } .logo svg { width: 34px; height: 34px; } }

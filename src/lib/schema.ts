@@ -5,7 +5,7 @@ import { plain } from './txt';
 import { u } from './url';
 
 export interface Faq { q: string; a: string }
-interface Opts { path: string; name?: string; faqs?: Faq[]; crumbs?: { name: string; path: string }[]; service?: { name: string; description: string; minPrice?: number } }
+interface Opts { path: string; name?: string; faqs?: Faq[]; crumbs?: { name: string; path: string }[]; service?: { name: string; description: string; minPrice?: number; areaServed?: string } }
 
 const isReal = (v: string) => !!v && !/\[|0000000/.test(v);
 const abs = (p: string) => new URL(u(p), site.url).toString();
@@ -21,7 +21,7 @@ export function buildGraph(o: Opts) {
     description: plain(site.description),
     image: abs('/og-image.jpg'),
     priceRange: `da ${site.priceFrom} EUR`,
-    areaServed: site.areas.map((a) => ({ '@type': 'AdministrativeArea', name: `Provincia di ${a}` })),
+    areaServed: site.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a === 'Verbano-Cusio-Ossola' ? `Provincia del ${a}` : `Provincia di ${a}` })),
     address: { '@type': 'PostalAddress', addressLocality: site.locality, addressRegion: 'Piemonte', addressCountry: site.country, ...(isReal(site.street) ? { streetAddress: site.street, postalCode: site.postalCode } : {}) },
     knowsAbout: ['trasformazione vasca in doccia', 'vasca con sportello', 'bagno per anziani', 'piatto doccia filo pavimento', 'eliminazione barriere architettoniche'],
   };
@@ -40,7 +40,10 @@ export function buildGraph(o: Opts) {
       description: plain(o.service.description),
       serviceType: o.service.name,
       provider: { '@id': bizId },
-      areaServed: { '@type': 'AdministrativeArea', name: 'Piemonte' },
+      // Zone pages pass their province; every other page serves the whole region.
+      areaServed: o.service.areaServed
+        ? { '@type': 'AdministrativeArea', name: o.service.areaServed, containedInPlace: { '@type': 'AdministrativeArea', name: 'Piemonte' } }
+        : { '@type': 'AdministrativeArea', name: 'Piemonte' },
       url: abs(o.path),
       ...(o.service.minPrice ? { offers: { '@type': 'Offer', priceCurrency: 'EUR', priceSpecification: { '@type': 'PriceSpecification', minPrice: o.service.minPrice, priceCurrency: 'EUR' } } } : {}),
     });

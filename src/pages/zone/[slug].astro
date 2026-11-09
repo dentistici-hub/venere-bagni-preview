@@ -23,16 +23,16 @@ const m = media[z.img];
   description={z.description}
   faqs={z.faqs}
   crumbs={crumbs}
-  service={{ name: `Trasformazione vasca in doccia a ${z.name}`, description: `Trasformazione della vasca in doccia a ${z.name} e provincia: sopralluogo gratuito, preventivo scritto a prezzo fisso e lavoro in un giorno.`, minPrice: site.priceFrom }}
+  service={{ name: `Trasformazione vasca in doccia ${z.at}`, description: `Trasformazione della vasca in doccia in provincia ${z.of}: sopralluogo gratuito e preventivo scritto a prezzo fisso.`, minPrice: site.priceFrom, areaServed: z.area }}
 >
   <PageHero
     crumbs={crumbs}
-    eyebrow={`${z.name} e provincia`}
-    title={`Trasformazione vasca in doccia a ${z.name}`}
+    eyebrow={z.eyebrow ?? `${z.name} e provincia`}
+    title={`Trasformazione vasca in doccia ${z.at}`}
     lead={z.lead}
     chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', `Da ${euro(site.priceFrom)}`]}
     img="hero"
-    formTitle={`Prenota il sopralluogo gratuito a ${z.name}`}
+    formTitle={`Prenota il sopralluogo gratuito ${z.at}`}
   />
 
   <section class="section" id="zona">
@@ -46,13 +46,26 @@ const m = media[z.img];
     </div>
   </section>
 
-  <section class="section section--sand" id="comuni">
+  <section class="section section--sand" id="in-breve">
     <div class="wrap narrow">
-      <h2>Dove lavoriamo in provincia di {z.name}</h2>
+      <h2>La provincia {z.of} in breve</h2>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tbody>{z.facts.map(([a, b]) => <tr><th scope="row">{a}</th><td set:html={h(b)} /></tr>)}</tbody>
+        </table>
+      </div>
+      <p style="margin-top:20px" set:html={h(z.l13)} />
+      <p class="muted">Il contributo della legge 13 è per persone con disabilità motoria o non vedenti che abitano nella casa dei lavori. La domanda va fatta prima di cominciare, in qualsiasi giorno dell’anno, e i soldi arrivano a lavori finiti. <a href={u('/bonus-detrazioni/')}>Regole e detrazioni 2026</a>.</p>
+    </div>
+  </section>
+
+  <section class="section" id="comuni">
+    <div class="wrap narrow">
+      <h2>Dove lavoriamo in provincia {z.of}</h2>
       {z.slug === 'torino' && <p>Torino città e, in provincia:</p>}
       <div class="tbl-wrap">
         <table class="tbl">
-          <caption>Comuni serviti da Venere Bagni in provincia di {z.name}</caption>
+          <caption>Comuni serviti da Venere Bagni in provincia {z.of}</caption>
           <thead><tr><th scope="col">Zona</th><th scope="col">Comuni</th></tr></thead>
           <tbody>{z.towns.map(([a, b]) => <tr><th scope="row">{a}</th><td>{b}</td></tr>)}</tbody>
         </table>
@@ -62,7 +75,7 @@ const m = media[z.img];
     </div>
   </section>
 
-  <section class="section" id="prezzo">
+  <section class="section section--sand" id="prezzo">
     <div class="wrap narrow">
       <h2>{z.pricesTitle}</h2>
       <div class="price-box">
@@ -75,7 +88,7 @@ const m = media[z.img];
     </div>
   </section>
 
-  <section class="section section--sand" id="recensioni">
+  <section class="section" id="recensioni">
     <div class="wrap">
       <div class="head"><h2>Cosa dicono i clienti{z.slug === 'torino' ? ' di Torino' : ''}</h2>
         {z.rating && <p class="muted" set:html={h('Valutazione Google: [VOTO GOOGLE] su 5, [N° RECENSIONI] recensioni.')} />}
@@ -88,13 +101,13 @@ const m = media[z.img];
     </div>
   </section>
 
-  <section class="section" id="domande">
+  <section class="section section--sand" id="domande">
     <div class="wrap narrow">
-      <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Domande frequenti a {z.name}</h2></div>
+      <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Domande frequenti {z.at}</h2></div>
       <Faq items={z.faqs} open verbose />
-      <p style="margin-top:28px" class="muted">Lavoriamo anche a {others.map((o, i) => <>{i > 0 && ' e '}<a href={u(`/zone/${o.slug}/`)}>{o.name}</a></>)}, e nelle altre province del Piemonte.</p>
+      <p style="margin-top:28px" class="muted">Lavoriamo anche nelle altre province del Piemonte: {others.map((o, i) => <>{i > 0 && (i === others.length - 1 ? ' e ' : ', ')}<a href={u(`/zone/${o.slug}/`)}>{o.name}</a></>)}.</p>
     </div>
   </section>
 
-  <CtaBand title={`Prenota il sopralluogo gratuito a ${z.name}`} text="Un tecnico viene a casa tua a prendere le misure e ti lascia il preventivo scritto, a prezzo fisso." />
+  <CtaBand title={`Prenota il sopralluogo gratuito ${z.at}`} text="Un tecnico viene a casa tua a prendere le misure e ti lascia il preventivo scritto, a prezzo fisso." />
 </Base>

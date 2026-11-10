@@ -1,7 +1,7 @@
 // Lead proxy for the Venere Bagni site (Cloudflare Worker, used once the site is on its own domain).
 // Static assets are served by Cloudflare; only /api/lead reaches this code (run_worker_first in wrangler.jsonc).
 //
-// POST /api/lead  {name, phone, email?, cap, intervento, tempi, privacy_consent, marketing_consent, hp_url, utm_*, gclid, fbclid, ...}
+// POST /api/lead  {name, phone, email?, cap, intervento, per_chi, tempi, frenato, privacy_consent, marketing_consent, hp_url, utm_*, gclid, fbclid, ...}
 //   -> validates, then forwards to the Profilo CRM ingest endpoint (/api/leads/ingest/<token>).
 //
 // CRM CONNECTION: PLACEHOLDER until launch.
@@ -13,7 +13,7 @@ const CRM_ORIGIN_DEFAULT = 'https://crm.profilomarketing.it';
 // env.CRM_ORIGIN is honoured only for a local test server, never for another host.
 const crmOrigin = (env) => (/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(env.CRM_ORIGIN || '') ? env.CRM_ORIGIN : CRM_ORIGIN_DEFAULT);
 const MAX_BODY = 8 * 1024;
-const TEXT = { name: 120, phone: 40, email: 200, cap: 5, intervento: 60, tempi: 60, pagina: 200, landing_page: 200, referrer: 200, fuori_zona: 2 };
+const TEXT = { name: 120, phone: 40, email: 200, cap: 5, intervento: 60, per_chi: 60, tempi: 60, frenato: 200, pagina: 200, landing_page: 200, referrer: 200, fuori_zona: 2 };
 const ATTR = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'ttclid', 'campaign_id', 'adset_id', 'ad_id', 'fbp', 'fbc'];
 
 const json = (status, body, extra = {}) =>

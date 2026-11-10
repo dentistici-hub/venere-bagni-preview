@@ -1,5 +1,5 @@
 // Page behaviour, no dependencies: menu, mobile action bar, before/after sliders,
-// campaign attribution capture and the 3-step lead form (POST /api/lead -> Worker -> Profilo CRM).
+// campaign attribution capture and the 3-step lead form (tiles -> one-tap pills -> CAP + contacts; POST /api/lead -> Worker -> Profilo CRM).
 import { track } from './consent.js';
 import { u } from '../lib/url';
 
@@ -82,9 +82,11 @@ $$('[data-lead-form]').forEach((form) => {
   const labels = label.dataset.labels.split('|');
   const msg = $('[data-msg]', form);
   const out = $('[data-out]', form);
+  const capMsg = $('[data-cap-msg]', form);
+  const recap = $('[data-recap]', form);
   const caps = form.dataset.caps.split(',');
   let step = 1;
-  let outOfArea = false;
+  let started = false;
 
   const say = (text, kind) => {
     msg.hidden = !text;
@@ -92,31 +94,35 @@ $$('[data-lead-form]').forEach((form) => {
     msg.textContent = '';
     if (text) setTimeout(() => { msg.textContent = text; }, 30);
   };
+  const frenato = () => $$('input[name="frenato"]:checked', form).map((i) => i.value);
   const go = (n) => {
     step = n;
     steps.forEach((s) => { s.hidden = Number(s.dataset.step) !== n; });
     bars.forEach((b, i) => b.classList.toggle('is-on', i < n));
-    label.textContent = `Passo ${n} di 3: ${labels[n - 1]}`;
+    label.textContent = `Passo ${n} di 3 · ${labels[n - 1]}`;
     say('');
+    if (n === 3 && recap) recap.textContent = [f.intervento.value, f.per_chi.value, f.tempi.value].filter(Boolean).join(' · ');
     const first = $(`[data-step="${n}"] input:not([type=hidden])`, form);
     first?.focus({ preventScroll: true });
     if (form.getBoundingClientRect().top < 0) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
   const bad = (el, text) => { el?.setAttribute('aria-invalid', 'true'); el?.focus(); say(text, 'err'); return false; };
+  const inArea = (cap) => caps.some((p) => cap.startsWith(p));
 
   const check = (n) => {
     $$('[aria-invalid]', form).forEach((el) => el.removeAttribute('aria-invalid'));
     if (n === 1) {
-      const cap = f.cap.value.trim();
-      if (!cap) return bad(f.cap, 'Scrivi il CAP della casa dove vuoi fare il lavoro.');
-      if (!/^\d{5}$/.test(cap)) return bad(f.cap, 'Il CAP ha 5 cifre, ricontrollalo.');
-      outOfArea = !caps.some((p) => cap.startsWith(p));
-      return true;
+      if (f.intervento.value) return true;
+      say('Tocca una delle quattro risposte.', 'err');
+      return false;
     }
     if (n === 2) {
-      if (!f.intervento.value || !f.tempi.value) { say('Scegli una risposta per ogni domanda.', 'err'); return false; }
+      if (!f.per_chi.value || !f.tempi.value) { say('Rispondi alle prime due domande, la terza è facoltativa.', 'err'); return false; }
       return true;
     }
+    const cap = f.cap.value.trim();
+    if (!cap) return bad(f.cap, 'Scrivi il CAP della casa dove vuoi fare il lavoro.');
+    if (!/^\d{5}$/.test(cap)) return bad(f.cap, 'Il CAP ha 5 cifre, ricontrollalo.');
     if (!f.name.value.trim()) return bad(f.name, 'Scrivi il tuo nome.');
     if (!f.phone.value.trim()) return bad(f.phone, 'Scrivi il tuo numero di telefono.');
     if (!phoneOk(f.phone.value.trim())) return bad(f.phone, 'Il numero non sembra giusto, controlla le cifre.');
@@ -125,21 +131,28 @@ $$('[data-lead-form]').forEach((form) => {
     return true;
   };
 
+  // live area check while the CAP is typed
   f.cap.addEventListener('input', () => {
-    f.cap.value = f.cap.value.replace(/\D/g, '').slice(0, 5);
-    if (out) out.hidden = true;
+    const cap = (f.cap.value = f.cap.value.replace(/\D/g, '').slice(0, 5));
+    const full = cap.length === 5;
+    const ok = full && inArea(cap);
+    capMsg.textContent = ok ? 'Arriviamo da te' : '';
+    capMsg.classList.toggle('is-on', ok);
+    out.hidden = !(full && !ok);
   });
-  // one-tap answers: when both questions are answered, move on by itself
-  $$('[data-step="2"] input[type=radio]', form).forEach((r) => r.addEventListener('change', () => {
-    if (f.intervento.value && f.tempi.value) setTimeout(() => step === 2 && go(3), 250);
+  // step 1: one tap and it moves on
+  $$('input[name="intervento"]', form).forEach((r) => r.addEventListener('change', () => {
+    if (!started) { started = true; track('form_start'); }
+    setTimeout(() => step === 1 && go(2), 280);
+  }));
+  // "Niente, sono pronto" excludes the other brakes and vice versa
+  $$('input[name="frenato"]', form).forEach((c) => c.addEventListener('change', () => {
+    if (!c.checked) return;
+    const none = c.value.startsWith('Niente');
+    $$('input[name="frenato"]', form).forEach((o) => { if (o !== c && o.value.startsWith('Niente') !== none) o.checked = false; });
   }));
 
-  $$('[data-next]', form).forEach((b) => b.addEventListener('click', () => {
-    if (!check(step)) return;
-    if (step === 1 && outOfArea && out.hidden) { out.hidden = false; return; } // show the notice once, next click goes on
-    go(step + 1);
-    if (step === 2) track('form_start');
-  }));
+  $$('[data-next]', form).forEach((b) => b.addEventListener('click', () => { if (check(step)) go(step + 1); }));
   $$('[data-prev]', form).forEach((b) => b.addEventListener('click', () => go(step - 1)));
   form.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && step < 3 && e.target.tagName === 'INPUT') { e.preventDefault(); $(`[data-step="${step}"] [data-next]`, form)?.click(); }
@@ -149,14 +162,17 @@ $$('[data-lead-form]').forEach((form) => {
     e.preventDefault();
     if (step !== 3 || !check(3) || form.classList.contains('is-busy')) return;
     const submit = $('[data-submit]', form);
+    const cap = f.cap.value.trim();
     const payload = {
       name: f.name.value.trim(),
       phone: f.phone.value.trim(),
       email: f.email.value.trim(),
-      cap: f.cap.value.trim(),
-      fuori_zona: outOfArea ? 'si' : 'no',
+      cap,
+      fuori_zona: inArea(cap) ? 'no' : 'si',
       intervento: f.intervento.value,
+      per_chi: f.per_chi.value,
       tempi: f.tempi.value,
+      frenato: frenato().join(', '),
       privacy_consent: true,
       marketing_consent: f.marketing_consent.checked,
       hp_url: f.hp_url.value,

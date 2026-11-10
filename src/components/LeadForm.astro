@@ -1,56 +1,84 @@
 ---
-// 3-step lead form: CAP (area check) -> two one-tap questions -> contacts + consents.
-// Submits JSON to /api/lead (Worker -> Profilo CRM, see worker/index.js). Several instances per page are fine.
+// 3-step lead form, built on what works in our other landings and in the leaders' funnels:
+//   1. what the job is: big one-tap tiles, moves on by itself (easiest question first, no typing);
+//   2. two one-tap questions + "cosa ti ha frenato finora?" (optional, multi; idea from the Think Unlimited planner,
+//      gives the sales call its opening line);
+//   3. CAP with live area check (West Shore style), name, phone, optional email, consents. A recap of the taps sits on top.
+// Submits JSON to /api/lead (Worker -> Profilo CRM, see worker/index.js); extra fields arrive as CRM custom fields.
 import { site } from '../data/site';
 import { u } from '../lib/url';
 import { h } from '../lib/txt';
-interface Props { id: string; title?: string; sub?: string; next1?: string }
-const { id, title = 'Vediamo se arriviamo nella tua zona', sub = 'Sono 3 domande, ci vuole meno di un minuto.', next1 = 'Avanti' } = Astro.props;
-const interventi = ['Da vasca a doccia', 'Vasca con sportello', 'Bagno completo', 'Non lo so ancora'];
+import Icon from './Icon.astro';
+interface Props { id: string; title?: string; sub?: string }
+const { id, title = 'Prenota il sopralluogo gratuito', sub = 'Tre passaggi, meno di un minuto. Quasi tutto con un tocco.' } = Astro.props;
+const interventi = [
+  { v: 'Da vasca a doccia', i: 'shower', d: 'Via la vasca, doccia nuova in 8 ore' },
+  { v: 'Vasca con sportello', i: 'tubdoor', d: 'Tieni la vasca, ci entri senza scavalcare' },
+  { v: 'Bagno completo', i: 'tiles', d: 'Rifacciamo tutto il bagno' },
+  { v: 'Non lo so ancora', i: 'help', d: 'Ne parliamo al sopralluogo' },
+];
+const perChi = ['Per me o per la mia famiglia', 'Per un genitore anziano', 'Per chi fa fatica a muoversi'];
 const tempi = ['Entro 1 mese', 'Tra 1 e 3 mesi', 'Sto solo valutando'];
-const labels = ['La tua zona', 'Il tuo bagno', 'I tuoi contatti'];
+const freni = ['Il costo', 'Lavori lunghi in casa', 'Le pratiche per la detrazione', 'Non so di chi fidarmi', 'Niente, sono pronto'];
+const labels = ['Il lavoro', 'Due dettagli', 'Dove e a chi telefoniamo'];
 ---
 <form class="lf card" id={id} data-lead-form data-caps={site.capPrefixes.join(',')} data-thanks={u('/grazie/')} novalidate>
-  <p class="lf__title">{title}</p>
-  <p class="lf__sub">{sub}</p>
-  <ol class="lf__progress" aria-hidden="true"><li class="is-on"></li><li></li><li></li></ol>
-  <p class="lf__step-label" data-step-label data-labels={labels.join('|')}>Passo 1 di 3: {labels[0]}</p>
+  <div class="lf__head">
+    <p class="lf__title">{title}</p>
+    <p class="lf__sub">{sub}</p>
+    <ol class="lf__progress" aria-hidden="true"><li class="is-on"></li><li></li><li></li></ol>
+    <p class="lf__step-label" data-step-label data-labels={labels.join('|')}>Passo 1 di 3 · {labels[0]}</p>
+  </div>
   <div class="hp" aria-hidden="true"><label>Lascia vuoto <input name="hp_url" type="text" tabindex="-1" autocomplete="off" /></label></div>
 
   <div class="lf__step" data-step="1">
-    <label class="fld fld--cap"><span>Il tuo CAP</span>
-      <input name="cap" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="ad es. 10100" />
-      <small class="help">Ci serve solo per sapere se arriviamo da te.</small>
-    </label>
-    <div class="lf__out" data-out hidden>
-      <h4>Per ora non arriviamo nella tua zona</h4>
-      <p>Il tuo CAP non è tra quelli che serviamo oggi. Puoi lasciarci comunque il tuo contatto: se cominciamo a lavorare anche lì, ti avvisiamo.</p>
-    </div>
-    <div class="lf__nav"><button class="btn btn--block" type="button" data-next>{next1}</button></div>
+    <fieldset>
+      <legend>Cosa vuoi fare nel tuo bagno?</legend>
+      <div class="tiles">
+        {interventi.map((o) => (
+          <label class="tile"><input type="radio" name="intervento" value={o.v} />
+            <span><Icon n={o.i} class="tile__ic" /><b>{o.v}</b><small>{o.d}</small></span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
   </div>
 
   <div class="lf__step" data-step="2" hidden>
     <fieldset>
-      <legend>Cosa vuoi cambiare?</legend>
-      <div class="opts">{interventi.map((o) => <label class="opt"><input type="radio" name="intervento" value={o} /><span>{o}</span></label>)}</div>
+      <legend>Per chi è il bagno?</legend>
+      <div class="pills">{perChi.map((o) => <label class="pill"><input type="radio" name="per_chi" value={o} /><span>{o}</span></label>)}</div>
     </fieldset>
     <fieldset>
       <legend>Quando vorresti farlo?</legend>
-      <div class="opts">{tempi.map((o) => <label class="opt"><input type="radio" name="tempi" value={o} /><span>{o}</span></label>)}</div>
+      <div class="pills">{tempi.map((o) => <label class="pill"><input type="radio" name="tempi" value={o} /><span>{o}</span></label>)}</div>
+    </fieldset>
+    <fieldset>
+      <legend>Cosa ti ha frenato finora? <span class="opt-tag">facoltativo, anche più di una</span></legend>
+      <div class="pills">{freni.map((o) => <label class="pill pill--multi"><input type="checkbox" name="frenato" value={o} /><span>{o}</span></label>)}</div>
     </fieldset>
     <div class="lf__nav"><button class="btn btn--ghost" type="button" data-prev>Indietro</button><button class="btn" type="button" data-next>Avanti</button></div>
   </div>
 
   <div class="lf__step" data-step="3" hidden>
-    <p class="q">A chi telefoniamo?</p>
+    <p class="lf__recap" data-recap></p>
+    <label class="fld fld--cap"><span>CAP della casa</span>
+      <span class="cap-row">
+        <input name="cap" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="10100" aria-describedby={`${id}-capmsg`} />
+        <span class="cap-ok" id={`${id}-capmsg`} data-cap-msg aria-live="polite"></span>
+      </span>
+    </label>
+    <div class="lf__out" data-out hidden>
+      <p><b>Per ora non arriviamo nella tua zona.</b> Lasciaci comunque il contatto: se cominciamo a lavorare anche lì, ti avvisiamo.</p>
+    </div>
     <label class="fld"><span>Il tuo nome</span><input name="name" type="text" autocomplete="name" maxlength="120" /></label>
     <label class="fld"><span>Il tuo numero di telefono</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" />
-      <small class="help" set:html={h('Ti chiamiamo entro [X ORE] per fissare il sopralluogo gratuito.')} /></label>
-    <label class="fld"><span>La tua email (facoltativa)</span><input name="email" type="email" autocomplete="email" maxlength="200" /></label>
+      <small class="help" set:html={h('Ti chiamiamo entro [X ORE] per fissare il sopralluogo.')} /></label>
+    <label class="fld"><span>La tua email <span class="opt-tag">facoltativa</span></span><input name="email" type="email" autocomplete="email" maxlength="200" /></label>
     <label class="check"><input type="checkbox" name="privacy_consent" /><span>Ho letto l'<a href={u('/privacy/')} target="_blank" rel="noopener">informativa sulla privacy</a> e accetto che {site.brand} usi i miei dati per contattarmi sulla mia richiesta.</span></label>
     <label class="check"><input type="checkbox" name="marketing_consent" /><span>Voglio ricevere ogni tanto novità e offerte di {site.brand} (facoltativo).</span></label>
-    <div class="lf__nav"><button class="btn btn--ghost" type="button" data-prev>Indietro</button><button class="btn" type="submit" data-submit>Prenota il sopralluogo gratuito</button></div>
-    <p class="lf__note">Il sopralluogo è gratuito e non ti impegna.</p>
+    <div class="lf__nav"><button class="btn btn--ghost" type="button" data-prev>Indietro</button><button class="btn" type="submit" data-submit>Prenota il sopralluogo</button></div>
+    <ul class="lf__trust"><li><Icon n="check" /> Sopralluogo gratuito</li><li><Icon n="check" /> Prezzo scritto prima</li><li><Icon n="check" /> Nessun impegno</li></ul>
   </div>
 
   <p class="lf__msg" role="status" aria-live="polite" data-msg hidden></p>

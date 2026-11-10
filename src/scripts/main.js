@@ -183,3 +183,22 @@ $$('[data-lead-form]').forEach((form) => {
     }
   });
 });
+
+/* subtle fade/slide-in on scroll for section heads and cards. CSS transitions only (see global.css);
+   skipped with prefers-reduced-motion, and without JS everything is simply visible. */
+if ('IntersectionObserver' in window && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  const els = $$('main .head, main .card:not(.lf), main .steps > li, main .ba, main .timeline, main .pull, main .band__box, main .split > img, main .bonus-row, main .guide-list > li')
+    .filter((el) => !el.closest('.xhero, .phero, .lp-hero, .cta-band'));
+  const vh = window.innerHeight;
+  els.forEach((el) => {
+    el.classList.add('rv');
+    const i = [...el.parentElement.children].indexOf(el);
+    if (i > 0) el.style.setProperty('--rv-d', `${Math.min(i, 3) * 90}ms`);
+    if (el.getBoundingClientRect().top < vh) el.classList.add('is-in'); // already on screen: no animation
+  });
+  document.documentElement.classList.add('js-rv');
+  const rio = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('is-in'); rio.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -8% 0px' });
+  els.filter((el) => !el.classList.contains('is-in')).forEach((el) => rio.observe(el));
+}

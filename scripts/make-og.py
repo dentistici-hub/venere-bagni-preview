@@ -18,21 +18,20 @@ OUT = ROOT / "public" / "og"
 W, H, BAND = 1200, 630, 232
 PETROL = (10, 56, 67)
 SAND = (242, 199, 166)
-SUB = "Venere Bagni · Torino e tutto il Piemonte"
+SUB = "Venere Bagni · Torino e provincia"
 
 PHOTO = {
     "hero": "hero-doccia-sicura.jpg", "solDoccia": "soluzione-doccia.jpg", "solSportello": "soluzione-sportello.jpg",
     "solSicuro": "soluzione-sicuro.jpg", "sopralluogo": "sopralluogo.jpg", "coppia": "coppia-bagno.jpg",
     "luminoso": "bagno-luminoso.jpg", "classico": "bagno-classico.jpg", "famiglia": "famiglia-bagno.jpg",
 }
+# Torino e provincia only since 2026-11-10.
 ZONES = [
-    ("torino", "a Torino", "coppia"), ("cuneo", "a Cuneo", "famiglia"), ("novara", "a Novara", "luminoso"),
-    ("alessandria", "ad Alessandria", "classico"), ("asti", "ad Asti", "solDoccia"), ("biella", "a Biella", "solSicuro"),
-    ("vercelli", "a Vercelli", "luminoso"), ("verbano-cusio-ossola", "nel Verbano-Cusio-Ossola", "classico"),
+    ("torino", "a Torino e provincia", "coppia"),
 ]
 # key, photo, title (keep it short: one or two lines at 56 px)
 PAGES = [
-    ("home", "hero", "Dalla vasca alla doccia in un giorno"),
+    ("home", "hero", "Dalla vasca alla doccia in 8 ore"),
     ("vasca-in-doccia", "solDoccia", "Trasformazione vasca in doccia"),
     ("vasca-con-sportello", "solSportello", "Vasca con sportello: si entra senza scavalcare"),
     ("bagno-sicuro", "hero", "Un bagno sicuro per te o per un tuo genitore"),
@@ -41,7 +40,6 @@ PAGES = [
     ("domande-frequenti", "sopralluogo", "Domande frequenti sulla vasca in doccia"),
     ("contatti", "sopralluogo", "Contatti e sopralluogo gratuito"),
     ("chi-siamo", "sopralluogo", "Chi c’è dietro Venere Bagni"),
-    ("zone", "coppia", "Vasca in doccia in tutto il Piemonte"),
     ("guide", "luminoso", "Guide per chi vuole togliere la vasca"),
     ("guide-doccia-a-norma-dm-236-detrazione", "hero", "Doccia a norma DM 236: cosa serve per la detrazione"),
     ("guide-piatto-doccia-filo-pavimento-o-ribassato", "solDoccia", "Piatto doccia filo pavimento o ribassato?"),
@@ -98,6 +96,8 @@ def main():
         d.text((60, H - 58), SUB, font=sub_f, fill=SAND)
         img.save(OUT / f"{key}.jpg", "JPEG", quality=84, optimize=True, progressive=True)
         print("og/", key, ".jpg", sep="")
+    # The site-wide default (site.ogImage) is the home image, so it never carries stale text.
+    (ROOT / "public" / "og-image.jpg").write_bytes((OUT / "home.jpg").read_bytes())
 
 
 if __name__ == "__main__":

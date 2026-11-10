@@ -23,22 +23,22 @@ const elementi = [
 const faqs = [
   { q: 'Che cosa rende sicuro un bagno per una persona anziana?', a: 'Un bagno sicuro di Venere Bagni ha la doccia a filo pavimento senza scalino, il fondo antiscivolo, i maniglioni messi nei punti giusti e un seggiolino ribaltabile. Servono a ridurre il rischio di cadere, che in bagno è più alto che nel resto della casa.' },
   { q: 'Posso chiedere io il preventivo per mio padre o mia madre?', a: 'Sì, a Venere Bagni capita spesso di parlare con i figli. Puoi prenotare tu il sopralluogo, esserci di persona o collegarti al telefono, e ricevere il preventivo scritto. Il sopralluogo non costa niente e la decisione la prendete voi, in famiglia.' },
-  { q: 'Il lavoro è faticoso o rumoroso per una persona anziana?', a: 'La squadra di Venere Bagni lavora una giornata e in quel tempo il bagno non si può usare. Il rumore c’è soprattutto la mattina, quando si toglie la vasca. Se il genitore preferisce, può passare la giornata da un parente. L’orario lo decidiamo insieme, in modo da dare meno disturbo possibile.' },
+  { q: 'Il lavoro è faticoso o rumoroso per una persona anziana?', a: 'Per togliere la vasca e montare la doccia la squadra di Venere Bagni lavora 8 ore, e in quel tempo il bagno non si può usare. Il rumore c’è soprattutto la mattina, quando si toglie la vasca. Se il genitore preferisce, può passare quelle ore da un parente. L’orario lo decidiamo insieme, in modo da dare meno disturbo possibile.' },
   { q: 'I maniglioni vanno bene per qualsiasi parete?', a: 'I maniglioni vanno fissati su una parete solida. Venere Bagni controlla la parete al sopralluogo e, se serve, la rinforza prima di montarli, così il maniglione non cede proprio quando ci si appoggia.' },
 ];
 ---
 <Base
   title="Bagno sicuro per anziani a Torino | Venere Bagni"
-  description="Doccia a filo pavimento, maniglioni e seggiolino per un bagno sicuro. Per anziani e per i figli che scelgono per loro. Sopralluogo gratuito in Piemonte."
+  description="Doccia a filo pavimento, maniglioni e seggiolino per un bagno sicuro. Per anziani e per i figli che scelgono per loro. A Torino e provincia."
   faqs={faqs}
   crumbs={crumbs}
-  service={{ name: 'Bagno sicuro per anziani', description: 'Adattamento del bagno per chi ha difficoltà a muoversi: doccia a filo pavimento, fondo antiscivolo, maniglioni e seggiolino ribaltabile, a Torino e in Piemonte.' }}
+  service={{ name: 'Bagno sicuro per anziani', description: 'Adattamento del bagno per chi ha difficoltà a muoversi: doccia a filo pavimento, fondo antiscivolo, maniglioni e seggiolino ribaltabile, a Torino e provincia.' }}
 >
   <PageHero
     crumbs={crumbs}
-    eyebrow="Torino e tutto il Piemonte"
+    eyebrow="Torino e provincia"
     title="Un bagno sicuro per te o per un tuo genitore"
-    lead="In casa è nel bagno che si cade più spesso. Lo adattiamo in un giorno [DA CONFERMARE], con il prezzo scritto prima e senza toccare il resto della casa."
+    lead="In casa è nel bagno che si cade più spesso. Al posto della vasca montiamo la doccia in 8 ore, chiavi in mano, con il prezzo scritto prima e senza toccare il resto della casa."
     chips={['Sopralluogo gratuito', 'Anche con il familiare', 'Prezzo fisso scritto']}
     img="hero"
     badge={['Doccia sicura con seggiolino', 'montata al posto della vasca']}
@@ -83,12 +83,9 @@ const faqs = [
   <section class="section section--sand" id="prezzo">
     <div class="wrap narrow">
       <h2>Quanto costa il bagno sicuro</h2>
-      <div class="price-box">
-        <p class="from"><small>Pacchetto bagno sicuro</small><span set:html={h('[DA X €]')} /></p>
-        <div>
-          <p>Il prezzo dipende da quali elementi decidi di mettere.</p>
-          <a class="link-arrow" href={u('/prezzi/')}>Tutti i prezzi</a>
-        </div>
+      <div class="note">
+        <p>Il prezzo dipende da quali elementi decidi di mettere e da come è fatto il bagno. Lo vediamo al sopralluogo gratuito e te lo scriviamo nel preventivo, a prezzo fisso.</p>
+        <p><a class="link-arrow" href={u('/prezzi/')}>Da cosa dipende il prezzo</a></p>
       </div>
       <h3 style="margin-top:36px">Detrazioni</h3>
       <div class="note"><p set:html={h(bonusShort)} /></div>

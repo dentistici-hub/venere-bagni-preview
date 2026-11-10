@@ -10,13 +10,13 @@ const here = Astro.url.pathname;
 ---
 <div class="topbar">
   <div class="wrap">
-    <span class="t-left">Torino e tutto il Piemonte · Sopralluogo gratuito</span>
-    <span>Chiama: <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} /> <span class="t-left">· {site.hours.startsWith('[') ? '' : site.hours}</span></span>
+    <span class="t-left">Torino e provincia · Sopralluogo gratuito</span>
+    <span>Chiama: <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} />{site.openingHours.length > 0 && <span class="t-left"> · {site.hours}</span>}</span>
   </div>
 </div>
 <header class={`hdr${minimal ? ' lp-hdr' : ''}`}>
   <div class="wrap">
-    <Logo />
+    <Logo tag="Vasca in doccia a Torino" />
     {!minimal && (
       <>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
@@ -25,6 +25,6 @@ const here = Astro.url.pathname;
         </nav>
       </>
     )}
-    <a class="btn btn--hdr" href={formHref} style={minimal ? 'margin-left:auto' : ''}><Icon n="calendar" /> Sopralluogo gratuito</a>
+    <a class="btn btn--hdr" href={formHref} style={minimal ? 'margin-left:auto' : ''}><Icon n="calendar" /> Sopralluogo gratis</a>
   </div>
 </header>

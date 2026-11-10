@@ -8,7 +8,7 @@ const { items } = Astro.props;
     <figure class="review card">
       <span class="stars" aria-label="5 stelle su 5">★★★★★</span>
       <blockquote set:html={h(r.text)} />
-      <footer>{r.name}<span>{r.town} · <mark class="ph">recensione di esempio</mark></span></footer>
+      <footer>{r.name}<span>{r.town} · <mark class="ph ph--label">recensione di esempio</mark></span></footer>
     </figure>
   ))}
 </div>

@@ -1,101 +1,69 @@
 ---
+// No figures on this page (client decision 2026-11-10): it explains what the cost depends on, what the job always
+// includes, and how the free survey and the fixed written quote work. Keep it that way.
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import GuideLinks from '../components/GuideLinks.astro';
-import { site, euro } from '../data/site';
 import { bonusShort } from '../data/bonus';
-import { priceList, priceFactors } from '../data/prices';
+import { included, priceFactors } from '../data/prices';
 import { u } from '../lib/url';
 import { hv as h } from '../lib/txt';
 
 const crumbs = [{ name: 'Prezzi', path: '/prezzi/' }];
-const listino = priceList.map((r) => [r.name, r.price, r.time, r.href]);
 const fattori = priceFactors;
-const incluso = [
-  'sopralluogo gratuito e preventivo scritto',
-  'rimozione e smaltimento della vasca',
-  'fornitura e posa di piatto, pareti, box e rubinetteria',
-  'pulizia finale e prova dell’acqua',
-  'garanzia di [ANNI DI GARANZIA] anni',
-];
 const faqs = [
-  { q: 'Quanto costa trasformare la vasca in doccia a Torino?', a: 'A Torino la trasformazione standard della vasca in doccia con Venere Bagni parte da 3.500 €. Il prezzo finale dipende da misura, piatto e finiture. Lo scriviamo nel preventivo dopo il sopralluogo gratuito ed è quello che paghi a lavoro finito.' },
+  { q: 'Quanto costa trasformare la vasca in doccia a Torino?', a: 'Una cifra uguale per tutti non c’è: il prezzo dipende dalla misura del bagno, dal tipo di piatto, dal gres e dal box. Dentro ci sono sempre la demolizione e lo smaltimento della vasca, l’impianto idraulico della doccia, il massetto, la posa, il rivestimento in gres, le finiture e i materiali. Venere Bagni te lo scrive nel preventivo dopo il sopralluogo gratuito, ed è il prezzo che paghi.' },
   { q: 'Il prezzo può aumentare durante i lavori?', a: 'No. Venere Bagni lavora a prezzo fisso scritto. Se durante il lavoro salta fuori qualcosa che prima non si poteva vedere, per esempio uno scarico rotto sotto la vasca, ti spieghiamo il problema e ci accordiamo sul costo prima di andare avanti. Senza il tuo consenso non fatturiamo niente in più.' },
-  { q: 'Perché i prezzi online sono molto diversi tra loro?', a: 'Perché spesso si riferiscono a lavori diversi. Alcuni prezzi comprendono solo il piatto doccia, altri anche pareti, box e rubinetteria. Nel preventivo di Venere Bagni ogni voce è scritta, così puoi metterlo accanto a un altro preventivo e vedere cosa c’è dentro a ciascuno.' },
+  { q: 'Perché i prezzi online sono molto diversi tra loro?', a: 'Perché spesso si riferiscono a lavori diversi. Alcuni comprendono solo il piatto doccia, altri anche box e rubinetteria, pochi il rifacimento di impianto, massetto e rivestimento. Nel preventivo di Venere Bagni ogni voce è scritta, così puoi metterlo accanto a un altro preventivo e vedere cosa c’è dentro a ciascuno.' },
   { q: 'Devo pagare qualcosa per il sopralluogo o per il preventivo?', a: 'No. Sopralluogo e preventivo di Venere Bagni sono gratuiti e non ti impegnano. Il tecnico misura il bagno, ti spiega cosa si può fare e ti lascia il preventivo scritto. Puoi decidere anche dopo qualche giorno.' },
   { q: 'Posso pagare a rate?', a: '[DA CONFERMARE: finanziamento disponibile?] Con Venere Bagni puoi pagare a rate tramite [SOCIETÀ DI FINANZIAMENTO]. Durata e importo li concordiamo al sopralluogo.' },
 ];
 ---
 <Base
   title="Quanto costa vasca in doccia a Torino 2026 | Venere Bagni"
-  description="Prezzi 2026 per trasformare la vasca in doccia a Torino: da 3.500 €. Tabella per tipo di lavoro, cosa cambia il costo e cosa è sempre compreso."
+  description="Quanto costa trasformare la vasca in doccia a Torino nel 2026: da cosa dipende il prezzo, cosa comprende il lavoro e come funziona il preventivo gratuito."
   faqs={faqs.filter((f) => !f.a.includes('[SOCIETÀ DI FINANZIAMENTO]'))}
   crumbs={crumbs}
-  service={{ name: 'Trasformazione vasca in doccia', description: 'Prezzi 2026 per la trasformazione della vasca in doccia a Torino e in Piemonte, con preventivo scritto a prezzo fisso dopo il sopralluogo gratuito.', minPrice: site.priceFrom }}
+  service={{ name: 'Trasformazione vasca in doccia', description: 'Trasformazione della vasca in doccia a Torino e provincia, chiavi in mano in 8 ore, con preventivo scritto a prezzo fisso dopo il sopralluogo gratuito.' }}
 >
   <PageHero
     crumbs={crumbs}
     eyebrow="Prezzi 2026"
     title="Quanto costa trasformare la vasca in doccia a Torino nel 2026"
-    lead="Una trasformazione standard con Venere Bagni parte da 3.500 € [DA CONFERMARE: IVA inclusa?]. Qui sotto trovi i prezzi per tipo di lavoro e cosa li fa salire o scendere."
+    lead="Il prezzo te lo scriviamo dopo aver visto il bagno, perché cambia da casa a casa. Qui sotto trovi da cosa dipende e cosa comprende sempre il lavoro."
     formTitle="Vuoi il prezzo per il tuo bagno?"
   >
     <div class="note">
-      <p><strong>In breve.</strong> A Torino la trasformazione di una vasca in doccia con Venere Bagni costa da 3.500 €, con dentro rimozione della vasca, piatto doccia, pareti, box, rubinetteria e posa. La cifra precisa la decidiamo al sopralluogo gratuito e la scriviamo nel preventivo, e durante il lavoro non cambia.</p>
+      <p><strong>In breve.</strong> Il costo dipende dalla misura del bagno, dal piatto, dal gres e dal box che scegli. Il lavoro è chiavi in mano, dura 8 ore e i materiali sono compresi. La cifra la fissiamo dopo il sopralluogo gratuito e la scriviamo nel preventivo, e durante il lavoro non cambia.</p>
     </div>
   </PageHero>
 
-  <section class="section" id="listino">
-    <div class="wrap">
-      <div class="head">
-        <p class="eyebrow">Listino</p>
-        <h2>Prezzi per tipo di intervento</h2>
-      </div>
-      <div class="tbl-wrap">
-        <table class="tbl tbl--stack">
-          <caption>Prezzi Venere Bagni 2026 per tipo di intervento, Torino e Piemonte</caption>
-          <thead><tr><th scope="col">Intervento</th><th scope="col">Prezzo</th><th scope="col">Tempi</th></tr></thead>
-          <tbody>
-            {listino.map(([a, b, c, href]) => (
-              <tr>
-                <th scope="row">{href ? <a href={u(href)}>{a}</a> : a}</th>
-                <td class="num" data-label="Prezzo" set:html={h(b)} />
-                <td data-label="Tempi" set:html={h(c)} />
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p class="small sec-intro" set:html={h('[DA CONFERMARE: IVA inclusa?] Sono prezzi indicativi per il 2026. Quello che paghi è la cifra del preventivo scritto dopo il sopralluogo.')} />
-    </div>
-  </section>
-
-  <section class="section section--sand" id="fattori">
+  <section class="section" id="fattori">
     <div class="wrap narrow">
-      <h2>Cosa fa cambiare il prezzo</h2>
+      <h2>Da cosa dipende il prezzo</h2>
       <div class="tbl-wrap">
         <table class="tbl">
-          <caption>Fattori che incidono sul prezzo della trasformazione</caption>
-          <thead><tr><th scope="col">Fattore</th><th scope="col">Come incide</th></tr></thead>
+          <caption>Cosa incide sul prezzo della trasformazione</caption>
+          <thead><tr><th scope="col">Cosa</th><th scope="col">Come incide</th></tr></thead>
           <tbody>{fattori.map(([a, b]) => <tr><th scope="row">{a}</th><td>{b}</td></tr>)}</tbody>
         </table>
       </div>
-      <p>Un caso frequente a Torino: nei condomini degli anni ’60 e ’70 la vasca misura spesso 170 cm. Se ci entra un piatto di misura standard il prezzo resta vicino a quello base, se serve un piatto su misura sale.</p>
+      <p>Un caso frequente a Torino: nei condomini degli anni ’60 e ’70 la vasca misura spesso 170 cm. Se ci entra un piatto di misura standard il prezzo è più basso che con un piatto su misura.</p>
     </div>
   </section>
 
-  <section class="section" id="incluso">
+  <section class="section section--sand" id="incluso">
     <div class="wrap narrow">
-      <h2>Cosa è sempre compreso</h2>
-      <p>In ogni preventivo di Venere Bagni trovi:</p>
-      <ul class="ticks">{incluso.map((i) => <li><span set:html={h(i.charAt(0).toUpperCase() + i.slice(1))} /></li>)}</ul>
-      <p class="small" set:html={h('[DA CONFERMARE: elenco definitivo]')} />
+      <h2>Cosa comprende il lavoro</h2>
+      <p>La trasformazione della vasca in doccia è chiavi in mano e dura 8 ore. In ogni preventivo di Venere Bagni ci sono sempre:</p>
+      <ul class="ticks">{included.map((i) => <li><span>{i.charAt(0).toUpperCase() + i.slice(1)}</span></li>)}</ul>
+      <p>Il sopralluogo e il preventivo sono gratuiti, e il prezzo scritto nel preventivo è fisso. Su materiali e manodopera hai la garanzia di 2 anni prevista dalla legge. L’IVA è indicata a parte: quale aliquota si applica al tuo lavoro lo spieghiamo nella pagina sulle <a href={u('/bonus-detrazioni/')}>detrazioni</a>.</p>
     </div>
   </section>
 
-  <section class="section section--sand" id="pagamento">
+  <section class="section" id="pagamento">
     <div class="wrap narrow">
       <h2>Come si paga</h2>
       <p set:html={h('Il pagamento si divide in [DA CONFERMARE: acconto alla firma, saldo a fine lavori]. Se preferisci pagare a rate: [DA CONFERMARE: finanziamento disponibile? società, durata, TAN].')} />
@@ -106,14 +74,14 @@ const faqs = [
     </div>
   </section>
 
-  <section class="section" id="domande">
+  <section class="section section--sand" id="domande">
     <div class="wrap narrow">
       <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Domande sui prezzi</h2></div>
       <Faq items={faqs} open verbose />
     </div>
   </section>
 
-  <GuideLinks slugs={['piatto-doccia-filo-pavimento-o-ribassato', 'doccia-a-norma-dm-236-detrazione']} sand />
+  <GuideLinks slugs={['piatto-doccia-filo-pavimento-o-ribassato', 'doccia-a-norma-dm-236-detrazione']} />
 
   <CtaBand title="Vuoi il prezzo per il tuo bagno?" text="Il sopralluogo è gratuito e il preventivo te lo lasciamo scritto." />
 </Base>

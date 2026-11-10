@@ -1,6 +1,6 @@
 ---
 // Guide B. General technical facts only (gravity drain needs a slope, flush tray needs depth under the floor,
-// DIN 51097 barefoot slip classes A-C, DM 236 "doccia a pavimento"). No prices: [DA X €] until the client gives them.
+// DIN 51097 barefoot slip classes A-C, DM 236 "doccia a pavimento"). No prices: the client publishes none (2026-11-10).
 // Site facts reused: filo pavimento costs more and needs the drain checked (/vasca-in-doccia/, /prezzi/),
 // recommended for balance problems or a shower chair (/vasca-in-doccia/, /bagno-sicuro/).
 import Base from '../../layouts/Base.astro';
@@ -19,7 +19,7 @@ const confronto = [
   ['Scarico', 'Va sotto il livello del pavimento: serve spessore per il tubo', 'Spesso si collega allo scarico che usava la vasca'],
   ['Acqua fuori dalla doccia', 'La trattengono la pendenza del piatto e il box', 'La trattiene anche il bordo'],
   ['Detrazione con il DM 236', 'È una “doccia a pavimento”', '[DA CONFERMARE CON IL COMMERCIALISTA]'],
-  ['Prezzo', 'Più alto [DA X €]', '[DA X €]'],
+  ['Costo', 'Più alto', 'Più basso'],
 ];
 ---
 <Base title={g.title} description={g.description} crumbs={crumbs} article={{ headline: g.h1, published: g.published }}>
@@ -58,8 +58,8 @@ const confronto = [
       <p>Le regole complete sono nella guida <a href={u('/guide/doccia-a-norma-dm-236-detrazione/')}>doccia a norma DM 236 e detrazione</a>.</p>
 
       <h2>Quanto costa uno rispetto all’altro?</h2>
-      <p set:html={h('Il filo pavimento costa di più, perché chiede più lavoro sullo scarico e a volte sul massetto. Nel nostro listino la trasformazione standard parte da 3.500 € [DA CONFERMARE: IVA inclusa? quale piatto comprende la versione standard] e quella con piatto a filo pavimento parte da [DA X €].')} />
-      <p>Il prezzo per il tuo bagno lo scriviamo nel preventivo dopo il sopralluogo gratuito e non cambia durante il lavoro. Il listino completo è nella pagina dei <a href={u('/prezzi/')}>prezzi</a>.</p>
+      <p>Il filo pavimento costa di più, perché chiede più lavoro sullo scarico e a volte sul massetto. Quanto di più dipende dal tuo bagno, da dove passa lo scarico e da quanto spazio c’è sotto il pavimento: lo vediamo al sopralluogo.</p>
+      <p>Il prezzo per il tuo bagno lo scriviamo nel preventivo dopo il sopralluogo gratuito e non cambia durante il lavoro. Da cosa dipende e cosa comprende sempre il lavoro è spiegato nella pagina dei <a href={u('/prezzi/')}>prezzi</a>.</p>
 
       <h2>Come lo decidiamo al sopralluogo?</h2>
       <p>Il tecnico misura lo spazio della vasca, controlla lo scarico e lo spessore del pavimento e ti chiede chi userà la doccia e come si muove. Se il filo pavimento si può fare senza rompere mezzo bagno e in casa serve, te lo consigliamo. Se lo scarico non lo permette, te lo diciamo prima e ti proponiamo il ribassato con maniglione e seggiolino.</p>

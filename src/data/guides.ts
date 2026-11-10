@@ -1,5 +1,5 @@
 // Guides (/guide/<slug>/): metadata used by the guide index, the "Da leggere" blocks on service and
-// province pages, Article schema, llms.txt and the sitemap dates. Article text is in src/pages/guide/<slug>.astro.
+// area page, Article schema, llms.txt and the sitemap dates. Article text is in src/pages/guide/<slug>.astro.
 import { PAGE_UPDATED } from './dates.mjs';
 
 export interface Guide {
@@ -38,10 +38,10 @@ export const guides = [
   g({
     slug: 'giorno-trasformazione-vasca-in-doccia',
     title: 'Il giorno della vasca in doccia, ora per ora | Venere Bagni',
-    description: 'Cosa succede il giorno in cui togliamo la vasca e montiamo la doccia: orari, cosa preparare, rumore, condominio e quando puoi usare la doccia nuova.',
+    description: 'Le 8 ore in cui togliamo la vasca e montiamo la doccia, chiavi in mano: orari, cosa preparare, rumore, condominio e quando usi la doccia nuova.',
     h1: 'Cosa succede il giorno della trasformazione vasca in doccia',
-    card: 'La giornata di lavoro ora per ora, cosa preparare prima e cosa trovi la sera.',
-    answer: 'La squadra arriva verso le 8 e copre pavimenti e corridoio. In mattinata toglie la vasca, nel pomeriggio monta piatto, pareti, box e rubinetteria. Verso le 18 pulisce, prova l’acqua e ti consegna la doccia, che la sera puoi già usare [DA CONFERMARE]. Per tutta la giornata il bagno resta chiuso.',
+    card: 'Le 8 ore di lavoro una dopo l’altra, cosa preparare prima e quando puoi usare la doccia.',
+    answer: 'Il lavoro dura 8 ore ed è chiavi in mano, con i materiali compresi. La squadra arriva la mattina, demolisce la vasca e la porta via, rifà impianto e massetto, posa il piatto, riveste le pareti in gres e monta box e rubinetteria. Alla fine pulisce, prova l’acqua e ti consegna la doccia, che la sera puoi già usare.',
     img: 'coppia',
     published: '2026-11-10',
   }),

@@ -2,17 +2,19 @@
 import { Image } from 'astro:assets';
 import { media } from '../data/media';
 import { h } from '../lib/txt';
-interface Props { before: string; after: string; caption: string }
-const { before, after, caption } = Astro.props;
+// size "lg" = the featured pair (full container width); note = short line under the caption.
+interface Props { before: string; after: string; caption: string; note?: string; size?: 'lg' | 'sm' }
+const { before, after, caption, note, size = 'sm' } = Astro.props;
 const b = media[before]; const a = media[after];
+const sizes = size === 'lg' ? '(max-width: 1240px) 100vw, 1180px' : '(max-width: 960px) 100vw, 580px';
 ---
-<figure class="ba">
+<figure class={`ba ba--${size}`}>
   <div class="ba__frame" data-ba>
-    <Image src={b.src} alt={b.alt} widths={[480, 800, 1200]} sizes="(max-width: 960px) 100vw, 380px" loading="lazy" />
-    <Image class="ba__after" src={a.src} alt={a.alt} widths={[480, 800, 1200]} sizes="(max-width: 960px) 100vw, 380px" loading="lazy" />
+    <Image src={b.src} alt={b.alt} widths={[480, 800, 1200]} sizes={sizes} loading="lazy" />
+    <Image class="ba__after" src={a.src} alt={a.alt} widths={[480, 800, 1200]} sizes={sizes} loading="lazy" />
     <span class="ba__tag ba__tag--l">Prima</span><span class="ba__tag ba__tag--r">Dopo</span>
     <span class="ba__line"></span>
     <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sposta per confrontare prima e dopo" />
   </div>
-  <figcaption set:html={h(caption)} />
+  <figcaption><span class="ba__meta" set:html={h(caption)} />{note && <span class="ba__note" set:html={h(note)} />}</figcaption>
 </figure>

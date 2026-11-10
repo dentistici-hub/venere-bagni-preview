@@ -23,14 +23,14 @@ const faqs = [
 ---
 <Base
   title="Vasca con sportello per anziani, Torino | Venere Bagni"
-  description="Vasca con sportello laterale per entrare senza scavalcare il bordo. Installazione a Torino e in Piemonte, sopralluogo gratuito e prezzo fisso."
+  description="Vasca con sportello laterale per entrare senza scavalcare il bordo. Installazione a Torino e provincia, sopralluogo gratuito e prezzo fisso."
   faqs={faqs}
   crumbs={crumbs}
-  service={{ name: 'Installazione vasca con sportello', description: 'Sostituzione della vecchia vasca con una vasca con sportello laterale e seggiolino interno, per entrare senza scavalcare il bordo, a Torino e in Piemonte.' }}
+  service={{ name: 'Installazione vasca con sportello', description: 'Sostituzione della vecchia vasca con una vasca con sportello laterale e seggiolino interno, per entrare senza scavalcare il bordo, a Torino e provincia.' }}
 >
   <PageHero
     crumbs={crumbs}
-    eyebrow="Torino e tutto il Piemonte"
+    eyebrow="Torino e provincia"
     title="Vasca con sportello: si entra senza scavalcare il bordo"
     lead="Per chi vuole continuare a fare il bagno ma non riesce più ad alzare la gamba oltre il bordo. Togliamo la vecchia vasca e montiamo la nuova, con il prezzo scritto prima."
     chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', 'Si entra da seduti']}
@@ -74,12 +74,9 @@ const faqs = [
   <section class="section section--sand" id="prezzo">
     <div class="wrap narrow">
       <h2>Quanto costa</h2>
-      <div class="price-box">
-        <p class="from"><small>Prezzo a partire da</small><span set:html={h('[DA X €]')} /></p>
-        <div>
-          <p>Il prezzo comprende fornitura e installazione e cambia con il modello e le misure. Quello preciso te lo scriviamo dopo il sopralluogo gratuito.</p>
-          <a class="link-arrow" href={u('/prezzi/')}>Tutti i prezzi</a>
-        </div>
+      <div class="note">
+        <p>Il prezzo comprende fornitura e installazione e cambia con il modello e le misure. Quello preciso te lo scriviamo nel preventivo dopo il sopralluogo gratuito, e durante il lavoro non cambia.</p>
+        <p><a class="link-arrow" href={u('/prezzi/')}>Da cosa dipende il prezzo</a></p>
       </div>
     </div>
   </section>

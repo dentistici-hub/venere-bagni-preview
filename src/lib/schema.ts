@@ -1,6 +1,6 @@
 // JSON-LD graph for every page:
 //   HomeAndConstructionBusiness (the company, same @id everywhere) + WebSite + WebPage (this page)
-//   + optional Service/Offer, FAQPage, BreadcrumbList, Article.
+//   + optional Service, FAQPage, BreadcrumbList, Article. No prices anywhere (client decision 2026-11-10).
 // Values from src/data/site.ts that are empty or still [PLACEHOLDER] are left out, so the markup never states
 // unconfirmed facts. Text fields go through plain(), which strips placeholders and markdown.
 import { site, filled } from '../data/site';
@@ -9,7 +9,7 @@ import { u } from './url';
 
 export interface Faq { q: string; a: string }
 export type PageType = 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage' | 'FAQPage';
-export interface ServiceOpts { name: string; description: string; minPrice?: number; areaServed?: string }
+export interface ServiceOpts { name: string; description: string }
 export interface ArticleOpts { headline: string; published: string; modified: string }
 interface Opts {
   path: string; title: string; description: string; image: string; modified: string; pageType?: PageType;
@@ -19,13 +19,17 @@ interface Opts {
 export const abs = (p: string) => new URL(u(p), site.url).toString();
 const ids = { biz: () => abs('/#azienda'), site: () => abs('/#sito') };
 
-// Services offered, linked from the business node (hasOfferCatalog). Only the standard job has a confirmed "from" price.
+// Services offered, linked from the business node (hasOfferCatalog). No prices: the client publishes none.
 const catalog = [
-  { name: 'Trasformazione vasca in doccia', path: '/vasca-in-doccia/', minPrice: site.priceFrom },
+  { name: 'Trasformazione vasca in doccia', path: '/vasca-in-doccia/' },
   { name: 'Installazione vasca con sportello', path: '/vasca-con-sportello/' },
   { name: 'Bagno sicuro per anziani', path: '/bagno-sicuro/' },
 ];
-const priceSpec = (min: number) => ({ '@type': 'PriceSpecification', minPrice: min, priceCurrency: 'EUR' });
+// Area served (client, 2026-11-10): Torino e provincia only.
+const areaServed = [
+  { '@type': 'AdministrativeArea', name: 'Provincia di Torino', alternateName: 'Città metropolitana di Torino' },
+  { '@type': 'City', name: 'Torino' },
+];
 const dayName: Record<string, string> = { Mo: 'Monday', Tu: 'Tuesday', We: 'Wednesday', Th: 'Thursday', Fr: 'Friday', Sa: 'Saturday', Su: 'Sunday' };
 
 function business() {
@@ -37,9 +41,7 @@ function business() {
     url: abs('/'),
     description: plain(site.description),
     image: abs(site.ogImage),
-    priceRange: `da ${site.priceFrom} EUR`,
-    currenciesAccepted: 'EUR',
-    areaServed: site.areas.map((a) => ({ '@type': 'AdministrativeArea', name: a === 'Verbano-Cusio-Ossola' ? `Provincia del ${a}` : a === 'Torino' ? 'Città metropolitana di Torino' : `Provincia di ${a}` })),
+    areaServed,
     address: {
       '@type': 'PostalAddress', addressLocality: site.locality, addressRegion: 'Piemonte', addressCountry: site.country,
       ...(filled(site.street) ? { streetAddress: site.street } : {}), ...(filled(site.postalCode) ? { postalCode: site.postalCode } : {}),
@@ -51,7 +53,6 @@ function business() {
       itemListElement: catalog.map((c) => ({
         '@type': 'Offer',
         itemOffered: { '@type': 'Service', name: c.name, url: abs(c.path) },
-        ...(c.minPrice ? { priceSpecification: priceSpec(c.minPrice) } : {}),
       })),
     },
   };
@@ -111,17 +112,9 @@ export function buildGraph(o: Opts) {
       serviceType: o.service.name,
       description: plain(o.service.description),
       provider: { '@id': ids.biz() },
-      // Zone pages pass their province; every other page serves the whole region.
-      areaServed: o.service.areaServed
-        ? { '@type': 'AdministrativeArea', name: o.service.areaServed, containedInPlace: { '@type': 'AdministrativeArea', name: 'Piemonte' } }
-        : { '@type': 'AdministrativeArea', name: 'Piemonte' },
+      areaServed,
       url,
       image: o.image,
-      offers: [
-        // The free survey and written quote are stated on every page of the site.
-        { '@type': 'Offer', name: 'Sopralluogo e preventivo scritto', price: 0, priceCurrency: 'EUR', url },
-        ...(o.service.minPrice ? [{ '@type': 'Offer', name: o.service.name, priceCurrency: 'EUR', priceSpecification: priceSpec(o.service.minPrice), url }] : []),
-      ],
     });
   }
   // FAQ markup on pages whose main content is not the FAQ (the FAQ page itself carries it in mainEntity).

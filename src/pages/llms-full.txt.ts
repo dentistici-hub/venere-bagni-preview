@@ -1,10 +1,10 @@
 // llms-full.txt: the key facts of the site in plain text, for AI assistants that read it whole.
 // Built from the same data files as the pages (site, prices, bonus, faq, zone-pages, guides, workday), so the two
-// can't drift. Items that still hold a value placeholder ([TELEFONO], [DA X €]...) are left out; facts the client
+// can't drift. Items that still hold a value placeholder ([TELEFONO], [EMAIL]...) are left out; facts the client
 // still has to confirm keep their [DA CONFERMARE] tag until it is removed from the source text.
 import type { APIRoute } from 'astro';
-import { site, filled, euro } from '../data/site';
-import { priceList, priceFactors } from '../data/prices';
+import { site, filled } from '../data/site';
+import { included, priceFactors } from '../data/prices';
 import { bonusShort, bonusStatus, bonusFaq } from '../data/bonus';
 import { faqGroups } from '../data/faq';
 import { zonePages } from '../data/zone-pages';
@@ -22,7 +22,7 @@ export const GET: APIRoute = () => {
   add(`Testo semplice con i fatti principali del sito ${abs('/')}. Aggiornato al ${site.updated}. Le pagine restano la fonte: qui ogni sezione indica la pagina da cui viene.`, '');
 
   add('## Chi siamo', '');
-  add(`${site.brand} è il marchio con cui ${site.legalName} trasforma la vasca da bagno in doccia, installa vasche con sportello e adatta il bagno per persone anziane, a Torino e in tutto il Piemonte.`);
+  add(`${site.brand} è il marchio con cui ${site.legalName} trasforma la vasca da bagno in doccia, installa vasche con sportello e adatta il bagno per persone anziane, a Torino e provincia (non lavora nelle altre province). Ha 15 anni di attività e migliaia di installazioni.`);
   add(
     `Ragione sociale: ${site.legalName}`,
     filled(site.vat) && `Partita IVA: ${site.vat}`,
@@ -39,23 +39,22 @@ export const GET: APIRoute = () => {
   );
 
   add('## Servizi', '');
-  add(`Trasformazione vasca in doccia (${abs('/vasca-in-doccia/')}): togliamo la vasca e nello stesso spazio montiamo piatto doccia, pareti, box e rubinetteria, senza rifare il resto del bagno. Il lavoro dura un giorno [DA CONFERMARE]. Il piatto può essere a filo pavimento, senza scalino, oppure con un bordo basso.`, '');
+  add(`Trasformazione vasca in doccia (${abs('/vasca-in-doccia/')}): togliamo la vasca e nello stesso spazio facciamo la doccia, senza rifare il resto del bagno. È un lavoro chiavi in mano di 8 ore. Comprende: ${included.join('; ')}. Il piatto può essere a filo pavimento, senza scalino, oppure con un bordo basso.`, '');
   add(`Vasca con sportello (${abs('/vasca-con-sportello/')}): una vasca con una porta stagna sul fianco e un seggiolino interno, per chi vuole fare ancora il bagno ma non riesce a scavalcare il bordo. Si entra, ci si siede, si chiude lo sportello e si riempie; prima di uscire la vasca si svuota.`, '');
   add(`Bagno sicuro per anziani (${abs('/bagno-sicuro/')}): doccia a filo pavimento, fondo antiscivolo, maniglioni e seggiolino ribaltabile, messi in base a come si muove chi userà la doccia. Spesso a chiamare sono i figli, per un genitore: possono prenotare il sopralluogo, esserci o collegarsi al telefono e ricevere il preventivo.`, '');
 
   add('## Come funziona', '');
   add('1. Il cliente chiama, scrive su WhatsApp o lascia CAP e telefono nel modulo del sito.');
   add('2. Un tecnico fa il sopralluogo gratuito a casa: misura il bagno e mostra cosa si può montare. Il sopralluogo non impegna.');
-  add('3. Il cliente riceve un preventivo scritto a prezzo fisso, con tutte le voci. Se durante il lavoro emerge un problema nascosto (per esempio uno scarico rotto sotto la vasca), il costo si concorda prima di andare avanti.');
-  add('4. Il giorno del lavoro la squadra toglie la vasca, monta la doccia e pulisce. La sera la doccia si può usare [DA CONFERMARE].', '');
-  add('Giornata di lavoro tipica [DA CONFERMARE: orari tipici]:');
+  add('3. Il cliente riceve un preventivo scritto a prezzo fisso, con tutte le voci. Se durante il lavoro emerge un problema nascosto (per esempio uno scarico rotto sotto la vasca), il costo si concorda prima di andare avanti. Tra l’ordine e il giorno del lavoro passano da 30 a 60 giorni.');
+  add('4. Il giorno del lavoro la squadra toglie la vasca, monta la doccia e pulisce, in 8 ore. La sera la doccia si può già usare.', '');
+  add('Le 8 ore di lavoro di una trasformazione standard [DA CONFERMARE: orari indicativi]:');
   workday.forEach(([t, d]) => add(`- ${t}: ${d}`));
   add('');
 
-  add(`## Prezzi 2026 (${abs('/prezzi/')})`, '');
-  priceList.forEach((p) => add(`- ${p.name}: ${p.price}`));
-  add(`Una trasformazione standard parte da ${euro(site.priceFrom)} [DA CONFERMARE: IVA inclusa?]. Il prezzo finale dipende dalla misura del bagno, dal tipo di piatto e dalle finiture; lo fissa il preventivo scritto dopo il sopralluogo gratuito e non cambia durante il lavoro.`, '');
-  add('Cosa fa cambiare il prezzo:');
+  add(`## Prezzi (${abs('/prezzi/')})`, '');
+  add('Venere Bagni non pubblica prezzi: il prezzo dipende dal bagno e lo fissa il preventivo scritto dopo il sopralluogo gratuito, a prezzo fisso, e non cambia durante il lavoro. L’IVA è indicata a parte. Su materiali e manodopera vale la garanzia legale di 2 anni.', '');
+  add('Da cosa dipende il prezzo:');
   priceFactors.forEach(([a, b]) => add(`- ${a}: ${b}`));
   add('');
 
@@ -68,8 +67,8 @@ export const GET: APIRoute = () => {
   add('## Guide', '');
   guides.forEach((g) => { add(`${g.h1} (${abs(`/guide/${g.slug}/`)}, aggiornata al ${guideUpdated(g.slug)})`, g.answer, ''); });
 
-  add('## Zone servite', '');
-  add(`${site.brand} lavora in tutte le otto province del Piemonte. Dati per provincia: CAP (comuni-json, dati Poste/ISTAT), residenti con 65 anni o più (ISTAT, 1° gennaio 2025), domanda e fondi 2025 della legge 13/1989 (Regione Piemonte, D.D. 25 settembre 2025 n. 1299).`, '');
+  add('## Zona servita', '');
+  add(`${site.brand} lavora solo a Torino e nella sua provincia. Dati della provincia: CAP (comuni-json, dati Poste/ISTAT), residenti con 65 anni o più (ISTAT, 1° gennaio 2025), domanda e fondi 2025 della legge 13/1989 (Regione Piemonte, D.D. 25 settembre 2025 n. 1299).`, '');
   zonePages.forEach((z) => {
     add(`### ${z.name} (${abs(`/zone/${z.slug}/`)})`);
     z.facts.forEach(([a, b]) => add(`- ${a}: ${b}`));

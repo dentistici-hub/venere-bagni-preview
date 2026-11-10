@@ -6,43 +6,34 @@ import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import GuideLinks from '../components/GuideLinks.astro';
 import { media } from '../data/media';
-import { site, euro } from '../data/site';
 import { workday } from '../data/workday';
+import { included } from '../data/prices';
 import { u } from '../lib/url';
 import { hv as h } from '../lib/txt';
 
 const crumbs = [{ name: 'Vasca in doccia', path: '/vasca-in-doccia/' }];
-const incluso = [
-  ['Rimozione', 'Smontiamo la vasca e portiamo via le macerie'],
-  ['Piatto doccia', 'Lo posiamo con le pendenze corrette per lo scarico'],
-  ['Pareti', 'Montiamo pareti in materiale sintetico, senza fughe da pulire'],
-  ['Box doccia', 'Anta scorrevole o a battente, in base al tuo bagno'],
-  ['Rubinetteria', 'Miscelatore, soffione e doccino'],
-  ['Accessori di sicurezza', 'Maniglione e seggiolino, se li vuoi'],
-  ['Pulizia', 'Lasciamo il bagno pulito a fine giornata'],
-];
 const day = workday;
 const faqs = [
-  { q: 'Quanto dura la trasformazione della vasca in doccia?', a: 'Con Venere Bagni la trasformazione della vasca in doccia dura un giorno di lavoro [DA CONFERMARE]. La squadra comincia la mattina presto e la sera la doccia si può già usare. Prima c’è il sopralluogo a casa tua, che dura circa [DURATA] minuti.' },
-  { q: 'Si può fare in un bagno piccolo?', a: 'Sì. La doccia prende lo spazio della vasca e spesso ne libera un po’, perché le pareti sono più sottili. Al sopralluogo gratuito Venere Bagni misura il bagno e ti dice quale piatto ci sta, anche nei bagni stretti dei condomini di Torino.' },
-  { q: 'La doccia nuova è facile da pulire e tiene l’acqua?', a: 'Venere Bagni monta pareti sintetiche senza le fughe delle piastrelle, che si puliscono con un panno [DA CONFERMARE: materiale pareti]. Il piatto viene sigillato e la tenuta è coperta dalla garanzia di [ANNI DI GARANZIA] anni.' },
+  { q: 'Quanto dura la trasformazione della vasca in doccia?', a: 'Con Venere Bagni la trasformazione dura 8 ore. È un lavoro chiavi in mano: demoliamo e smaltiamo la vasca, rifacciamo l’impianto idraulico della doccia e il massetto, posiamo il piatto, rivestiamo le pareti con gres nuovo e montiamo box e rubinetteria. I materiali li portiamo noi, e la sera la doccia si può già usare. Prima c’è il sopralluogo, di circa [DURATA] minuti.' },
+  { q: 'Si può fare in un bagno piccolo?', a: 'Sì. La doccia prende lo spazio della vasca, quindi il bagno non deve essere più grande di com’è. Al sopralluogo gratuito Venere Bagni misura il bagno e ti dice quale piatto ci sta, anche nei bagni stretti dei condomini di Torino.' },
+  { q: 'La doccia nuova è facile da pulire e tiene l’acqua?', a: 'Nella zona della doccia Venere Bagni rifà l’impianto idraulico e il massetto, posa il piatto e riveste le pareti con gres porcellanato nuovo. Il piatto viene sigillato. Su materiali e manodopera hai la garanzia di 2 anni prevista dalla legge: se c’è una perdita dovuta al montaggio, torniamo a sistemarla.' },
   { q: 'Devo svuotare il bagno prima?', a: 'Basta liberare la zona intorno alla vasca e togliere le tue cose dal bagno. La squadra di Venere Bagni copre il resto della casa con teli e cartoni e a fine giornata pulisce.' },
   { q: 'Si può avere una doccia con seggiolino e maniglione?', a: 'Sì, Venere Bagni monta seggiolino ribaltabile e maniglioni nello stesso intervento. Servono soprattutto a chi ha più di 65 anni o problemi di equilibrio. Trovi i dettagli nella pagina sul bagno sicuro.' },
 ];
 ---
 <Base
-  title="Trasformazione vasca in doccia in 1 giorno | Venere Bagni"
-  description="Da vasca a doccia in un giorno, a Torino e in Piemonte: cosa è compreso nel prezzo, quanto costa e come va la giornata di lavoro."
+  title="Trasformazione vasca in doccia in 8 ore | Venere Bagni"
+  description="Da vasca a doccia in 8 ore, chiavi in mano, a Torino e provincia: cosa comprende il lavoro, da cosa dipende il prezzo e come vanno le 8 ore."
   faqs={faqs}
   crumbs={crumbs}
-  service={{ name: 'Trasformazione vasca in doccia', description: 'Sostituzione della vasca con un piatto doccia nello stesso spazio, con pareti, box e rubinetteria, in un giorno di lavoro, a Torino e in Piemonte.', minPrice: site.priceFrom }}
+  service={{ name: 'Trasformazione vasca in doccia', description: 'Sostituzione della vasca con una doccia nello stesso spazio, chiavi in mano in 8 ore: demolizione e smaltimento della vasca, rifacimento dell’impianto idraulico della doccia e del massetto, posa del piatto, box doccia, rubinetteria, rivestimento delle pareti in gres porcellanato, finiture e fornitura dei materiali. A Torino e provincia.' }}
 >
   <PageHero
     crumbs={crumbs}
-    eyebrow="Torino e tutto il Piemonte"
-    title="Trasformazione della vasca in doccia in un giorno"
-    lead="Togliamo la vecchia vasca e nello stesso spazio montiamo la doccia. Il lavoro dura una giornata [DA CONFERMARE] e il prezzo te lo scriviamo prima di cominciare."
-    chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', `Da ${euro(site.priceFrom)}`]}
+    eyebrow="Torino e provincia"
+    title="Trasformazione della vasca in doccia in 8 ore"
+    lead="Togliamo la vecchia vasca e nello stesso spazio montiamo la doccia, con le pareti rivestite in gres nuovo. È un lavoro chiavi in mano di 8 ore, materiali compresi, e il prezzo te lo scriviamo nel preventivo prima di cominciare."
+    chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', 'Chiavi in mano in 8 ore']}
     img="solDoccia"
     formTitle="Prenota il sopralluogo gratuito"
   />
@@ -60,16 +51,9 @@ const faqs = [
 
   <section class="section section--sand" id="incluso">
     <div class="wrap narrow">
-      <h2>Cosa è compreso nel prezzo</h2>
-      <p>Nel lavoro standard ci sono queste voci, e nel preventivo le trovi scritte una per una.</p>
-      <div class="tbl-wrap">
-        <table class="tbl">
-          <caption>Che cosa comprende la trasformazione standard</caption>
-          <thead><tr><th scope="col">Voce</th><th scope="col">Cosa facciamo</th></tr></thead>
-          <tbody>{incluso.map(([a, b]) => <tr><th scope="row">{a}</th><td>{b}</td></tr>)}</tbody>
-        </table>
-      </div>
-      <p class="small" set:html={h('[DA CONFERMARE: elenco esatto delle voci incluse nel prezzo da 3.500 €]')} />
+      <h2>Cosa comprende il lavoro</h2>
+      <p>Il lavoro è chiavi in mano e dura 8 ore. Non devi comprare niente a parte, perché la fornitura dei materiali è compresa. Nel preventivo trovi queste voci scritte una per una:</p>
+      <ul class="ticks">{included.map((i) => <li><span>{i.charAt(0).toUpperCase() + i.slice(1)}</span></li>)}</ul>
     </div>
   </section>
 
@@ -80,7 +64,7 @@ const faqs = [
         <p class="eyebrow">Le scelte</p>
         <h2>Piatto, pareti e box</h2>
         <p>Il piatto può essere a filo pavimento, senza scalino, oppure con un bordo basso. Se in casa c’è chi ha problemi di equilibrio o userà una sedia da doccia, ti consigliamo il filo pavimento. Costa di più e lo scarico va controllato bene: lo guardiamo al sopralluogo. Le differenze sono spiegate nella guida <a href={u('/guide/piatto-doccia-filo-pavimento-o-ribassato/')}>piatto a filo pavimento o ribassato</a>.</p>
-        <p set:html={h('Pareti, piatto, box e rubinetteria li scegli dal catalogo: [OPZIONI DA CATALOGO: colori e finiture delle pareti, colori del piatto, tipi di box (scorrevole, a battente, a nicchia), rubinetteria]')} />
+        <p set:html={h('Il gres delle pareti, il piatto, il box e la rubinetteria li scegli dal catalogo: [OPZIONI DA CATALOGO: colori e formati del gres, colori del piatto, tipi di box (scorrevole, a battente, a nicchia), rubinetteria]')} />
       </div>
     </div>
   </section>
@@ -88,8 +72,8 @@ const faqs = [
   <section class="section section--sand" id="giornata">
     <div class="wrap">
       <div class="head">
-        <h2>La giornata di lavoro, ora per ora</h2>
-        <p set:html={h('Cominciamo verso le 8 e finiamo verso le 18 [DA CONFERMARE: orari tipici].')} />
+        <h2 set:html={h('Le 8 ore di lavoro, ora per ora [DA CONFERMARE: orari indicativi]')} />
+        <p>Arriviamo la mattina e dopo 8 ore ti lasciamo la doccia finita, pronta da usare.</p>
       </div>
       <div class="timeline timeline--7">
         <ol>{day.map(([t, d]) => <li><b>{t}</b><span>{d}</span></li>)}</ol>
@@ -101,11 +85,10 @@ const faqs = [
   <section class="section" id="prezzo">
     <div class="wrap narrow">
       <h2>Quanto costa</h2>
-      <div class="price-box">
-        <p class="from"><small>Prezzo a partire da</small>{euro(site.priceFrom)}</p>
+      <div class="note">
         <div>
-          <p set:html={h('Una trasformazione standard parte da 3.500 € [DA CONFERMARE: IVA inclusa?]. Sale con la misura, il tipo di piatto e le finiture. Il dettaglio è nella pagina dei prezzi.')} />
-          <a class="link-arrow" href={u('/prezzi/')}>Tutti i prezzi</a>
+          <p>Il prezzo dipende dalla misura del bagno, dal tipo di piatto, dal gres e dal box che scegli. Lo fissiamo nel preventivo scritto dopo il sopralluogo gratuito e durante il lavoro non cambia.</p>
+          <a class="link-arrow" href={u('/prezzi/')}>Cosa fa cambiare il prezzo</a>
         </div>
       </div>
     </div>

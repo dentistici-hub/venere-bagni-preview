@@ -6,7 +6,8 @@ import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import GuideLinks from '../../components/GuideLinks.astro';
 import { media } from '../../data/media';
-import { site, euro, ratingValue, ratingCount } from '../../data/site';
+import { ratingValue, ratingCount } from '../../data/site';
+import { includedShort } from '../../data/prices';
 import { zonePages, type ZonePage } from '../../data/zone-pages';
 import { u } from '../../lib/url';
 import { hv as h } from '../../lib/txt';
@@ -15,8 +16,8 @@ export function getStaticPaths() {
   return zonePages.map((z) => ({ params: { slug: z.slug }, props: { z } }));
 }
 const { z } = Astro.props as { z: ZonePage };
-const crumbs = [{ name: 'Zone', path: '/zone/' }, { name: z.name, path: `/zone/${z.slug}/` }];
-const others = zonePages.filter((o) => o.slug !== z.slug);
+// Single area page since 2026-11-10 (Torino e provincia): no /zone/ hub, so the breadcrumb is Home > this page.
+const crumbs = [{ name: `${z.name} e provincia`, path: `/zone/${z.slug}/` }];
 const m = media[z.img];
 ---
 <Base
@@ -24,14 +25,14 @@ const m = media[z.img];
   description={z.description}
   faqs={z.faqs}
   crumbs={crumbs}
-  service={{ name: `Trasformazione vasca in doccia ${z.at}`, description: `Trasformazione della vasca in doccia in provincia ${z.of}: sopralluogo gratuito e preventivo scritto a prezzo fisso.`, minPrice: site.priceFrom, areaServed: z.area }}
+  service={{ name: `Trasformazione vasca in doccia ${z.at}`, description: `Trasformazione della vasca in doccia ${z.at} e in provincia, chiavi in mano in 8 ore con i materiali compresi: sopralluogo gratuito e preventivo scritto a prezzo fisso.` }}
 >
   <PageHero
     crumbs={crumbs}
     eyebrow={z.eyebrow ?? `${z.name} e provincia`}
     title={`Trasformazione vasca in doccia ${z.at}`}
     lead={z.lead}
-    chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', `Da ${euro(site.priceFrom)}`]}
+    chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', 'Chiavi in mano in 8 ore']}
     img="hero"
     formTitle={`Prenota il sopralluogo gratuito ${z.at}`}
   />
@@ -79,12 +80,10 @@ const m = media[z.img];
   <section class="section section--sand" id="prezzo">
     <div class="wrap narrow">
       <h2>{z.pricesTitle}</h2>
-      <div class="price-box">
-        <p class="from"><small>Prezzo a partire da</small>{euro(site.priceFrom)}</p>
-        <div>
-          <p set:html={h(z.prices)} />
-          <a class="link-arrow" href={u('/prezzi/')}>Prezzi completi</a>
-        </div>
+      <div class="note">
+        <p set:html={h(z.prices)} />
+        <p>Il lavoro comprende {includedShort}.</p>
+        <p><a class="link-arrow" href={u('/prezzi/')}>Da cosa dipende il prezzo</a></p>
       </div>
     </div>
   </section>
@@ -97,7 +96,7 @@ const m = media[z.img];
       <figure class="review card review--solo">
         <span class="stars" aria-label="5 stelle su 5">★★★★★</span>
         <blockquote set:html={h(z.review.text)} />
-        <footer>{z.review.name}<span>{z.review.town} · <mark class="ph">recensione di esempio</mark></span></footer>
+        <footer>{z.review.name}<span>{z.review.town} · <mark class="ph ph--label">recensione di esempio</mark></span></footer>
       </figure>
     </div>
   </section>
@@ -106,7 +105,6 @@ const m = media[z.img];
     <div class="wrap narrow">
       <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Domande frequenti {z.at}</h2></div>
       <Faq items={z.faqs} open verbose />
-      <p style="margin-top:28px" class="muted">Lavoriamo anche nelle altre province del Piemonte: {others.map((o, i) => <>{i > 0 && (i === others.length - 1 ? ' e ' : ', ')}<a href={u(`/zone/${o.slug}/`)}>{o.name}</a></>)}.</p>
     </div>
   </section>
 

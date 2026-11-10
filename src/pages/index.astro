@@ -9,59 +9,66 @@ import CtaBand from '../components/CtaBand.astro';
 import GuideLinks from '../components/GuideLinks.astro';
 import Icon from '../components/Icon.astro';
 import { media } from '../data/media';
-import { site, zones, euro, ratingValue, ratingCount } from '../data/site';
+import { site, ratingValue, ratingCount } from '../data/site';
 import { bonusShort } from '../data/bonus';
-import { priceList } from '../data/prices';
+import { includedShort } from '../data/prices';
+import { zonePages } from '../data/zone-pages';
 import { u } from '../lib/url';
 import { h } from '../lib/txt';
 
 const faqs = [
-  { q: 'Quanto tempo ci vuole per trasformare la vasca in doccia?', a: 'Con Venere Bagni la trasformazione della vasca in doccia richiede un giorno di lavoro [DA CONFERMARE]. La squadra arriva la mattina, toglie la vasca, monta piatto, pareti e box, e la sera la doccia si può già usare. Prima c’è il sopralluogo gratuito, di circa [DURATA] minuti, per prendere le misure.' },
-  { q: 'Quanto costa trasformare la vasca in doccia a Torino?', a: 'A Torino una trasformazione standard della vasca in doccia con Venere Bagni parte da 3.500 € [DA CONFERMARE: IVA inclusa?]. Il prezzo finale dipende dalla misura del bagno, dal tipo di piatto e dal rivestimento. Dopo il sopralluogo gratuito ti lasciamo un preventivo scritto a prezzo fisso, voce per voce.' },
-  { q: 'Il sopralluogo è davvero gratuito?', a: 'Sì, il sopralluogo di Venere Bagni è gratuito e non ti impegna. Un tecnico viene a casa tua, in Piemonte, misura il bagno, ti fa vedere cosa si può montare e ti lascia il preventivo scritto. Se poi decidi di non farlo, non devi niente.' },
-  { q: 'Devo rifare anche il pavimento e le piastrelle?', a: 'Di solito no. Venere Bagni posa il piatto doccia e le pareti nello spazio della vasca, e il resto del bagno resta com’è. Se nel tuo bagno serve qualche ripristino te lo diciamo al sopralluogo e lo trovi scritto nel preventivo.' },
+  { q: 'Quanto tempo ci vuole per trasformare la vasca in doccia?', a: 'Con Venere Bagni la trasformazione della vasca in doccia richiede 8 ore ed è un lavoro chiavi in mano, con i materiali compresi. La squadra arriva la mattina, demolisce e smaltisce la vasca, rifà impianto e massetto, posa il piatto, riveste le pareti in gres e monta box e rubinetteria. La sera la doccia si può già usare. Prima c’è il sopralluogo gratuito, di circa [DURATA] minuti.' },
+  { q: 'Quanto costa trasformare la vasca in doccia a Torino?', a: 'Dipende dalla misura del bagno, dal piatto che scegli e dal gres per le pareti, e per questo il prezzo te lo diamo solo dopo aver visto il bagno. Il lavoro è chiavi in mano e comprende demolizione e smaltimento della vasca, impianto idraulico della doccia, massetto, piatto, box, rubinetteria, rivestimento in gres, finiture e materiali. Il sopralluogo è gratuito e il preventivo è scritto, a prezzo fisso.' },
+  { q: 'Il sopralluogo è davvero gratuito?', a: 'Sì, il sopralluogo di Venere Bagni è gratuito e non ti impegna. Un tecnico viene a casa tua, a Torino o in provincia, misura il bagno, ti fa vedere cosa si può montare e ti lascia il preventivo scritto. Se poi decidi di non farlo, non devi niente.' },
+  { q: 'Devo rifare anche il pavimento e le piastrelle?', a: 'Fuori dallo spazio della vasca di solito no. Venere Bagni lavora dove c’era la vasca: lì rifà impianto e massetto, posa il piatto doccia e riveste le pareti con gres porcellanato nuovo. Il resto del bagno resta com’è. Se nel tuo bagno serve qualche ripristino te lo diciamo al sopralluogo e lo trovi scritto nel preventivo.' },
   { q: 'Fate lavori anche per persone anziane o con difficoltà a camminare?', a: 'Sì. Venere Bagni monta piatti doccia a filo pavimento, maniglioni, seggiolini e superfici antiscivolo per chi fa fatica a scavalcare il bordo della vasca. Puoi chiamarci anche se cerchi una soluzione sicura per un tuo genitore.' },
-  { q: 'Quali province del Piemonte servite?', a: 'Venere Bagni lavora a Torino e provincia, Cuneo, Novara, Alessandria, Asti, Biella, Vercelli e nel Verbano-Cusio-Ossola. Per sapere se arriviamo nel tuo comune scrivi il CAP nel modulo: la risposta è immediata.' },
+  { q: 'In quali zone lavorate?', a: 'Venere Bagni lavora a Torino e in tutta la provincia: la cintura, da Moncalieri a Settimo Torinese, il Chierese e il Carmagnolese, il Canavese, la Valle di Susa e la Val Sangone, il Pinerolese e le Valli di Lanzo. Per sapere se arriviamo nel tuo comune scrivi il CAP nel modulo: la risposta è immediata.' },
 ];
 const reviews = [
-  { text: 'Mi hanno misurato il bagno il lunedì e il giovedì avevo già la doccia nuova. Il prezzo era quello scritto sul foglio.', name: 'Maria', town: 'Moncalieri' },
+  { text: 'Il giorno del lavoro sono arrivati la mattina e nel pomeriggio avevo già la doccia nuova. Il prezzo era quello scritto sul foglio.', name: 'Maria', town: 'Moncalieri' },
   { text: 'Mia madre non riusciva più a entrare nella vasca. Adesso fa la doccia seduta, da sola, e io sono più tranquillo.', name: 'Giorgio', town: 'Rivoli' },
   { text: 'Sono venuti in due e hanno lavorato tutto il giorno, alla fine il bagno era pulito. Il giorno dopo mi hanno anche telefonato per sapere se andava tutto bene.', name: 'Lucia', town: 'Collegno' },
   { text: 'Volevo solo sapere quanto costava. Il tecnico ha misurato tutto e mi ha lasciato il prezzo senza insistere. Ci sto ancora pensando ma intanto ringrazio.', name: 'Franco', town: 'Carmagnola' },
 ];
+// Short version of src/data/workday.ts (same 8 hours, indicative clock times).
 const day = [
   ['8:00', 'Arriva la squadra e protegge casa e pavimenti'],
-  ['10:00', 'La vasca è rimossa'],
-  ['13:00', 'Piatto doccia e pareti sono montati'],
-  ['16:00', 'Box, rubinetteria e accessori sono al loro posto'],
-  ['18:00', 'Pulizia finale e consegna'],
+  ['9:30', 'La vasca è demolita e portata via'],
+  ['11:30', 'Impianto della doccia, massetto e piatto sono fatti'],
+  ['14:00', 'Le pareti sono rivestite in gres, box e rubinetteria montati'],
+  ['16:00', 'Finiture, pulizia e consegna'],
 ];
-const prices = priceList.filter((r) => r.home).map((r) => [r.short ?? r.name, r.price]);
+// One review becomes the large pull-quote, the others go in the grid.
+const pull = reviews[1];
+const others = reviews.filter((r) => r !== pull);
+const towns = zonePages[0].towns.map(([a]) => a);
 ---
 <Base
-  title="Vasca in doccia a Torino in 1 giorno | Venere Bagni"
-  description="Trasformiamo la vasca in doccia in un giorno, a Torino e in Piemonte. Sopralluogo gratuito a casa tua e preventivo scritto a prezzo fisso, da 3.500 €."
+  title="Vasca in doccia a Torino in 8 ore | Venere Bagni"
+  description="Vasca in doccia in 8 ore, chiavi in mano e materiali compresi, a Torino e provincia. Sopralluogo gratuito e preventivo scritto a prezzo fisso."
   faqs={faqs}
-  service={{ name: 'Trasformazione vasca in doccia', description: site.description, minPrice: site.priceFrom }}
+  service={{ name: 'Trasformazione vasca in doccia', description: site.description }}
 >
-  <section class="hero">
-    <div class="wrap hero__grid">
-      <div>
-        <p class="eyebrow">Torino e tutto il Piemonte</p>
-        <h1>Dalla vasca alla doccia in un giorno, a casa tua</h1>
-        <p class="lead" set:html={h('Veniamo a casa tua a prendere le misure, senza costi, e ti lasciamo il prezzo scritto. Se il preventivo ti va bene, in un giorno togliamo la vasca e montiamo la doccia [DA CONFERMARE].')} />
+  <section class="xhero">
+    <div class="xhero__photo">
+      <Image src={media.hero.src} alt={media.hero.alt} widths={[640, 960, 1400, 1920]} sizes="(max-width: 960px) calc(100vw - 32px), 100vw" loading="eager" fetchpriority="high" />
+      <p class="xhero__badge">Doccia sicura con seggiolino<span>montata al posto della vasca</span></p>
+    </div>
+    <div class="wrap xhero__grid">
+      <div class="xhero__text">
+        <p class="eyebrow">Torino e provincia</p>
+        <h1>Dalla vasca alla doccia in 8 ore, a casa tua</h1>
+        <p class="lead"><span set:html={h('Veniamo a casa tua a prendere le misure, senza costi, e ti lasciamo il prezzo scritto.')} /><span class="xhero__more-lead" set:html={h(' Se il preventivo ti va bene, togliamo la vasca e in 8 ore ti lasciamo la doccia finita, materiali compresi.')} /></p>
+      </div>
+      <div class="xhero__form"><LeadForm id="prenota" /></div>
+      <div class="xhero__more">
         <ul class="chips-row">
           <li><Icon n="check" />Sopralluogo gratuito</li>
           <li><Icon n="check" />Prezzo fisso scritto</li>
-          <li><Icon n="check" />Da {euro(site.priceFrom)}</li>
+          <li><Icon n="check" />Chiavi in mano in 8 ore</li>
         </ul>
         <p class="trust-line"><span class="stars" aria-hidden="true">★★★★★</span><span set:html={h(`${ratingValue} su 5 da ${ratingCount} recensioni Google`)} /></p>
         <p class="hero__alt" set:html={h(`Preferisci parlare con qualcuno? Chiama il ${site.phone} oppure scrivi su WhatsApp al ${site.whatsappLabel}.`)} />
-      </div>
-      <div class="hero__media">
-        <div class="hero__img"><Image src={media.hero.src} alt={media.hero.alt} widths={[640, 960, 1400]} sizes="(max-width: 960px) 100vw, 560px" loading="eager" fetchpriority="high" /></div>
-        <p class="hero__badge">Doccia sicura con seggiolino<span>montata al posto della vasca</span></p>
-        <div class="hero__form"><LeadForm id="prenota" /></div>
       </div>
     </div>
   </section>
@@ -71,22 +78,24 @@ const prices = priceList.filter((r) => r.home).map((r) => [r.short ?? r.name, r.
       <ul>
         <li><Icon n="home" /><div><strong>Sopralluogo gratuito</strong><span>Misuriamo il bagno a casa tua e non paghi niente.</span></div></li>
         <li><Icon n="doc" /><div><strong>Prezzo fisso scritto</strong><span>Il prezzo è nel preventivo e non cambia.</span></div></li>
-        <li><Icon n="clock" /><div><strong>Un giorno di lavoro</strong><span set:html={h('La sera puoi già usare la doccia [DA CONFERMARE].')} /></div></li>
-        <li><Icon n="shield" /><div><strong set:html={h('Garanzia [ANNI] anni')} /><span>Scritta, su posa e materiali.</span></div></li>
+        <li><Icon n="clock" /><div><strong>8 ore, chiavi in mano</strong><span>Materiali compresi. La sera hai già la doccia.</span></div></li>
+        <li><Icon n="shield" /><div><strong>Garanzia di 2 anni</strong><span>Su materiali e manodopera, come prevede la legge.</span></div></li>
       </ul>
     </div>
   </section>
 
   <section class="section" id="prima-dopo">
     <div class="wrap">
-      <div class="head">
-        <h2>Tre bagni in Piemonte, prima e dopo</h2>
+      <div class="head head--row">
+        <h2>Tre bagni a Torino e provincia, prima e dopo</h2>
         <p class="muted">Sposta la barra su ogni foto per vedere la differenza.</p>
       </div>
-      <div class="ba-grid">
-        <BeforeAfter before="ba1p" after="ba1d" caption="[CITTÀ] · doccia a piatto basso con panca · [DURATA]" />
-        <BeforeAfter before="ba2p" after="ba2d" caption="[CITTÀ] · doccia con porta in vetro e maniglioni · [DURATA]" />
-        <BeforeAfter before="ba4p" after="ba4d" caption="[CITTÀ] · doccia walk-in a filo pavimento · [DURATA]" />
+      <div class="ba-feature">
+        <BeforeAfter size="lg" before="ba1p" after="ba1d" caption="[CITTÀ] · doccia a piatto basso con panca · [DURATA]" note="Via la vasca con la tenda: al suo posto una doccia con il piatto basso e una panca per sedersi." />
+        <div class="ba-pair">
+          <BeforeAfter before="ba2p" after="ba2d" caption="[CITTÀ] · doccia con porta in vetro e maniglioni · [DURATA]" note="La vasca sotto la finestra è diventata una doccia chiusa, con i maniglioni a portata di mano." />
+          <BeforeAfter before="ba4p" after="ba4d" caption="[CITTÀ] · doccia walk-in a filo pavimento · [DURATA]" note="In un bagno piccolo, una doccia walk-in con il piatto allo stesso livello del pavimento." />
+        </div>
       </div>
     </div>
   </section>
@@ -101,10 +110,10 @@ const prices = priceList.filter((r) => r.home).map((r) => [r.short ?? r.name, r.
         <li><h3>Ci chiami o ci scrivi</h3><p set:html={h('Ci dici il CAP e cosa vuoi cambiare. Ti rispondiamo entro [X ORE].')} /></li>
         <li><h3>Il sopralluogo</h3><p>Un nostro tecnico viene a casa tua, prende le misure e ti fa vedere cosa si può montare nel tuo bagno.</p></li>
         <li><h3>Il preventivo</h3><p>Ti lasciamo un prezzo fisso con l’elenco di quello che comprende. Non devi decidere subito.</p></li>
-        <li><h3>Il giorno del lavoro</h3><p>Smontiamo la vasca, posiamo piatto e pareti, montiamo box e rubinetteria e prima di andare via puliamo.</p></li>
+        <li><h3>Il giorno del lavoro</h3><p>In 8 ore togliamo la vasca, rifacciamo impianto e massetto, posiamo il piatto, rivestiamo le pareti in gres, montiamo box e rubinetteria e prima di andare via puliamo.</p></li>
       </ol>
       <div class="timeline">
-        <h3 set:html={h('La giornata di lavoro, ora per ora [DA CONFERMARE]')} />
+        <h3 set:html={h('Le 8 ore di lavoro, passo per passo [DA CONFERMARE: orari indicativi]')} />
         <ol>{day.map(([t, d]) => <li><b>{t}</b><span>{d}</span></li>)}</ol>
       </div>
     </div>
@@ -116,7 +125,7 @@ const prices = priceList.filter((r) => r.home).map((r) => [r.short ?? r.name, r.
       <div class="cards">
         <article class="card sol">
           <Image src={media.solDoccia.src} alt={media.solDoccia.alt} widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" />
-          <div class="sol__body"><h3>Vasca in doccia</h3><p>Dove c’era la vasca mettiamo un piatto doccia, anche a filo pavimento. Il lavoro dura un giorno.</p><a class="link-arrow" href={u('/vasca-in-doccia/')}>Come funziona la trasformazione</a></div>
+          <div class="sol__body"><h3>Vasca in doccia</h3><p>Dove c’era la vasca mettiamo un piatto doccia, anche a filo pavimento. Il lavoro dura 8 ore, materiali compresi.</p><a class="link-arrow" href={u('/vasca-in-doccia/')}>Come funziona la trasformazione</a></div>
         </article>
         <article class="card sol">
           <Image src={media.solSportello.src} alt={media.solSportello.alt} widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" />
@@ -130,31 +139,39 @@ const prices = priceList.filter((r) => r.home).map((r) => [r.short ?? r.name, r.
     </div>
   </section>
 
+  <section class="band" aria-label="Sopralluogo gratuito">
+    <Image class="band__img" src={media.coppia.src} alt={media.coppia.alt} widths={[640, 960, 1400, 2000]} sizes="100vw" />
+    <div class="wrap band__inner">
+      <div class="band__box">
+        <p class="band__t">Prima di decidere, guardiamo insieme il tuo bagno</p>
+        <p>Il sopralluogo è gratuito e non ti impegna.</p>
+        <a class="btn" href="#prenota"><Icon n="calendar" /> Prenota il sopralluogo gratuito</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--sand" id="costi">
-    <div class="wrap split">
-      <div>
-        <h2>Quanto costa passare dalla vasca alla doccia</h2>
-        <p set:html={h('Una trasformazione standard parte da 3.500 € [DA CONFERMARE: IVA inclusa?]. Quanto spendi alla fine dipende dalla misura del bagno, dal piatto che scegli e dal rivestimento: lo vediamo al sopralluogo e te lo scriviamo nel preventivo.')} />
-        <a class="link-arrow" href={u('/prezzi/')}>Listino completo e cosa fa cambiare il prezzo</a>
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <h2>Quanto costa passare dalla vasca alla doccia</h2>
+          <p>Dipende dalla misura del bagno, dal piatto che scegli e dal gres per le pareti. Lo vediamo al sopralluogo gratuito e te lo scriviamo nel preventivo, a prezzo fisso: quella cifra non cambia durante il lavoro.</p>
+          <a class="link-arrow" href={u('/prezzi/')}>Cosa fa cambiare il prezzo</a>
+        </div>
+        <div class="note">
+          <h3>Cosa comprende il lavoro</h3>
+          <p>Chiavi in mano, in 8 ore: {includedShort}.</p>
+        </div>
       </div>
-      <div class="tbl-wrap">
-        <table class="tbl">
-          <thead><tr><th scope="col">Intervento</th><th scope="col">Prezzo</th></tr></thead>
-          <tbody>{prices.map(([a, b]) => <tr><td>{a}</td><td class="num" set:html={h(b)} /></tr>)}</tbody>
-        </table>
+      <div class="bonus-row" id="bonus">
+        <h2 class="h3">Bonus e detrazioni nel 2026</h2>
+        <div class="note"><p set:html={h(bonusShort)} /></div>
+        <p><a class="link-arrow" href={u('/bonus-detrazioni/')}>Le detrazioni 2026 nel dettaglio</a></p>
       </div>
     </div>
   </section>
 
-  <section class="section" id="bonus">
-    <div class="wrap narrow">
-      <h2>Bonus e detrazioni nel 2026</h2>
-      <div class="note"><p set:html={h(bonusShort)} /></div>
-      <p style="margin-top:16px"><a class="link-arrow" href={u('/bonus-detrazioni/')}>Le detrazioni 2026 nel dettaglio</a></p>
-    </div>
-  </section>
-
-  <section class="section section--sand" id="perche">
+  <section class="section section--petrol section--dark" id="perche">
     <div class="wrap split">
       <div>
         <p class="eyebrow">Perché Venere Bagni</p>
@@ -165,30 +182,39 @@ const prices = priceList.filter((r) => r.home).map((r) => [r.short ?? r.name, r.
           <li><span>Nel preventivo c’è ogni voce. Se durante il lavoro salta fuori qualcosa che prima non si poteva vedere, ti chiamiamo e ci accordiamo prima di andare avanti.</span></li>
           <li><span>Il tecnico misura e spiega, poi ti lascia il preventivo e decidi tu quando.</span></li>
         </ul>
-        <p class="muted" set:html={h(`[ANNI DI ESPERIENZA] anni di lavoro e [N° INSTALLAZIONI] bagni rifatti in Piemonte. Su Google abbiamo ${ratingValue} su 5 da ${ratingCount} clienti, e le recensioni puoi leggerle tutte.`)} />
+        <p class="muted" set:html={h(`15 anni di lavoro e migliaia di installazioni. Su Google abbiamo ${ratingValue} su 5 da ${ratingCount} clienti, e le recensioni puoi leggerle tutte.`)} />
       </div>
       <Image src={media.sopralluogo.src} alt={media.sopralluogo.alt} widths={[640, 960]} sizes="(max-width: 960px) 100vw, 560px" />
     </div>
   </section>
 
-  <section class="section" id="recensioni">
+  <section class="section quote-sec" aria-label="La voce di un cliente">
     <div class="wrap">
-      <div class="head"><h2>Cosa dicono i clienti</h2><p class="muted" set:html={h(`${ratingValue} su 5 · ${ratingCount} recensioni su Google`)} /></div>
-      <Reviews items={reviews} />
+      <figure class="pull">
+        <blockquote><p set:html={h(pull.text)} /></blockquote>
+        <figcaption><span class="stars" aria-label="5 stelle su 5">★★★★★</span><b>{pull.name}</b>, {pull.town} · <mark class="ph ph--label">recensione di esempio</mark></figcaption>
+      </figure>
     </div>
   </section>
 
-  <section class="section section--sand" id="zone">
+  <section class="section section--sand" id="recensioni">
     <div class="wrap">
-      <div class="head"><h2>Dove lavoriamo</h2><p>Partiamo da Torino, copriamo tutta la provincia e andiamo anche nelle altre province del Piemonte.</p></div>
+      <div class="head"><h2>Cosa dicono i clienti</h2><p class="muted" set:html={h(`${ratingValue} su 5 · ${ratingCount} recensioni su Google`)} /></div>
+      <Reviews items={others} />
+    </div>
+  </section>
+
+  <section class="section" id="zone">
+    <div class="wrap">
+      <div class="head"><h2>Dove lavoriamo</h2><p>A Torino e nei comuni della sua provincia, dalla cintura alle valli.</p></div>
       <ul class="zones">
-        {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.label}</a></li>)}
+        <li><a href={u('/zone/torino/')}>Torino città</a></li>{towns.map((t) => <li><a href={u('/zone/torino/#comuni')}>{t}</a></li>)}
       </ul>
       <p style="margin-top:20px">La tua zona non c’è? Scrivi il CAP nel modulo e ti diciamo subito se possiamo venire.</p>
     </div>
   </section>
 
-  <section class="section" id="domande">
+  <section class="section section--sand" id="domande">
     <div class="wrap narrow">
       <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Cosa ci chiedono più spesso</h2></div>
       <Faq items={faqs} open />
@@ -196,7 +222,7 @@ const prices = priceList.filter((r) => r.home).map((r) => [r.short ?? r.name, r.
     </div>
   </section>
 
-  <GuideLinks sand />
+  <GuideLinks />
 
   <CtaBand />
 </Base>

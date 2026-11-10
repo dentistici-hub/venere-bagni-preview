@@ -45,22 +45,20 @@ export const site = {
   legalName: 'Italprogetti srls', // footer, privacy, chi-siamo, schema `legalName`
   vat: '[P.IVA]', // P.IVA, 11 digits: footer, contatti, chi-siamo, schema `vatID`
   rea: '[REA]', // REA number, e.g. 'TO-1234567': chi-siamo, footer, schema `identifier`
-  foundingYear: '[ANNO DI FONDAZIONE]', // 'YYYY': chi-siamo, schema `foundingDate`
+  foundingYear: '', // 'YYYY': chi-siamo, schema `foundingDate`. Not given by the client (2026-11-10): leave empty. Years in business: 15.
   // Owner or manager shown on Chi siamo and used as schema `founder` and as guide author when set.
   founder: { name: '[NOME TITOLARE]', role: '[RUOLO, es. titolare]' },
-  tagline: 'Dalla vasca alla doccia in un giorno',
+  tagline: 'Dalla vasca alla doccia in 8 ore',
   // Default <title> and meta description (home page sets its own; these are the fallback).
-  title: 'Trasformazione vasca in doccia a Torino e in Piemonte | Venere Bagni',
+  title: 'Trasformazione vasca in doccia a Torino e provincia | Venere Bagni',
   description:
-    'Togliamo la vasca e montiamo una doccia sicura in un giorno, a Torino e in Piemonte. Sopralluogo gratuito, prezzo fisso scritto, da 3.500 €.',
+    'Togliamo la vasca e montiamo una doccia sicura in 8 ore, chiavi in mano, a Torino e provincia. Sopralluogo gratuito e preventivo scritto a prezzo fisso.',
 
   // ---- AREA SERVED ---------------------------------------------------------------------------------
-  area: 'Torino e tutto il Piemonte',
-  // Provinces served, Torino first (order is used in the zone lists and in schema areaServed).
-  areas: ['Torino', 'Cuneo', 'Novara', 'Alessandria', 'Asti', 'Biella', 'Vercelli', 'Verbano-Cusio-Ossola'],
-  // CAP prefixes of the Piemonte provinces, used by the form's area check.
-  // 18025 = Briga Alta (CN), the only Piemonte comune with a Ligurian-range CAP (comuni-json, Poste data).
-  capPrefixes: ['10', '12', '13', '14', '15', '28', '18025'],
+  // Client, 2026-11-10: Torino e provincia only (the other Piemonte provinces are not served).
+  area: 'Torino e provincia',
+  // CAP prefix of the Torino province (10010-10156), used by the form's area check.
+  capPrefixes: ['10'],
 
   // ---- ADDRESS (NAP: must match Google Business Profile, Bing Places and every directory letter for letter)
   street: '[INDIRIZZO]', // 'Via Esempio 12': footer, contatti, chi-siamo, schema streetAddress
@@ -97,7 +95,8 @@ export const site = {
   ratingInSchema: false,
 
   // ---- PRICES --------------------------------------------------------------------------------------
-  priceFrom: 3500, // example price agreed with Denis 2026-11-09; CONFIRM with the client (VAT included?). Price list: src/data/prices.ts
+  // Client, 2026-11-10: no price is published anywhere on the site (pages, schema, meta, llms files).
+  // /prezzi/ explains what the cost depends on and what is always included; the figure is in the written quote.
 
   // ---- SEO / VERIFICATION / TRACKING ---------------------------------------------------------------
   // Search Console "HTML tag" method: only the content="..." value. '' = no tag.
@@ -130,20 +129,10 @@ export const nav = [
   { href: '/domande-frequenti/', label: 'Domande' },
 ];
 
-// One page per province (/zone/<slug>/), same order as `areas`. `at` = "a Torino" / "nel Verbano-Cusio-Ossola";
-// `label` = text of the zone chips on the home page and the zone hub.
+// The area page (/zone/<slug>/). Only Torino e provincia since 2026-11-10.
 export const zones = [
   { slug: 'torino', name: 'Torino', at: 'a Torino', label: 'Torino e provincia' },
-  { slug: 'cuneo', name: 'Cuneo', at: 'a Cuneo', label: 'Cuneo e provincia' },
-  { slug: 'novara', name: 'Novara', at: 'a Novara', label: 'Novara e provincia' },
-  { slug: 'alessandria', name: 'Alessandria', at: 'ad Alessandria', label: 'Alessandria e provincia' },
-  { slug: 'asti', name: 'Asti', at: 'ad Asti', label: 'Asti e provincia' },
-  { slug: 'biella', name: 'Biella', at: 'a Biella', label: 'Biella e provincia' },
-  { slug: 'vercelli', name: 'Vercelli', at: 'a Vercelli', label: 'Vercelli e provincia' },
-  { slug: 'verbano-cusio-ossola', name: 'Verbano-Cusio-Ossola', at: 'nel Verbano-Cusio-Ossola', label: 'Verbano-Cusio-Ossola' },
 ];
-
-export const euro = (n: number) => `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.')} €`;
 
 // Google rating as shown in the page text ("4,9" / "37"), or the yellow placeholder until site.rating is set.
 export const ratingValue = site.rating.value ? String(site.rating.value).replace('.', ',') : '[VOTO GOOGLE]';

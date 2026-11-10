@@ -70,15 +70,36 @@ const index = site.indexable && !noindex && !isPreview;
     <link rel="alternate" type="text/plain" href={u('/llms.txt')} title="llms.txt" />
     <link rel="sitemap" type="application/xml" href={u('/sitemap-index.xml')} />
     <script type="application/ld+json" set:html={graph} />
+    {/* Presentation mode (preview only): example data on by default, choice remembered. Set before paint. */}
+    {isPreview && (
+      <script is:inline>(function(){var on=true;try{on=localStorage.getItem('venere-ex')!=='0'}catch(e){}if(on)document.documentElement.classList.add('pv-ex');document.documentElement.classList.add('pv')})();</script>
+    )}
   </head>
   <body>
     <a class="skip" href="#main">Vai al contenuto</a>
-    {isPreview && <div class="preview-ribbon"><strong>Anteprima del progetto</strong> · foto di esempio e dati da confermare (evidenziati in giallo) · il modulo non invia dati</div>}
+    {isPreview && (
+      <div class="preview-ribbon">
+        <p><strong>Anteprima del progetto</strong><span class="pv-desc"><span class="pv-when-ex"> · foto e dati di esempio, non reali</span><span class="pv-when-ph"> · foto di esempio e dati da confermare (evidenziati in giallo)</span> · il modulo non invia dati</span></p>
+        <button type="button" class="pv-toggle" data-pv-toggle hidden><span class="pv-when-ph">Mostra dati di esempio</span><span class="pv-when-ex">Mostra cosa manca</span></button>
+      </div>
+    )}
     <Header minimal={landing} formHref={formHref} />
     <main id="main"><slot /></main>
     <Footer minimal={landing} />
     <MobileBar formHref={formHref} />
     <Consent />
+    {/* Swaps each placeholder mark between its name and its example value (data-ex). Inline at the end of <body>
+        so the example text is in place before the first paint. "a|b|c" values rotate on the page. */}
+    {isPreview && (
+      <script is:inline>(function(){
+        var root=document.documentElement,marks=[].slice.call(document.querySelectorAll('mark.ph[data-ex]')),seen={};
+        marks.forEach(function(m){var k=m.textContent,alts=m.getAttribute('data-ex').split('|');m.setAttribute('data-ph',k);seen[k]=(seen[k]||0)+1;m.setAttribute('data-ex-v',alts[(seen[k]-1)%alts.length]);});
+        function apply(){var on=root.classList.contains('pv-ex');marks.forEach(function(m){m.textContent=on?m.getAttribute('data-ex-v'):m.getAttribute('data-ph');});}
+        apply();
+        var b=document.querySelector('[data-pv-toggle]');if(!b)return;b.hidden=false;
+        b.addEventListener('click',function(){var on=root.classList.toggle('pv-ex');try{localStorage.setItem('venere-ex',on?'1':'0')}catch(e){}apply();});
+      })();</script>
+    )}
     <script>
       import '../scripts/main.js';
     </script>

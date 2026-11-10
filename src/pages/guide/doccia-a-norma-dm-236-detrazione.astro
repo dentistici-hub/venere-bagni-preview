@@ -23,8 +23,8 @@ const casi = [
   ['Doccia dentro un rifacimento del bagno con lavori di manutenzione straordinaria', 'Per la parte che rientra in quei lavori'],
 ];
 const esempio = [
-  ['6.000 €', '50%', '3.000 €', '300 €'],
-  ['6.000 €', '36%', '2.160 €', '216 €'],
+  ['6.000 €', '50%', '3.000 €', '300 €'],
+  ['6.000 €', '36%', '2.160 €', '216 €'],
 ];
 ---
 <Base title={g.title} description={g.description} crumbs={crumbs} article={{ headline: g.h1, published: g.published }}>
@@ -60,7 +60,7 @@ const esempio = [
       </div>
 
       <h2>Quanto si recupera nel 2026?</h2>
-      <p>Per le spese pagate nel 2026 la detrazione è del 50% se il lavoro è nella casa dove abiti e ne sei proprietario, o hai un diritto come l’usufrutto. In tutti gli altri casi è del 36%: seconda casa, inquilino, figlio convivente che paga i lavori. Il tetto di spesa è di 96.000 € per abitazione.</p>
+      <p>Per le spese pagate nel 2026 la detrazione è del 50% se il lavoro è nella casa dove abiti e ne sei proprietario, o hai un diritto come l’usufrutto. In tutti gli altri casi è del 36%: seconda casa, inquilino, figlio convivente che paga i lavori. Il tetto di spesa è di 96.000 € per abitazione.</p>
       <p>I soldi non tornano subito. La detrazione riduce l’IRPEF e si divide in dieci quote uguali, una per ogni dichiarazione dei redditi a partire dall’anno in cui paghi.</p>
       <div class="tbl-wrap">
         <table class="tbl tbl--stack">
@@ -69,11 +69,11 @@ const esempio = [
           <tbody>{esempio.map((r) => <tr>{r.map((c, i) => <td class="num" data-label={['Spesa', 'Aliquota', 'Detrazione totale', 'Quota annuale'][i]}>{c}</td>)}</tr>)}</tbody>
         </table>
       </div>
-      <p>Chi paga poca IRPEF, per esempio con una pensione bassa, rischia di non riuscire a usare tutta la quota di ogni anno. Con un reddito sopra i 75.000 € c’è invece un tetto alle detrazioni totali. In tutti e due i casi conviene fare il conto con chi ti prepara la dichiarazione.</p>
+      <p>Chi paga poca IRPEF, per esempio con una pensione bassa, rischia di non riuscire a usare tutta la quota di ogni anno. Con un reddito sopra i 75.000 € c’è invece un tetto alle detrazioni totali. In tutti e due i casi conviene fare il conto con chi ti prepara la dichiarazione.</p>
 
       <h2>Servono più di 65 anni o una invalidità?</h2>
       <p>Per la detrazione del 50% o del 36% no: non c’è un limite di età e non serve un certificato. Conta come è fatta la doccia.</p>
-      <p>L’invalidità certificata serve invece per il contributo a fondo perduto della legge 13 del 1989, che in Piemonte si chiede al Comune prima di cominciare i lavori (a Torino all’ATC del Piemonte Centrale). Nelle <a href={u('/zone/')}>pagine delle province</a> trovi dove si presenta la domanda e quanti fondi sono arrivati nel 2025.</p>
+      <p>L’invalidità certificata serve invece per il contributo a fondo perduto della legge 13 del 1989, che in Piemonte si chiede al Comune prima di cominciare i lavori (a Torino all’ATC del Piemonte Centrale). Nella <a href={u('/zone/torino/')}>pagina su Torino e provincia</a> trovi dove si presenta la domanda e quanti fondi sono arrivati nel 2025.</p>
       <p>Il bonus barriere architettoniche del 75% non c’è più: valeva fino al 31 dicembre 2025 e dal 30 dicembre 2023 copriva solo scale, rampe, ascensori, servoscala e piattaforme elevatrici, quindi già prima non si usava per la doccia.</p>
 
       <h2>Quali documenti servono per non perdere la detrazione?</h2>

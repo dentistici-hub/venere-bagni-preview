@@ -2,7 +2,7 @@
 // contacts and prices always match the pages. Contact lines appear only once the value in site.ts is real.
 // The long plain-text version is /llms-full.txt.
 import type { APIRoute } from 'astro';
-import { site, filled, euro } from '../data/site';
+import { site, filled } from '../data/site';
 import { zonePages } from '../data/zone-pages';
 import { guides } from '../data/guides';
 import { abs } from '../lib/schema';
@@ -19,29 +19,29 @@ export const GET: APIRoute = () => {
   ].filter(Boolean).join(', ');
 
   L.push(`# ${site.brand}`, '');
-  L.push(`> ${site.brand} (${site.legalName}) toglie la vasca da bagno e monta al suo posto una doccia, in un giorno di lavoro [DA CONFERMARE], a Torino e in tutte le otto province del Piemonte. Installa anche vasche con sportello e adatta il bagno per persone anziane: doccia a filo pavimento, maniglioni, seggiolino ribaltabile. Il sopralluogo a casa è gratuito e il preventivo è scritto, a prezzo fisso. Una trasformazione standard parte da ${euro(site.priceFrom)} [DA CONFERMARE: IVA inclusa?].`, '');
-  L.push(`Zone servite: ${site.areas.join(', ')}.`, '');
-  L.push('Come funziona: il cliente lascia CAP e telefono; un tecnico fa il sopralluogo gratuito e misura il bagno; il cliente riceve un preventivo scritto a prezzo fisso; la squadra toglie la vasca e monta piatto doccia, pareti, box e rubinetteria in un giorno [DA CONFERMARE].', '');
+  L.push(`> ${site.brand} (${site.legalName}) toglie la vasca da bagno e monta al suo posto una doccia, con un lavoro chiavi in mano di 8 ore e i materiali compresi, a Torino e provincia. Installa anche vasche con sportello e adatta il bagno per persone anziane: doccia a filo pavimento, maniglioni, seggiolino ribaltabile. Il sopralluogo a casa è gratuito e il preventivo è scritto, a prezzo fisso. I prezzi non sono pubblicati: dipendono dal bagno e si fissano nel preventivo.`, '');
+  L.push('Zona servita: Torino e provincia (Città metropolitana di Torino). Le altre province del Piemonte non sono servite.', '');
+  L.push('Come funziona: il cliente lascia CAP e telefono; un tecnico fa il sopralluogo gratuito e misura il bagno; il cliente riceve un preventivo scritto a prezzo fisso; tra l’ordine e il lavoro passano da 30 a 60 giorni; in 8 ore la squadra demolisce e smaltisce la vasca, rifà impianto idraulico della doccia e massetto, posa il piatto, riveste le pareti in gres porcellanato, monta box e rubinetteria e fa le finiture. Garanzia legale di 2 anni su materiali e manodopera.', '');
   L.push('Bonus 2026: il bonus barriere architettoniche del 75% è finito il 31 dicembre 2025. Cambiare soltanto la vasca di solito non è detraibile; una doccia a pavimento con sedile ribaltabile e doccia a telefono conforme al DM 236/1989 può rientrare nella detrazione ristrutturazione (50% abitazione principale, 36% negli altri casi), senza requisiti di età o disabilità. Da verificare caso per caso con il commercialista.', '');
   if (contact) L.push(`Contatti: ${contact}.`, '');
-  L.push(`Versione completa in testo semplice, con prezzi, bonus, province e domande frequenti: ${abs('/llms-full.txt')}`, '');
+  L.push(`Versione completa in testo semplice, con cosa comprende il lavoro, bonus, zona servita e domande frequenti: ${abs('/llms-full.txt')}`, '');
 
   L.push('## Servizi', '');
-  L.push(`- [Trasformazione vasca in doccia](${abs('/vasca-in-doccia/')}): cosa è compreso, giornata di lavoro ora per ora, prezzo da ${euro(site.priceFrom)}`);
+  L.push(`- [Trasformazione vasca in doccia](${abs('/vasca-in-doccia/')}): cosa comprende il lavoro, le 8 ore di lavoro ora per ora, da cosa dipende il prezzo`);
   L.push(`- [Vasca con sportello](${abs('/vasca-con-sportello/')}): per chi vuole tenere la vasca ma non riesce a scavalcare il bordo`);
   L.push(`- [Bagno sicuro per anziani](${abs('/bagno-sicuro/')}): doccia a filo pavimento, antiscivolo, maniglioni, seggiolino`, '');
 
   L.push('## Prezzi e agevolazioni', '');
-  L.push(`- [Prezzi 2026](${abs('/prezzi/')}): listino per tipo di intervento, cosa cambia il prezzo, cosa è sempre compreso`);
+  L.push(`- [Prezzi 2026](${abs('/prezzi/')}): da cosa dipende il prezzo, cosa comprende sempre il lavoro, preventivo gratuito a prezzo fisso`);
   L.push(`- [Bonus e detrazioni 2026](${abs('/bonus-detrazioni/')}): detrazione 50% e 36%, IVA agevolata, contributo legge 13/1989 in Piemonte`, '');
 
   L.push('## Guide', '');
   guides.forEach((g) => L.push(`- [${g.h1}](${abs(`/guide/${g.slug}/`)}): ${g.card}`));
   L.push('');
 
-  L.push('## Zone', '');
-  L.push('Una pagina per provincia, con comuni serviti, CAP, quota di residenti con 65 anni o più (ISTAT, 1° gennaio 2025) e fondi della legge 13/1989 assegnati nel 2025.', '');
-  zonePages.forEach((z) => L.push(`- [Vasca in doccia ${z.at}](${abs(`/zone/${z.slug}/`)}): ${plain(z.description)}`));
+  L.push('## Zona servita', '');
+  L.push('Una pagina per Torino e provincia, con comuni serviti, CAP, quota di residenti con 65 anni o più (ISTAT, 1° gennaio 2025) e fondi della legge 13/1989 assegnati nel 2025.', '');
+  zonePages.forEach((z) => L.push(`- [Vasca in doccia ${z.at} e provincia](${abs(`/zone/${z.slug}/`)}): ${plain(z.description)}`));
   L.push('');
 
   L.push('## Azienda', '');

@@ -1,6 +1,8 @@
 ---
 // Inner-page hero: breadcrumb, H1, lead, optional chips, and on the right an image and/or the first
-// lead form (id "prenota"), overlapping the image like on the home page so it is reachable on mobile.
+// lead form (id "prenota"). With both an image and a form it uses the home page layout (.xhero): the photo
+// fills the hero on desktop with the text over a dark gradient and the form beside it; on mobile the order is
+// H1, lead, form, chips and contacts, photo.
 import { Image } from 'astro:assets';
 import { media } from '../data/media';
 import { site } from '../data/site';
@@ -15,6 +17,36 @@ interface Props {
 const { title, lead, eyebrow, crumbs, img, badge, form = true, formTitle, chips, contacts = true } = Astro.props;
 const m = img ? media[img] : undefined;
 ---
+{m && form ? (
+<section class="xhero xhero--page">
+  <div class="xhero__photo">
+    <Image src={m.src} alt={m.alt} widths={[640, 960, 1400, 1920]} sizes="(max-width: 960px) calc(100vw - 32px), 100vw" loading="eager" fetchpriority="high" />
+    {badge && <p class="xhero__badge">{badge[0]}<span>{badge[1]}</span></p>}
+  </div>
+  <div class="wrap xhero__grid">
+    <div class="xhero__text">
+      <nav class="crumbs" aria-label="Percorso">
+        <a href={u('/')}>Home</a>
+        {crumbs.map((c, i) => (
+          <>
+            <span aria-hidden="true"> › </span>
+            {i < crumbs.length - 1 ? <a href={u(c.path)}>{c.name}</a> : <span aria-current="page">{c.name}</span>}
+          </>
+        ))}
+      </nav>
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1 set:html={h(title)} />
+      {lead && <p class="lead" set:html={h(lead)} />}
+    </div>
+    <div class="xhero__form"><LeadForm id="prenota" title={formTitle} /></div>
+    <div class="xhero__more">
+      {chips && <ul class="chips-row">{chips.map((c) => <li><Icon n="check" /><span set:html={h(c)} /></li>)}</ul>}
+      <slot />
+      {contacts && <p class="hero__alt" set:html={h(`Preferisci parlare con qualcuno? Chiama il ${site.phone} oppure scrivi su WhatsApp al ${site.whatsappLabel}.`)} />}
+    </div>
+  </div>
+</section>
+) : (
 <section class="phero">
   <div class={`wrap phero__grid${form ? ' phero__grid--form' : ''}`}>
     <div>
@@ -43,3 +75,4 @@ const m = img ? media[img] : undefined;
     )}
   </div>
 </section>
+)}

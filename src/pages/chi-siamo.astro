@@ -5,7 +5,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { site, zones, filled, ratingValue, ratingCount } from '../data/site';
+import { site, filled, ratingValue, ratingCount } from '../data/site';
 import { u } from '../lib/url';
 import { hv as h } from '../lib/txt';
 
@@ -18,15 +18,16 @@ const dati: [string, string][] = [
   ['Partita IVA', site.vat],
   ['Numero REA', site.rea],
   ['Anno di fondazione', site.foundingYear],
-  ['Zone servite', site.areas.join(', ')],
-];
+  ['Anni di attività', '15'],
+  ['Zona servita', site.area],
+].filter(([, v]) => v !== '') as [string, string][];
 const rating = `Su Google abbiamo ${ratingValue} su 5 da ${ratingCount} recensioni.`;
 const reviewUrl = filled(site.gbpPlaceId) ? `https://search.google.com/local/writereview?placeid=${site.gbpPlaceId}` : '';
 const profiles = site.sameAs.filter(filled);
 ---
 <Base
   title="Chi siamo | Venere Bagni, vasca in doccia a Torino"
-  description="Chi c’è dietro Venere Bagni (Italprogetti srls): sede, dati dell’azienda, le persone che vengono a casa tua e come lavoriamo in Piemonte."
+  description="Chi c’è dietro Venere Bagni (Italprogetti srls): sede, dati dell’azienda, le persone che vengono a casa tua e come lavoriamo a Torino e provincia."
   crumbs={crumbs}
   pageType="AboutPage"
 >
@@ -34,7 +35,7 @@ const profiles = site.sameAs.filter(filled);
     crumbs={crumbs}
     eyebrow="Chi siamo"
     title="Chi c’è dietro Venere Bagni"
-    lead={`Venere Bagni è il marchio con cui ${site.legalName} toglie la vasca e monta la doccia a Torino e in tutto il Piemonte. Qui trovi chi siamo, dove siamo e come lavoriamo.`}
+    lead={`Venere Bagni è il marchio con cui ${site.legalName} toglie la vasca e monta la doccia a Torino e provincia. Qui trovi chi siamo, dove siamo e come lavoriamo.`}
     img="sopralluogo"
     form={false}
   />
@@ -45,7 +46,7 @@ const profiles = site.sameAs.filter(filled);
         <h2>Le persone che vengono a casa tua</h2>
         <h3 set:html={h(`${site.founder.name}, ${site.founder.role}`)} />
         <p set:html={h('[SERVE DATO REALE: due o tre righe sul titolare: da quanti anni fa questo lavoro, dove ha imparato, perché si occupa di bagni per chi non riesce più a usare la vasca]')} />
-        <p set:html={h('[ANNI DI ESPERIENZA] anni di lavoro e [N° INSTALLAZIONI] bagni rifatti in Piemonte.')} />
+        <p>15 anni di lavoro e migliaia di installazioni. Al telefono gestiamo decine di chiamate ogni giorno.</p>
         <h3>La squadra di posa</h3>
         <p set:html={h('Il lavoro lo fa la nostra squadra di posatori [DA CONFERMARE: squadra interna o posatori di fiducia, quante persone, da quanti anni lavorano insieme].')} />
         <p set:html={h('Al sopralluogo viene [NOME E RUOLO DEL TECNICO], che poi segue il tuo lavoro fino alla consegna.')} />
@@ -59,7 +60,7 @@ const profiles = site.sameAs.filter(filled);
       <h2>Come lavoriamo</h2>
       <p>Il primo passo è una telefonata o il modulo del sito: ci dici il CAP e cosa vuoi cambiare. Poi un tecnico viene a casa tua, misura il bagno e guarda come si muove chi userà la doccia. Il sopralluogo non costa niente e non ti impegna.</p>
       <p>Il preventivo te lo lasciamo scritto, voce per voce, a prezzo fisso. Se durante il lavoro salta fuori qualcosa che prima non si poteva vedere, come uno scarico rotto sotto la vasca, ti chiamiamo e ci accordiamo prima di andare avanti.</p>
-      <p set:html={h('Dal sopralluogo alla consegna parli sempre con lo stesso responsabile. Il lavoro dura un giorno [DA CONFERMARE] e ha una garanzia scritta di [ANNI DI GARANZIA] anni su posa e materiali.')} />
+      <p>Dal sopralluogo alla consegna parli sempre con lo stesso responsabile. La trasformazione della vasca in doccia la consegniamo chiavi in mano in 8 ore, e su materiali e manodopera hai la garanzia di 2 anni prevista dalla legge.</p>
       <p>Dopo il sopralluogo non ti richiamiamo in continuazione. Se sei d’accordo ti telefoniamo una volta per sapere se hai domande, poi decidi tu.</p>
       <p><a class="link-arrow" href={u('/guide/giorno-trasformazione-vasca-in-doccia/')}>Come va il giorno del lavoro, ora per ora</a></p>
     </div>
@@ -96,8 +97,7 @@ const profiles = site.sameAs.filter(filled);
   <section class="section section--sand" id="zone">
     <div class="wrap narrow">
       <h2>Dove lavoriamo</h2>
-      <p>Partiamo da Torino e lavoriamo nelle otto province del Piemonte. Ogni provincia ha la sua pagina, con i comuni serviti e dove si chiede il contributo della legge 13.</p>
-      <ul class="zones">{zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.label}</a></li>)}</ul>
+      <p>Lavoriamo a Torino e in tutta la sua provincia, dalla cintura alle valli. Nella <a href={u('/zone/torino/')}>pagina su Torino e provincia</a> trovi i comuni serviti e dove si chiede il contributo della legge 13.</p>
       <p style="margin-top:20px"><a class="link-arrow" href={u('/contatti/')}>Telefono, WhatsApp e orari</a></p>
     </div>
   </section>

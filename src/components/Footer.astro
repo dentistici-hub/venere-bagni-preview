@@ -1,5 +1,5 @@
 ---
-import { site, nav, zones } from '../data/site';
+import { site, nav } from '../data/site';
 import { u } from '../lib/url';
 import { h } from '../lib/txt';
 import Logo from './Logo.astro';
@@ -17,7 +17,7 @@ const { minimal = false } = Astro.props;
     <div class="ftr__grid">
       <div>
         <Logo />
-        <p>Trasformazione vasca in doccia, vasca con sportello e bagno sicuro a Torino e in tutto il Piemonte.</p>
+        <p>Trasformazione vasca in doccia, vasca con sportello e bagno sicuro a Torino e provincia.</p>
         <p set:html={h(`${site.legalName} · ${site.street}, ${site.postalCode} ${site.locality} · P.IVA ${site.vat} · REA ${site.rea}`)} />
       </div>
       <div>
@@ -25,9 +25,10 @@ const { minimal = false } = Astro.props;
         <ul>{nav.map((l) => <li><a href={u(l.href)}>{l.label}</a></li>)}</ul>
       </div>
       <div>
-        <h3>Zone servite</h3>
+        <h3>Zona servita</h3>
         <ul>
-          {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>Vasca in doccia {z.at}</a></li>)}
+          <li><a href={u('/zone/torino/')}>Vasca in doccia a Torino e provincia</a></li>
+          <li>Cintura, Chierese, Canavese, Valle di Susa, Pinerolese e Valli di Lanzo</li>
         </ul>
       </div>
       <div>

@@ -18,16 +18,18 @@ OUT = ROOT / "public" / "og"
 W, H, BAND = 1200, 630, 232
 PETROL = (10, 56, 67)
 SAND = (242, 199, 166)
-SUB = "Venere Bagni · Torino e provincia"
+SUB = "Venere Bagni · Torino e tutto il Piemonte"
 
 PHOTO = {
     "hero": "hero-doccia-sicura.jpg", "solDoccia": "soluzione-doccia.jpg", "solSportello": "soluzione-sportello.jpg",
     "solSicuro": "soluzione-sicuro.jpg", "sopralluogo": "sopralluogo.jpg", "coppia": "coppia-bagno.jpg",
     "luminoso": "bagno-luminoso.jpg", "classico": "bagno-classico.jpg", "famiglia": "famiglia-bagno.jpg",
 }
-# Torino e provincia only since 2026-11-10.
+# Torino first: the client's main area.
 ZONES = [
-    ("torino", "a Torino e provincia", "coppia"),
+    ("torino", "a Torino e provincia", "coppia"), ("cuneo", "a Cuneo", "famiglia"), ("novara", "a Novara", "luminoso"),
+    ("alessandria", "ad Alessandria", "classico"), ("asti", "ad Asti", "solDoccia"), ("biella", "a Biella", "solSicuro"),
+    ("vercelli", "a Vercelli", "luminoso"), ("verbano-cusio-ossola", "nel Verbano-Cusio-Ossola", "classico"),
 ]
 # key, photo, title (keep it short: one or two lines at 56 px)
 PAGES = [
@@ -40,6 +42,7 @@ PAGES = [
     ("domande-frequenti", "sopralluogo", "Domande frequenti sulla vasca in doccia"),
     ("contatti", "sopralluogo", "Contatti e sopralluogo gratuito"),
     ("chi-siamo", "sopralluogo", "Chi c’è dietro Venere Bagni"),
+    ("zone", "coppia", "Partiamo da Torino, lavoriamo in tutto il Piemonte"),
     ("guide", "luminoso", "Guide per chi vuole togliere la vasca"),
     ("guide-doccia-a-norma-dm-236-detrazione", "hero", "Doccia a norma DM 236: cosa serve per la detrazione"),
     ("guide-piatto-doccia-filo-pavimento-o-ribassato", "solDoccia", "Piatto doccia filo pavimento o ribassato?"),

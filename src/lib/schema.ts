@@ -9,7 +9,7 @@ import { u } from './url';
 
 export interface Faq { q: string; a: string }
 export type PageType = 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage' | 'FAQPage';
-export interface ServiceOpts { name: string; description: string }
+export interface ServiceOpts { name: string; description: string; areaServed?: string }
 export interface ArticleOpts { headline: string; published: string; modified: string }
 interface Opts {
   path: string; title: string; description: string; image: string; modified: string; pageType?: PageType;
@@ -25,11 +25,9 @@ const catalog = [
   { name: 'Installazione vasca con sportello', path: '/vasca-con-sportello/' },
   { name: 'Bagno sicuro per anziani', path: '/bagno-sicuro/' },
 ];
-// Area served (client, 2026-11-10): Torino e provincia only.
-const areaServed = [
-  { '@type': 'AdministrativeArea', name: 'Provincia di Torino', alternateName: 'Città metropolitana di Torino' },
-  { '@type': 'City', name: 'Torino' },
-];
+// Area served: the eight Piemonte provinces, Torino first (main area). Order from site.areas.
+const provinceName = (a: string) => (a === 'Verbano-Cusio-Ossola' ? `Provincia del ${a}` : a === 'Torino' ? 'Città metropolitana di Torino' : `Provincia di ${a}`);
+const areaServed = site.areas.map((a) => ({ '@type': 'AdministrativeArea', name: provinceName(a) }));
 const dayName: Record<string, string> = { Mo: 'Monday', Tu: 'Tuesday', We: 'Wednesday', Th: 'Thursday', Fr: 'Friday', Sa: 'Saturday', Su: 'Sunday' };
 
 function business() {
@@ -112,7 +110,10 @@ export function buildGraph(o: Opts) {
       serviceType: o.service.name,
       description: plain(o.service.description),
       provider: { '@id': ids.biz() },
-      areaServed,
+      // Zone pages pass their province; every other page serves the whole list.
+      areaServed: o.service.areaServed
+        ? { '@type': 'AdministrativeArea', name: o.service.areaServed, containedInPlace: { '@type': 'AdministrativeArea', name: 'Piemonte' } }
+        : areaServed,
       url,
       image: o.image,
     });

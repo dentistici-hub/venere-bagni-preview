@@ -1,6 +1,6 @@
 # Venere Bagni: sito (anteprima per il cliente)
 
-Sito statico Astro per Venere Bagni (Pfggroup srl): trasformazione vasca in doccia a Torino e provincia.
+Sito statico Astro per Venere Bagni (Pfggroup srl): trasformazione vasca in doccia a Torino e in tutto il Piemonte (zona principale Torino e provincia).
 Anteprima temporanea su GitHub Pages, `noindex`, con banda "Anteprima": il modulo non invia dati.
 
 - Foto: segnaposto presi da siti internazionali di settore, solo come esempio visivo. Vanno tutti sostituiti con foto di lavori reali prima del lancio.

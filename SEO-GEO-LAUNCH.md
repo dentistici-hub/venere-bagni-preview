@@ -46,10 +46,10 @@ Other data files:
 
 ## 2. What was built (for reference)
 
-- **Schema** (`src/lib/schema.ts`): one `HomeAndConstructionBusiness` (`/#azienda`) on every page with areaServed (Provincia di Torino + Torino), `hasOfferCatalog` (3 services with links, no prices: the client does not publish prices), plus `WebSite`, `WebPage` (or `AboutPage`/`ContactPage`/`CollectionPage`/`FAQPage`) with `dateModified`, `inLanguage`, `primaryImageOfPage`; `Service` + `Offer` (no amounts) on service pages and the Torino page; `FAQPage`; `BreadcrumbList` on every inner indexable page; `Article` on the 3 guides.
+- **Schema** (`src/lib/schema.ts`): one `HomeAndConstructionBusiness` (`/#azienda`) on every page with areaServed (the 8 Piemonte provinces, Torino first), `hasOfferCatalog` (3 services with links, no prices: the client does not publish prices), plus `WebSite`, `WebPage` (or `AboutPage`/`ContactPage`/`CollectionPage`/`FAQPage`) with `dateModified`, `inLanguage`, `primaryImageOfPage`; `Service` + `Offer` (no amounts) on service pages and the 8 province pages (each with its province as areaServed); `FAQPage`; `BreadcrumbList` on every inner indexable page; `Article` on the 3 guides.
 - **Meta** (`src/layouts/Base.astro`): unique title (max 60) and description (max 155) per page, canonical, OG + Twitter tags with per-page image `public/og/<page>.jpg`, verification tags when set, theme-color.
 - **Indexing**: `robots.txt`, `llms.txt`, `llms-full.txt` are generated at build from the data (`src/pages/*.txt.ts`), so they follow the domain and the filled values. Sitemap excludes grazie, offerta, privacy, cookie; lastmod from `dates.mjs`.
-- **GEO content**: `/chi-siamo/`, `/guide/` + 3 guides, "Da leggere" guide blocks on service, price, bonus, FAQ, home and the Torino page.
+- **GEO content**: `/chi-siamo/`, `/guide/` + 3 guides, "Da leggere" guide blocks on service, price, bonus, FAQ, home and province pages.
 - **Scripts**: `npm run og` (share images from the photos), `npm run indexnow` (ping IndexNow).
 
 ## 3. Launch steps (in order)
@@ -65,10 +65,10 @@ Other data files:
 9. **Bing Webmaster Tools**: import from Search Console (no extra verification), submit the sitemap. Bing feeds Copilot and ChatGPT search.
 10. **IndexNow**: set `indexNowKey`, rebuild, deploy, then `npm run indexnow -- --live`. Expect HTTP 200/202. Re-run with the single URL whenever a page or guide is added.
 11. **Google Business Profile** (the main lever for ChatGPT's local answers in this niche, see `research/piemonte/02-ai-search.md`):
-    - Name exactly "Venere Bagni" (no keywords in the name). Address, phone, website identical to `site.ts`, letter for letter. If the sede does not receive customers, set it as a service-area business and hide the address, listing Torino and its province as service area.
+    - Name exactly "Venere Bagni" (no keywords in the name). Address, phone, website identical to `site.ts`, letter for letter. If the sede does not receive customers, set it as a service-area business and hide the address, listing the 8 provinces as service areas, Torino first.
     - Primary category: "Bathroom remodeler" (Ristrutturazione bagni). Secondary: "Contractor" / "Plumber" only if true for the client. Check the Italian category names in the dashboard.
     - Services: Trasformazione vasca in doccia, Vasca con sportello, Bagno sicuro per anziani, Piatto doccia filo pavimento; with the "from" price only once confirmed.
-    - Description: same facts as the home page (free survey, fixed written price, 8 hours turnkey, Torino e provincia, 15 years, no prices). No promotional claims you can't prove.
+    - Description: same facts as the home page (free survey, fixed written price, 8 hours turnkey, Torino e tutto il Piemonte, 15 years, no prices). No promotional claims you can't prove.
     - Hours = `openingHours`. Website link = home (with `?utm_source=google&utm_medium=organic&utm_campaign=gbp` if the client wants GBP traffic separated in GA4).
     - Photos: logo, cover, team, van, real before/after jobs (at least 10 at start, then 2-4 a month).
     - Copy the Maps URL into `gbpUrl` and the Place ID into `gbpPlaceId`.

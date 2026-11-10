@@ -9,20 +9,19 @@ import CtaBand from '../components/CtaBand.astro';
 import GuideLinks from '../components/GuideLinks.astro';
 import Icon from '../components/Icon.astro';
 import { media } from '../data/media';
-import { site, ratingValue, ratingCount } from '../data/site';
+import { site, zones, ratingValue, ratingCount } from '../data/site';
 import { bonusShort } from '../data/bonus';
 import { includedShort } from '../data/prices';
-import { zonePages } from '../data/zone-pages';
 import { u } from '../lib/url';
 import { h } from '../lib/txt';
 
 const faqs = [
   { q: 'Quanto tempo ci vuole per trasformare la vasca in doccia?', a: 'Con Venere Bagni la trasformazione della vasca in doccia richiede 8 ore ed è un lavoro chiavi in mano, con i materiali compresi. La squadra arriva la mattina, demolisce e smaltisce la vasca, rifà impianto e massetto, posa il piatto, riveste le pareti in gres e monta box e rubinetteria. La sera la doccia si può già usare. Prima c’è il sopralluogo gratuito, di circa [DURATA] minuti.' },
   { q: 'Quanto costa trasformare la vasca in doccia a Torino?', a: 'Dipende dalla misura del bagno, dal piatto che scegli e dal gres per le pareti, e per questo il prezzo te lo diamo solo dopo aver visto il bagno. Il lavoro è chiavi in mano e comprende demolizione e smaltimento della vasca, impianto idraulico della doccia, massetto, piatto, box, rubinetteria, rivestimento in gres, finiture e materiali. Il sopralluogo è gratuito e il preventivo è scritto, a prezzo fisso.' },
-  { q: 'Il sopralluogo è davvero gratuito?', a: 'Sì, il sopralluogo di Venere Bagni è gratuito e non ti impegna. Un tecnico viene a casa tua, a Torino o in provincia, misura il bagno, ti fa vedere cosa si può montare e ti lascia il preventivo scritto. Se poi decidi di non farlo, non devi niente.' },
+  { q: 'Il sopralluogo è davvero gratuito?', a: 'Sì, il sopralluogo di Venere Bagni è gratuito e non ti impegna. Un tecnico viene a casa tua, a Torino, in provincia o nel resto del Piemonte, misura il bagno, ti fa vedere cosa si può montare e ti lascia il preventivo scritto. Se poi decidi di non farlo, non devi niente.' },
   { q: 'Devo rifare anche il pavimento e le piastrelle?', a: 'Fuori dallo spazio della vasca di solito no. Venere Bagni lavora dove c’era la vasca: lì rifà impianto e massetto, posa il piatto doccia e riveste le pareti con gres porcellanato nuovo. Il resto del bagno resta com’è. Se nel tuo bagno serve qualche ripristino te lo diciamo al sopralluogo e lo trovi scritto nel preventivo.' },
   { q: 'Fate lavori anche per persone anziane o con difficoltà a camminare?', a: 'Sì. Venere Bagni monta piatti doccia a filo pavimento, maniglioni, seggiolini e superfici antiscivolo per chi fa fatica a scavalcare il bordo della vasca. Puoi chiamarci anche se cerchi una soluzione sicura per un tuo genitore.' },
-  { q: 'In quali zone lavorate?', a: 'Venere Bagni lavora a Torino e in tutta la provincia: la cintura, da Moncalieri a Settimo Torinese, il Chierese e il Carmagnolese, il Canavese, la Valle di Susa e la Val Sangone, il Pinerolese e le Valli di Lanzo. Per sapere se arriviamo nel tuo comune scrivi il CAP nel modulo: la risposta è immediata.' },
+  { q: 'In quali zone lavorate?', a: 'Venere Bagni lavora soprattutto a Torino e in tutta la sua provincia, dalla cintura al Canavese, al Pinerolese e alle valli. Arriviamo anche nel resto del Piemonte: Cuneo, Novara, Alessandria, Asti, Biella, Vercelli e il Verbano-Cusio-Ossola. Per sapere se veniamo nel tuo comune scrivi il CAP nel modulo: la risposta è immediata.' },
 ];
 const reviews = [
   { text: 'Il giorno del lavoro sono arrivati la mattina e nel pomeriggio avevo già la doccia nuova. Il prezzo era quello scritto sul foglio.', name: 'Maria', town: 'Moncalieri' },
@@ -41,11 +40,10 @@ const day = [
 // One review becomes the large pull-quote, the others go in the grid.
 const pull = reviews[1];
 const others = reviews.filter((r) => r !== pull);
-const towns = zonePages[0].towns.map(([a]) => a);
 ---
 <Base
   title="Vasca in doccia a Torino in 8 ore | Venere Bagni"
-  description="Vasca in doccia in 8 ore, chiavi in mano e materiali compresi, a Torino e provincia. Sopralluogo gratuito e preventivo scritto a prezzo fisso."
+  description="Vasca in doccia in 8 ore, chiavi in mano e materiali compresi, a Torino e in tutto il Piemonte. Sopralluogo gratuito e preventivo a prezzo fisso."
   faqs={faqs}
   service={{ name: 'Trasformazione vasca in doccia', description: site.description }}
 >
@@ -56,7 +54,7 @@ const towns = zonePages[0].towns.map(([a]) => a);
     </div>
     <div class="wrap xhero__grid">
       <div class="xhero__text">
-        <p class="eyebrow">Torino e provincia</p>
+        <p class="eyebrow">Torino e tutto il Piemonte</p>
         <h1>Dalla vasca alla doccia in 8 ore, a casa tua</h1>
         <p class="lead"><span set:html={h('Veniamo a casa tua a prendere le misure, senza costi, e ti lasciamo il prezzo scritto.')} /><span class="xhero__more-lead" set:html={h(' Se il preventivo ti va bene, togliamo la vasca e in 8 ore ti lasciamo la doccia finita, materiali compresi.')} /></p>
       </div>
@@ -206,9 +204,9 @@ const towns = zonePages[0].towns.map(([a]) => a);
 
   <section class="section" id="zone">
     <div class="wrap">
-      <div class="head"><h2>Dove lavoriamo</h2><p>A Torino e nei comuni della sua provincia, dalla cintura alle valli.</p></div>
+      <div class="head"><h2>Dove lavoriamo</h2><p>Partiamo da Torino e dalla sua provincia, dalla cintura alle valli, e andiamo anche nelle altre province del Piemonte.</p></div>
       <ul class="zones">
-        <li><a href={u('/zone/torino/')}>Torino città</a></li>{towns.map((t) => <li><a href={u('/zone/torino/#comuni')}>{t}</a></li>)}
+        {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.label}</a></li>)}
       </ul>
       <p style="margin-top:20px">La tua zona non c’è? Scrivi il CAP nel modulo e ti diciamo subito se possiamo venire.</p>
     </div>

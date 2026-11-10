@@ -50,15 +50,19 @@ export const site = {
   founder: { name: '[NOME TITOLARE]', role: '[RUOLO, es. titolare]' },
   tagline: 'Dalla vasca alla doccia in 8 ore',
   // Default <title> and meta description (home page sets its own; these are the fallback).
-  title: 'Trasformazione vasca in doccia a Torino e provincia | Venere Bagni',
+  title: 'Vasca in doccia a Torino e in Piemonte | Venere Bagni',
   description:
-    'Togliamo la vasca e montiamo una doccia sicura in 8 ore, chiavi in mano, a Torino e provincia. Sopralluogo gratuito e preventivo scritto a prezzo fisso.',
+    'Togliamo la vasca e montiamo una doccia sicura in 8 ore, chiavi in mano, a Torino e in tutto il Piemonte. Sopralluogo gratuito e preventivo a prezzo fisso.',
 
   // ---- AREA SERVED ---------------------------------------------------------------------------------
-  // Client, 2026-11-10: Torino e provincia only (the other Piemonte provinces are not served).
-  area: 'Torino e provincia',
-  // CAP prefix of the Torino province (10010-10156), used by the form's area check.
-  capPrefixes: ['10'],
+  // Main area: Torino e provincia. The other Piemonte provinces are served too (Denis, 2026-11-10: keep them).
+  // Always name Torino first where the site states coverage.
+  area: 'Torino e tutto il Piemonte',
+  // Provinces served, Torino first (order is used in the zone lists and in schema areaServed).
+  areas: ['Torino', 'Cuneo', 'Novara', 'Alessandria', 'Asti', 'Biella', 'Vercelli', 'Verbano-Cusio-Ossola'],
+  // CAP prefixes of the Piemonte provinces, used by the form's area check.
+  // 18025 = Briga Alta (CN), the only Piemonte comune with a Ligurian-range CAP (comuni-json, Poste data).
+  capPrefixes: ['10', '12', '13', '14', '15', '28', '18025'],
 
   // ---- ADDRESS (NAP: must match Google Business Profile, Bing Places and every directory letter for letter)
   street: '[INDIRIZZO]', // 'Via Esempio 12': footer, contatti, chi-siamo, schema streetAddress
@@ -129,9 +133,17 @@ export const nav = [
   { href: '/domande-frequenti/', label: 'Domande' },
 ];
 
-// The area page (/zone/<slug>/). Only Torino e provincia since 2026-11-10.
+// One page per province (/zone/<slug>/), same order as `areas`. `at` = "a Torino" / "nel Verbano-Cusio-Ossola";
+// `label` = text of the zone chips on the home page and the zone hub.
 export const zones = [
   { slug: 'torino', name: 'Torino', at: 'a Torino', label: 'Torino e provincia' },
+  { slug: 'cuneo', name: 'Cuneo', at: 'a Cuneo', label: 'Cuneo e provincia' },
+  { slug: 'novara', name: 'Novara', at: 'a Novara', label: 'Novara e provincia' },
+  { slug: 'alessandria', name: 'Alessandria', at: 'ad Alessandria', label: 'Alessandria e provincia' },
+  { slug: 'asti', name: 'Asti', at: 'ad Asti', label: 'Asti e provincia' },
+  { slug: 'biella', name: 'Biella', at: 'a Biella', label: 'Biella e provincia' },
+  { slug: 'vercelli', name: 'Vercelli', at: 'a Vercelli', label: 'Vercelli e provincia' },
+  { slug: 'verbano-cusio-ossola', name: 'Verbano-Cusio-Ossola', at: 'nel Verbano-Cusio-Ossola', label: 'Verbano-Cusio-Ossola' },
 ];
 
 // Google rating as shown in the page text ("4,9" / "37"), or the yellow placeholder until site.rating is set.

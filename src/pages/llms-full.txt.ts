@@ -22,7 +22,7 @@ export const GET: APIRoute = () => {
   add(`Testo semplice con i fatti principali del sito ${abs('/')}. Aggiornato al ${site.updated}. Le pagine restano la fonte: qui ogni sezione indica la pagina da cui viene.`, '');
 
   add('## Chi siamo', '');
-  add(`${site.brand} è il marchio con cui ${site.legalName} trasforma la vasca da bagno in doccia, installa vasche con sportello e adatta il bagno per persone anziane, a Torino e provincia (non lavora nelle altre province). Ha 15 anni di attività e migliaia di installazioni.`);
+  add(`${site.brand} è il marchio con cui ${site.legalName} trasforma la vasca da bagno in doccia, installa vasche con sportello e adatta il bagno per persone anziane, soprattutto a Torino e nella sua provincia e anche nel resto del Piemonte. Ha 15 anni di attività e migliaia di installazioni.`);
   add(
     `Ragione sociale: ${site.legalName}`,
     filled(site.vat) && `Partita IVA: ${site.vat}`,
@@ -67,8 +67,8 @@ export const GET: APIRoute = () => {
   add('## Guide', '');
   guides.forEach((g) => { add(`${g.h1} (${abs(`/guide/${g.slug}/`)}, aggiornata al ${guideUpdated(g.slug)})`, g.answer, ''); });
 
-  add('## Zona servita', '');
-  add(`${site.brand} lavora solo a Torino e nella sua provincia. Dati della provincia: CAP (comuni-json, dati Poste/ISTAT), residenti con 65 anni o più (ISTAT, 1° gennaio 2025), domanda e fondi 2025 della legge 13/1989 (Regione Piemonte, D.D. 25 settembre 2025 n. 1299).`, '');
+  add('## Zone servite', '');
+  add(`${site.brand} lavora a Torino e in tutto il Piemonte: la zona principale è Torino con la sua provincia, poi le altre sette province. Dati per provincia: CAP (comuni-json, dati Poste/ISTAT), residenti con 65 anni o più (ISTAT, 1° gennaio 2025), domanda e fondi 2025 della legge 13/1989 (Regione Piemonte, D.D. 25 settembre 2025 n. 1299).`, '');
   zonePages.forEach((z) => {
     add(`### ${z.name} (${abs(`/zone/${z.slug}/`)})`);
     z.facts.forEach(([a, b]) => add(`- ${a}: ${b}`));

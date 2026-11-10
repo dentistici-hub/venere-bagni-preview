@@ -16,8 +16,8 @@ export function getStaticPaths() {
   return zonePages.map((z) => ({ params: { slug: z.slug }, props: { z } }));
 }
 const { z } = Astro.props as { z: ZonePage };
-// Single area page since 2026-11-10 (Torino e provincia): no /zone/ hub, so the breadcrumb is Home > this page.
-const crumbs = [{ name: `${z.name} e provincia`, path: `/zone/${z.slug}/` }];
+const crumbs = [{ name: 'Zone', path: '/zone/' }, { name: z.name, path: `/zone/${z.slug}/` }];
+const others = zonePages.filter((o) => o.slug !== z.slug);
 const m = media[z.img];
 ---
 <Base
@@ -25,7 +25,7 @@ const m = media[z.img];
   description={z.description}
   faqs={z.faqs}
   crumbs={crumbs}
-  service={{ name: `Trasformazione vasca in doccia ${z.at}`, description: `Trasformazione della vasca in doccia ${z.at} e in provincia, chiavi in mano in 8 ore con i materiali compresi: sopralluogo gratuito e preventivo scritto a prezzo fisso.` }}
+  service={{ name: `Trasformazione vasca in doccia ${z.at}`, description: `Trasformazione della vasca in doccia in provincia ${z.of}, chiavi in mano in 8 ore con i materiali compresi: sopralluogo gratuito e preventivo scritto a prezzo fisso.`, areaServed: z.area }}
 >
   <PageHero
     crumbs={crumbs}
@@ -105,6 +105,7 @@ const m = media[z.img];
     <div class="wrap narrow">
       <div class="head"><p class="eyebrow">Domande frequenti</p><h2>Domande frequenti {z.at}</h2></div>
       <Faq items={z.faqs} open verbose />
+      <p style="margin-top:28px" class="muted">{z.slug === 'torino' ? 'Oltre a Torino e provincia lavoriamo in tutto il Piemonte' : 'Partiamo da Torino e lavoriamo anche nelle altre province del Piemonte'}: {others.map((o, i) => <>{i > 0 && (i === others.length - 1 ? ' e ' : ', ')}<a href={u(`/zone/${o.slug}/`)}>{o.name}</a></>)}.</p>
     </div>
   </section>
 

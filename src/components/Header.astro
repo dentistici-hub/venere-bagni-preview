@@ -10,7 +10,7 @@ const here = Astro.url.pathname;
 ---
 <div class="topbar">
   <div class="wrap">
-    <span class="t-left">Torino e provincia · Sopralluogo gratuito</span>
+    <span class="t-left">Torino e tutto il Piemonte · Sopralluogo gratuito</span>
     <span>Chiama: <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} />{site.openingHours.length > 0 && <span class="t-left"> · {site.hours}</span>}</span>
   </div>
 </div>

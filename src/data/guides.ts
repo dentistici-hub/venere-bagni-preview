@@ -1,5 +1,5 @@
 // Guides (/guide/<slug>/): metadata used by the guide index, the "Da leggere" blocks on service and
-// area page, Article schema, llms.txt and the sitemap dates. Article text is in src/pages/guide/<slug>.astro.
+// province pages, Article schema, llms.txt and the sitemap dates. Article text is in src/pages/guide/<slug>.astro.
 import { PAGE_UPDATED } from './dates.mjs';
 
 export interface Guide {

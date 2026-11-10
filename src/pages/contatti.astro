@@ -1,8 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { site } from '../data/site';
-import { zonePages } from '../data/zone-pages';
+import { site, zones } from '../data/site';
 import { u } from '../lib/url';
 import { hv as h } from '../lib/txt';
 
@@ -16,14 +15,14 @@ const recapiti: [string, string, string?][] = [
 ];
 ---
 <Base
-  title="Contatti | Venere Bagni, Torino e provincia"
-  description="Telefono, WhatsApp e modulo per prenotare il sopralluogo gratuito di Venere Bagni. Lavoriamo a Torino e in tutta la provincia."
+  title="Contatti | Venere Bagni, Torino e Piemonte"
+  description="Telefono, WhatsApp e modulo per prenotare il sopralluogo gratuito di Venere Bagni. Lavoriamo a Torino e in tutto il Piemonte."
   crumbs={crumbs}
   pageType="ContactPage"
 >
   <PageHero
     crumbs={crumbs}
-    eyebrow="Torino e provincia"
+    eyebrow="Torino e tutto il Piemonte"
     title="Contatti"
     lead="Chiamaci, scrivici su WhatsApp o lascia il CAP nel modulo. Ogni giorno gestiamo decine di chiamate e rispondiamo entro [X ORE]."
     formTitle="Prenota il sopralluogo gratuito"
@@ -45,8 +44,8 @@ const recapiti: [string, string, string?][] = [
     <div class="wrap split">
       <div>
         <h2>Dove lavoriamo</h2>
-        <p>A Torino e in tutta la provincia. I comuni serviti sono nella pagina su <a href={u('/zone/torino/')}>Torino e provincia</a>:</p>
-        <ul class="zones"><li><a href={u('/zone/torino/')}>Torino città</a></li>{zonePages[0].towns.map(([a]) => <li><a href={u('/zone/torino/#comuni')}>{a}</a></li>)}</ul>
+        <p>A Torino, nella sua provincia e nel resto del Piemonte. Queste sono le pagine per zona:</p>
+        <ul class="zones">{zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.name}</a></li>)}</ul>
       </div>
       <div class="map-ph"><p class="muted" set:html={h('[MAPPA GOOGLE: inserire dopo conferma dell’indirizzo]')} /></div>
     </div>

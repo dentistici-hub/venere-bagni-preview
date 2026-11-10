@@ -1,0 +1,31 @@
+---
+// Small hub for the "Zone" breadcrumb level; text reused from the home page zone section.
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { zones } from '../../data/site';
+import { u } from '../../lib/url';
+
+const crumbs = [{ name: 'Zone', path: '/zone/' }];
+---
+<Base
+  title="Zone servite: Torino e tutto il Piemonte | Venere Bagni"
+  description="Vasca in doccia a Torino e provincia e nelle altre sette province del Piemonte, fino al Verbano-Cusio-Ossola. Sopralluogo gratuito e prezzo fisso scritto."
+  crumbs={crumbs}
+  pageType="CollectionPage"
+>
+  <PageHero
+    crumbs={crumbs}
+    eyebrow="Torino e tutto il Piemonte"
+    title="Partiamo da Torino, lavoriamo in tutto il Piemonte"
+    lead="La nostra zona principale è Torino con la sua provincia, e lavoriamo anche nelle altre sette province del Piemonte. Ogni provincia ha la sua pagina, con i comuni, i CAP e dove si chiede il contributo della legge 13."
+    formTitle="Vediamo se arriviamo nella tua zona"
+  >
+    <ul class="zones">
+      {zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.label}</a></li>)}
+    </ul>
+    <p style="margin-top:20px">La tua zona non c’è? Scrivi il CAP nel modulo e ti diciamo subito se possiamo venire.</p>
+  </PageHero>
+
+  <CtaBand />
+</Base>

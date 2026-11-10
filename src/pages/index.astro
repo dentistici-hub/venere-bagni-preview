@@ -20,14 +20,14 @@ const faqs = [
   { q: 'Quanto costa trasformare la vasca in doccia a Torino?', a: 'Dipende dalla misura del bagno, dal piatto che scegli e dal gres per le pareti, e per questo il prezzo te lo diamo solo dopo aver visto il bagno. Il lavoro è chiavi in mano e comprende demolizione e smaltimento della vasca, impianto idraulico della doccia, massetto, piatto, box, rubinetteria, rivestimento in gres, finiture e materiali. Il sopralluogo è gratuito e il preventivo è scritto, a prezzo fisso.' },
   { q: 'Il sopralluogo è davvero gratuito?', a: 'Sì, il sopralluogo di Venere Bagni è gratuito e non ti impegna. Un tecnico viene a casa tua, a Torino, in provincia o nel resto del Piemonte, misura il bagno, ti fa vedere cosa si può montare e ti lascia il preventivo scritto. Se poi decidi di non farlo, non devi niente.' },
   { q: 'Devo rifare anche il pavimento e le piastrelle?', a: 'Fuori dallo spazio della vasca di solito no. Venere Bagni lavora dove c’era la vasca: lì rifà impianto e massetto, posa il piatto doccia e riveste le pareti con gres porcellanato nuovo. Il resto del bagno resta com’è. Se nel tuo bagno serve qualche ripristino te lo diciamo al sopralluogo e lo trovi scritto nel preventivo.' },
-  { q: 'Fate lavori anche per persone anziane o con difficoltà a camminare?', a: 'Sì. Venere Bagni monta piatti doccia a filo pavimento, maniglioni, seggiolini e superfici antiscivolo per chi fa fatica a scavalcare il bordo della vasca. Puoi chiamarci anche se cerchi una soluzione sicura per un tuo genitore.' },
+  { q: 'Posso scegliere colori e finiture?', a: 'Sì, e conviene sceglierle guardando i campioni nel tuo bagno, con la luce di casa tua. Il gres per le pareti c’è effetto marmo, pietra, legno o in tinta unita; il piatto in più colori, a filo pavimento o con bordo basso; il box trasparente, satinato o con profili neri; la rubinetteria cromata o nera opaca [DA CONFERMARE: finiture del catalogo]. Se in casa serve anche un maniglione o un seggiolino, lo scegliamo nello stesso stile.' },
   { q: 'In quali zone lavorate?', a: 'Venere Bagni lavora soprattutto a Torino e in tutta la sua provincia, dalla cintura al Canavese, al Pinerolese e alle valli. Arriviamo anche nel resto del Piemonte: Cuneo, Novara, Alessandria, Asti, Biella, Vercelli e il Verbano-Cusio-Ossola. Per sapere se veniamo nel tuo comune scrivi il CAP nel modulo: la risposta è immediata.' },
 ];
 const reviews = [
   { text: 'Il giorno del lavoro sono arrivati la mattina e nel pomeriggio avevo già la doccia nuova. Il prezzo era quello scritto sul foglio.', name: 'Maria', town: 'Moncalieri' },
-  { text: 'Mia madre non riusciva più a entrare nella vasca. Adesso fa la doccia seduta, da sola, e io sono più tranquillo.', name: 'Giorgio', town: 'Rivoli' },
+  { text: 'Avevamo ancora la vasca degli anni Ottanta con le piastrelle marroni. Adesso la doccia ha le pareti effetto pietra e il box nero, e chi entra pensa che abbiamo rifatto tutto il bagno.', name: 'Giorgio', town: 'Rivoli' },
   { text: 'Sono venuti in due e hanno lavorato tutto il giorno, alla fine il bagno era pulito. Il giorno dopo mi hanno anche telefonato per sapere se andava tutto bene.', name: 'Lucia', town: 'Collegno' },
-  { text: 'Volevo solo sapere quanto costava. Il tecnico ha misurato tutto e mi ha lasciato il prezzo senza insistere. Ci sto ancora pensando ma intanto ringrazio.', name: 'Franco', town: 'Carmagnola' },
+  { text: 'Mia madre non riusciva più a entrare nella vasca. Adesso fa la doccia da sola, e a me il bagno piace anche di più di prima.', name: 'Paolo', town: 'Carmagnola' },
 ];
 // Short version of src/data/workday.ts (same 8 hours, indicative clock times).
 const day = [
@@ -39,24 +39,30 @@ const day = [
 ];
 // One review becomes the large pull-quote, the others go in the grid.
 const pull = reviews[1];
+const stili = [
+  { img: 'stileMarmo', t: 'Effetto marmo', d: 'Venature leggere su fondo chiaro. Il bagno sembra più grande e più luminoso.' },
+  { img: 'stilePietra', t: 'Effetto pietra', d: 'Grigi e tortora caldi, superficie opaca. Sta bene con mobili in legno e con quelli laccati.' },
+  { img: 'stileLegno', t: 'Effetto legno', d: 'Doghe in gres che sembrano legno e reggono l’acqua come una piastrella.' },
+  { img: 'stileMinimal', t: 'Minimal', d: 'Lastre grandi e chiare, poche fughe, profili e rubinetteria neri opachi.' },
+];
 const others = reviews.filter((r) => r !== pull);
 ---
 <Base
   title="Vasca in doccia a Torino in 8 ore | Venere Bagni"
-  description="Vasca in doccia in 8 ore, chiavi in mano e materiali compresi, a Torino e in tutto il Piemonte. Sopralluogo gratuito e preventivo a prezzo fisso."
+  description="La vasca diventa una doccia nuova in 8 ore, con il gres, il piatto e il box che scegli tu. Chiavi in mano a Torino e in tutto il Piemonte, sopralluogo gratuito."
   faqs={faqs}
   service={{ name: 'Trasformazione vasca in doccia', description: site.description }}
 >
   <section class="xhero">
     <div class="xhero__photo">
       <Image src={media.hero.src} alt={media.hero.alt} widths={[640, 960, 1400, 1920]} sizes="(max-width: 960px) calc(100vw - 32px), 100vw" loading="eager" fetchpriority="high" />
-      <p class="xhero__badge">Doccia sicura con seggiolino<span>montata al posto della vasca</span></p>
+      <p class="xhero__badge">Doccia in vetro, pareti effetto marmo<span>una delle finiture che puoi scegliere</span></p>
     </div>
     <div class="wrap xhero__grid">
       <div class="xhero__text">
         <p class="eyebrow">Torino e tutto il Piemonte</p>
-        <h1>Dalla vasca alla doccia in 8 ore, a casa tua</h1>
-        <p class="lead"><span set:html={h('Veniamo a casa tua a prendere le misure, senza costi, e ti lasciamo il prezzo scritto.')} /><span class="xhero__more-lead" set:html={h(' Se il preventivo ti va bene, togliamo la vasca e in 8 ore ti lasciamo la doccia finita, materiali compresi.')} /></p>
+        <h1>La vasca diventa una doccia di design, in 8 ore</h1>
+        <p class="lead"><span set:html={h('Gres, piatto e box li scegli a casa tua, con i campioni in mano, e il prezzo te lo lasciamo scritto.')} /><span class="xhero__more-lead" set:html={h(' Poi in un giorno togliamo la vasca e ti consegniamo un bagno che sembra nuovo, materiali compresi.')} /></p>
       </div>
       <div class="xhero__form"><LeadForm id="prenota" /></div>
       <div class="xhero__more">
@@ -91,10 +97,33 @@ const others = reviews.filter((r) => r !== pull);
       <div class="ba-feature">
         <BeforeAfter size="lg" before="ba1p" after="ba1d" caption="[CITTÀ] · doccia a piatto basso con panca · [DURATA]" note="Via la vasca con la tenda: al suo posto una doccia con il piatto basso e una panca per sedersi." />
         <div class="ba-pair">
-          <BeforeAfter before="ba2p" after="ba2d" caption="[CITTÀ] · doccia con porta in vetro e maniglioni · [DURATA]" note="La vasca sotto la finestra è diventata una doccia chiusa, con i maniglioni a portata di mano." />
+          <BeforeAfter before="ba2p" after="ba2d" caption="[CITTÀ] · doccia in vetro, pareti effetto marmo · [DURATA]" note="La vasca sotto la finestra è diventata una doccia chiusa in vetro, con le pareti color sabbia." />
           <BeforeAfter before="ba4p" after="ba4d" caption="[CITTÀ] · doccia walk-in a filo pavimento · [DURATA]" note="In un bagno piccolo, una doccia walk-in con il piatto allo stesso livello del pavimento." />
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section section--petrol section--dark" id="stile">
+    <div class="wrap">
+      <div class="head head--row">
+        <div><p class="eyebrow">Stile e finiture</p><h2>Il bagno è una stanza della casa, e deve piacerti</h2></div>
+        <p class="muted" style="max-width:52ch">Togliere la vasca è l’occasione per cambiare faccia al bagno. Le pareti della doccia le rivestiamo con gres nuovo, e la finitura la scegli tu.</p>
+      </div>
+      <div class="styles">
+        {stili.map((s) => (
+          <figure class="style">
+            <Image src={media[s.img].src} alt={media[s.img].alt} widths={[400, 700]} sizes="(max-width: 480px) 100vw, (max-width: 960px) 50vw, 280px" />
+            <figcaption><b>{s.t}</b><span>{s.d}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+      <div class="parts">
+        <div><h3>Il piatto</h3><p>Bianco, grigio, antracite o effetto pietra. A filo pavimento, senza scalino, oppure con un bordo basso.</p></div>
+        <div><h3>Il box</h3><p>Vetro trasparente o satinato, profili cromati o neri. Scorrevole, a battente o con un vetro fisso.</p></div>
+        <div><h3>La rubinetteria</h3><p>Cromata o nera opaca, con il soffione grande a pioggia e la doccetta a mano.</p></div>
+      </div>
+      <p class="muted styles-note" set:html={h('Al sopralluogo ti portiamo i campioni e li guardi nel tuo bagno, con la luce di casa tua. [DA CONFERMARE: finiture, colori e marche del catalogo]')} />
     </div>
   </section>
 
@@ -122,8 +151,8 @@ const others = reviews.filter((r) => r !== pull);
       <div class="head"><h2>Cosa possiamo mettere al posto della vasca</h2></div>
       <div class="cards">
         <article class="card sol">
-          <Image src={media.solDoccia.src} alt={media.solDoccia.alt} widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" />
-          <div class="sol__body"><h3>Vasca in doccia</h3><p>Dove c’era la vasca mettiamo un piatto doccia, anche a filo pavimento. Il lavoro dura 8 ore, materiali compresi.</p><a class="link-arrow" href={u('/vasca-in-doccia/')}>Come funziona la trasformazione</a></div>
+          <Image src={media.docciaModerna.src} alt={media.docciaModerna.alt} widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" />
+          <div class="sol__body"><h3>Vasca in doccia</h3><p>Dove c’era la vasca mettiamo un piatto doccia, anche a filo pavimento, e rivestiamo le pareti con il gres che scegli. Il lavoro dura 8 ore, materiali compresi.</p><a class="link-arrow" href={u('/vasca-in-doccia/')}>Come funziona la trasformazione</a></div>
         </article>
         <article class="card sol">
           <Image src={media.solSportello.src} alt={media.solSportello.alt} widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" />
@@ -131,7 +160,7 @@ const others = reviews.filter((r) => r !== pull);
         </article>
         <article class="card sol">
           <Image src={media.solSicuro.src} alt={media.solSicuro.alt} widths={[480, 800]} sizes="(max-width: 960px) 100vw, 380px" />
-          <div class="sol__body"><h3>Bagno sicuro</h3><p>Maniglioni, seggiolino e piatto antiscivolo, messi dove servono a chi userà la doccia. Spesso a chiamarci sono i figli, per un genitore anziano.</p><a class="link-arrow" href={u('/bagno-sicuro/')}>Il bagno sicuro</a></div>
+          <div class="sol__body"><h3>Bagno sicuro</h3><p>Quando in casa serve un appoggio in più: maniglioni, seggiolino e piatto antiscivolo, scelti nello stesso stile del resto del bagno.</p><a class="link-arrow" href={u('/bagno-sicuro/')}>Il bagno sicuro</a></div>
         </article>
       </div>
     </div>

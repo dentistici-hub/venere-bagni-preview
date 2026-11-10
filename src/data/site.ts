@@ -52,7 +52,7 @@ export const site = {
   // Default <title> and meta description (home page sets its own; these are the fallback).
   title: 'Vasca in doccia a Torino e in Piemonte | Venere Bagni',
   description:
-    'Togliamo la vasca e montiamo una doccia sicura in 8 ore, chiavi in mano, a Torino e in tutto il Piemonte. Sopralluogo gratuito e preventivo a prezzo fisso.',
+    'Togliamo la vasca e montiamo una doccia nuova, con le finiture che scegli tu, in 8 ore, chiavi in mano, a Torino e in tutto il Piemonte. Sopralluogo gratuito e preventivo a prezzo fisso.',
 
   // ---- AREA SERVED ---------------------------------------------------------------------------------
   // Main area: Torino e provincia. The other Piemonte provinces are served too (Denis, 2026-11-10: keep them).

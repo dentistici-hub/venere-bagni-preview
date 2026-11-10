@@ -1,7 +1,14 @@
 // PLACEHOLDER PHOTOS for the client preview only: taken from international market leaders' sites
 // (Bath Fitter, Re-Bath) as visual examples. They must ALL be replaced with Venere Bagni's own photos
 // before the site goes live. Alt texts describe what is visible, in Italian (screen readers, AI crawlers).
-import heroDoccia from '../assets/media/hero-doccia-sicura.jpg';
+import heroDoccia from '../assets/media/hero-doccia-design.jpg';
+import heroSicuro from '../assets/media/hero-doccia-sicura.jpg';
+// Design placeholders (Pexels, free licence; sources in _ba-sources.md). pietra and legno are 3D renders.
+import stileMarmo from '../assets/media/stile-marmo.jpg';
+import stilePietra from '../assets/media/stile-pietra.jpg';
+import stileLegno from '../assets/media/stile-legno.jpg';
+import stileMinimal from '../assets/media/stile-minimal.jpg';
+import docciaModerna from '../assets/media/doccia-moderna.jpg';
 import ba1p from '../assets/media/ba1-prima.jpg';
 import ba1d from '../assets/media/ba1-dopo.jpg';
 import ba2p from '../assets/media/ba2-prima.jpg';
@@ -24,7 +31,13 @@ import famiglia from '../assets/media/famiglia-bagno.jpg';
 export interface Img { src: ImageMetadata; alt: string }
 
 export const media: Record<string, Img> = {
-  hero: { src: heroDoccia, alt: 'Doccia bianca a filo pavimento con seggiolino ribaltabile, maniglione e soffione regolabile, al posto della vecchia vasca' },
+  hero: { src: heroDoccia, alt: 'Doccia in vetro con pareti in gres effetto marmo, pavimento a mosaico esagonale e soffione a pioggia' },
+  heroSicuro: { src: heroSicuro, alt: 'Doccia bianca a filo pavimento con seggiolino ribaltabile, maniglione e soffione regolabile, al posto della vecchia vasca' },
+  stileMarmo: { src: stileMarmo, alt: 'Doccia con pareti in gres effetto marmo bianco venato e rubinetteria nera opaca' },
+  stilePietra: { src: stilePietra, alt: 'Doccia walk-in con pareti effetto pietra grigia, vetro con profilo nero e rubinetteria nera' },
+  stileLegno: { src: stileLegno, alt: 'Doccia con parete in gres effetto legno, vetro con profilo nero e soffione a pioggia nero' },
+  stileMinimal: { src: stileMinimal, alt: 'Doccia minimal con lastre bianche di grande formato e colonna doccia nera opaca' },
+  docciaModerna: { src: docciaModerna, alt: 'Doccia in vetro con parete in piastrelle antracite lucide e rubinetteria nera opaca' },
   // Real before/after pairs (Re-Bath US gallery, placeholders only: replace with the client's own jobs).
   ba1p: { src: ba1p, alt: 'Prima: bagno con vasca da incasso, tenda doccia e piastrelle beige' },
   ba1d: { src: ba1d, alt: 'Dopo: stesso bagno con doccia a piatto basso, panca e rivestimento grigio' },

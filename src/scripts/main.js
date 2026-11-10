@@ -101,7 +101,7 @@ $$('[data-lead-form]').forEach((form) => {
     bars.forEach((b, i) => b.classList.toggle('is-on', i < n));
     label.textContent = `Passo ${n} di 3 · ${labels[n - 1]}`;
     say('');
-    if (n === 3 && recap) recap.textContent = [f.intervento.value, f.per_chi.value, f.tempi.value].filter(Boolean).join(' · ');
+    if (n === 3 && recap) recap.textContent = [f.intervento.value, f.stile.value, f.tempi.value].filter(Boolean).join(' · ');
     const first = $(`[data-step="${n}"] input:not([type=hidden])`, form);
     first?.focus({ preventScroll: true });
     if (form.getBoundingClientRect().top < 0) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -117,7 +117,7 @@ $$('[data-lead-form]').forEach((form) => {
       return false;
     }
     if (n === 2) {
-      if (!f.per_chi.value || !f.tempi.value) { say('Rispondi alle prime due domande, la terza è facoltativa.', 'err'); return false; }
+      if (!f.stile.value || !f.tempi.value) { say('Rispondi alle prime due domande, la terza è facoltativa.', 'err'); return false; }
       return true;
     }
     const cap = f.cap.value.trim();
@@ -170,7 +170,7 @@ $$('[data-lead-form]').forEach((form) => {
       cap,
       fuori_zona: inArea(cap) ? 'no' : 'si',
       intervento: f.intervento.value,
-      per_chi: f.per_chi.value,
+      stile: f.stile.value,
       tempi: f.tempi.value,
       frenato: frenato().join(', '),
       privacy_consent: true,

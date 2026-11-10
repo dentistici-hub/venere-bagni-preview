@@ -1,7 +1,7 @@
 ---
 // 3-step lead form, built on what works in our other landings and in the leaders' funnels:
 //   1. what the job is: big one-tap tiles, moves on by itself (easiest question first, no typing);
-//   2. two one-tap questions + "cosa ti ha frenato finora?" (optional, multi; idea from the Think Unlimited planner,
+//   2. style + timing (one tap each) + "cosa ti ha frenato finora?" (optional, multi; idea from the Think Unlimited planner,
 //      gives the sales call its opening line);
 //   3. CAP with live area check (West Shore style), name, phone, optional email, consents. A recap of the taps sits on top.
 // Submits JSON to /api/lead (Worker -> Profilo CRM, see worker/index.js); extra fields arrive as CRM custom fields.
@@ -17,7 +17,7 @@ const interventi = [
   { v: 'Bagno completo', i: 'tiles', d: 'Rifacciamo tutto il bagno' },
   { v: 'Non lo so ancora', i: 'help', d: 'Ne parliamo al sopralluogo' },
 ];
-const perChi = ['Per me o per la mia famiglia', 'Per un genitore anziano', 'Per chi fa fatica a muoversi'];
+const stili = ['Moderno e minimale', 'Classico ed elegante', 'Effetto pietra o legno', 'Consigliatemi voi'];
 const tempi = ['Entro 1 mese', 'Tra 1 e 3 mesi', 'Sto solo valutando'];
 const freni = ['Il costo', 'Lavori lunghi in casa', 'Le pratiche per la detrazione', 'Non so di chi fidarmi', 'Niente, sono pronto'];
 const labels = ['Il lavoro', 'Due dettagli', 'Dove e a chi telefoniamo'];
@@ -46,8 +46,8 @@ const labels = ['Il lavoro', 'Due dettagli', 'Dove e a chi telefoniamo'];
 
   <div class="lf__step" data-step="2" hidden>
     <fieldset>
-      <legend>Per chi è il bagno?</legend>
-      <div class="pills">{perChi.map((o) => <label class="pill"><input type="radio" name="per_chi" value={o} /><span>{o}</span></label>)}</div>
+      <legend>Che stile ti piace?</legend>
+      <div class="pills">{stili.map((o) => <label class="pill"><input type="radio" name="stile" value={o} /><span>{o}</span></label>)}</div>
     </fieldset>
     <fieldset>
       <legend>Quando vorresti farlo?</legend>

@@ -21,7 +21,7 @@ SAND = (242, 199, 166)
 SUB = "Venere Bagni · Torino e tutto il Piemonte"
 
 PHOTO = {
-    "hero": "hero-doccia-sicura.jpg", "solDoccia": "soluzione-doccia.jpg", "solSportello": "soluzione-sportello.jpg",
+    "hero": "hero-doccia-design.jpg", "heroSicuro": "hero-doccia-sicura.jpg", "solDoccia": "soluzione-doccia.jpg", "solSportello": "soluzione-sportello.jpg",
     "solSicuro": "soluzione-sicuro.jpg", "sopralluogo": "sopralluogo.jpg", "coppia": "coppia-bagno.jpg",
     "luminoso": "bagno-luminoso.jpg", "classico": "bagno-classico.jpg", "famiglia": "famiglia-bagno.jpg",
 }
@@ -33,10 +33,10 @@ ZONES = [
 ]
 # key, photo, title (keep it short: one or two lines at 56 px)
 PAGES = [
-    ("home", "hero", "Dalla vasca alla doccia in 8 ore"),
+    ("home", "hero", "La vasca diventa una doccia di design, in 8 ore"),
     ("vasca-in-doccia", "solDoccia", "Trasformazione vasca in doccia"),
     ("vasca-con-sportello", "solSportello", "Vasca con sportello: si entra senza scavalcare"),
-    ("bagno-sicuro", "hero", "Un bagno sicuro per te o per un tuo genitore"),
+    ("bagno-sicuro", "heroSicuro", "Un bagno sicuro per te o per un tuo genitore"),
     ("prezzi", "classico", "Quanto costa trasformare la vasca in doccia"),
     ("bonus-detrazioni", "luminoso", "Detrazioni per la doccia al posto della vasca nel 2026"),
     ("domande-frequenti", "sopralluogo", "Domande frequenti sulla vasca in doccia"),
@@ -44,7 +44,7 @@ PAGES = [
     ("chi-siamo", "sopralluogo", "Chi c’è dietro Venere Bagni"),
     ("zone", "coppia", "Partiamo da Torino, lavoriamo in tutto il Piemonte"),
     ("guide", "luminoso", "Guide per chi vuole togliere la vasca"),
-    ("guide-doccia-a-norma-dm-236-detrazione", "hero", "Doccia a norma DM 236: cosa serve per la detrazione"),
+    ("guide-doccia-a-norma-dm-236-detrazione", "heroSicuro", "Doccia a norma DM 236: cosa serve per la detrazione"),
     ("guide-piatto-doccia-filo-pavimento-o-ribassato", "solDoccia", "Piatto doccia filo pavimento o ribassato?"),
     ("guide-giorno-trasformazione-vasca-in-doccia", "coppia", "Il giorno della trasformazione, ora per ora"),
 ] + [(f"zone-{s}", p, f"Trasformazione vasca in doccia {at}") for s, at, p in ZONES]

@@ -40,7 +40,7 @@ export const zonePages: ZonePage[] = [
     lead: 'Lavoriamo in città e in tutta la provincia. Veniamo a misurare il bagno senza costi, ti lasciamo il prezzo scritto e poi, in 8 ore di lavoro, passi dalla vasca alla doccia finita.',
     introTitle: 'Il bagno a Torino',
     intro: [
-      'A Torino molti appartamenti sono in condomini degli anni ’60 e ’70, dove la vasca misura spesso circa 170 cm ed è l’unico posto per lavarsi. Con l’età scavalcarla diventa difficile. Se al suo posto mettiamo una doccia nello stesso spazio, il resto del bagno non va rifatto.',
+      'A Torino molti appartamenti sono in condomini degli anni ’60 e ’70, dove la vasca misura spesso circa 170 cm ed è l’unico posto per lavarsi. Spesso il bagno è ancora quello originale, con le piastrelle dell’epoca. Se al posto della vasca mettiamo una doccia con pareti in gres nuovo, il bagno cambia faccia senza rifarlo tutto.',
       'Lavoriamo anche nelle case singole e nelle villette dell’area metropolitana, allo stesso modo: il piatto doccia va dove c’era la vasca.',
     ],
     realData: '[SERVE DATO REALE: indirizzo della sede e distanza dalla città, se rilevante]',
@@ -80,7 +80,7 @@ export const zonePages: ZonePage[] = [
     intro: [
       // tuttitalia.it/piemonte/provincia-di-cuneo/ : 6.894,82 km², the largest province of Piemonte.
       'Quella di Cuneo è la provincia più estesa del Piemonte, quasi 6.900 km² tra le valli alpine, la pianura di Fossano e Savigliano e le colline di Langhe e Roero. Fuori dai centri più grandi ci sono tante case singole, bifamiliari e cascine. Per noi il lavoro cambia poco: togliamo la vasca e nello stesso spazio montiamo una doccia comoda, senza rifare il bagno.',
-      'Se cerchi una vasca con sportello o una doccia a filo pavimento per un genitore anziano e abiti lontano, al sopralluogo gratuito puoi collegarti per telefono.',
+      'Nelle case di campagna i bagni sono spesso grandi: c’è spazio per una doccia walk-in con vetro fisso, o per una vasca con sportello se la vasca la vuoi tenere.',
     ],
     realData: '[SERVE DATO REALE: come serviamo Cuneo, da quale sede, tempi di trasferta]',
     facts: [
@@ -227,7 +227,7 @@ export const zonePages: ZonePage[] = [
     introTitle: 'Il bagno nel Biellese',
     intro: [
       // [ISTAT] BI 51.066 / 168.328 = 30,3%, highest of the 8 provinces; Piemonte 26,9%.
-      'Il Biellese è la provincia più anziana del Piemonte. Al 1° gennaio 2025 il 30,3% dei residenti aveva 65 anni o più, quasi uno su tre, contro il 26,9% della media regionale. Per chi a quell’età usa ancora la vasca, al suo posto montiamo una doccia con seggiolino e maniglione, nello stesso spazio.',
+      'Il Biellese è la provincia più anziana del Piemonte. Al 1° gennaio 2025 il 30,3% dei residenti aveva 65 anni o più, quasi uno su tre, contro il 26,9% della media regionale. Per chi usa ancora la vasca, al suo posto montiamo una doccia con il piatto a filo pavimento, e se serve con seggiolino e maniglione, scelti nello stesso stile del bagno.',
       // Valdilana: L.R. Piemonte 21 dicembre 2018 n. 29, comune dal 1° gennaio 2019 (tuttitalia.it/variazioni-amministrative/nuovo-comune-di-valdilana/).
       'Fuori città molti abitano in paesi di valle: la Valle Cervo, la Valle Elvo, la Valsessera e la zona di Valdilana, il comune nato nel 2019 da Mosso, Soprana, Trivero e Valle Mosso, dove ci sono ancora i lanifici. Per portare via la vasca e scaricare il materiale [DA CONFERMARE: cosa serve davanti a casa per il furgone].',
     ],
@@ -267,7 +267,7 @@ export const zonePages: ZonePage[] = [
     introTitle: 'Il bagno nel Vercellese e in Valsesia',
     intro: [
       'La provincia di Vercelli va dalla pianura del riso al Monte Rosa. Intorno al capoluogo, a Santhià e a Trino ci sono paesi di pianura e cascine. A nord, lungo il Sesia, la Valsesia sale da Borgosesia e Varallo fino ad Alagna.',
-      'Che la casa sia in città, in una cascina o in un paese della valle, al posto della vasca va la doccia, con seggiolino e maniglione se servono. Cambiano i tempi di trasferta, e te li diciamo prima del sopralluogo.',
+      'Che la casa sia in città, in una cascina o in un paese della valle, al posto della vasca va una doccia nuova, con le pareti nel gres che scegli. Cambiano i tempi di trasferta, e te li diciamo prima del sopralluogo.',
     ],
     realData: '[SERVE DATO REALE: come serviamo Vercelli e la Valsesia, da quale sede, tempi di trasferta]',
     facts: [

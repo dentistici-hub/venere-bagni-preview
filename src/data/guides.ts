@@ -22,7 +22,7 @@ export const guides = [
     h1: 'Doccia a norma DM 236: cosa serve per la detrazione',
     card: 'Quando la doccia al posto della vasca rientra nella detrazione del 50% o del 36%, e cosa chiede il decreto.',
     answer: 'Nel 2026 la doccia messa al posto della vasca può rientrare nella detrazione per ristrutturazione se rispetta il DM 236 del 1989: doccia a pavimento, sedile ribaltabile e doccia a telefono. Recuperi il 50% se è la casa dove abiti e ne sei proprietario, il 36% negli altri casi. Non servono un’età minima o una disabilità. [DA CONFERMARE CON IL COMMERCIALISTA]',
-    img: 'hero',
+    img: 'heroSicuro',
     published: '2026-11-10',
   }),
   g({

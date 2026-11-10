@@ -17,6 +17,7 @@ const faqs = [
   { q: 'Quanto dura la trasformazione della vasca in doccia?', a: 'Con Venere Bagni la trasformazione dura 8 ore. È un lavoro chiavi in mano: demoliamo e smaltiamo la vasca, rifacciamo l’impianto idraulico della doccia e il massetto, posiamo il piatto, rivestiamo le pareti con gres nuovo e montiamo box e rubinetteria. I materiali li portiamo noi, e la sera la doccia si può già usare. Prima c’è il sopralluogo, di circa [DURATA] minuti.' },
   { q: 'Si può fare in un bagno piccolo?', a: 'Sì. La doccia prende lo spazio della vasca, quindi il bagno non deve essere più grande di com’è. Al sopralluogo gratuito Venere Bagni misura il bagno e ti dice quale piatto ci sta, anche nei bagni stretti dei condomini di Torino.' },
   { q: 'La doccia nuova è facile da pulire e tiene l’acqua?', a: 'Nella zona della doccia Venere Bagni rifà l’impianto idraulico e il massetto, posa il piatto e riveste le pareti con gres porcellanato nuovo. Il piatto viene sigillato. Su materiali e manodopera hai la garanzia di 2 anni prevista dalla legge: se c’è una perdita dovuta al montaggio, torniamo a sistemarla.' },
+  { q: 'Posso scegliere colori e finiture?', a: 'Sì, e conviene sceglierle guardando i campioni nel tuo bagno, con la luce di casa tua. Il gres per le pareti c’è effetto marmo, pietra, legno o in tinta unita; il piatto in più colori, a filo pavimento o con bordo basso; il box trasparente, satinato o con profili neri; la rubinetteria cromata o nera opaca [DA CONFERMARE: finiture del catalogo]. Se in casa serve anche un maniglione o un seggiolino, lo scegliamo nello stesso stile.' },
   { q: 'Devo svuotare il bagno prima?', a: 'Basta liberare la zona intorno alla vasca e togliere le tue cose dal bagno. La squadra di Venere Bagni copre il resto della casa con teli e cartoni e a fine giornata pulisce.' },
   { q: 'Si può avere una doccia con seggiolino e maniglione?', a: 'Sì, Venere Bagni monta seggiolino ribaltabile e maniglioni nello stesso intervento. Servono soprattutto a chi ha più di 65 anni o problemi di equilibrio. Trovi i dettagli nella pagina sul bagno sicuro.' },
 ];
@@ -32,7 +33,7 @@ const faqs = [
     crumbs={crumbs}
     eyebrow="Torino e tutto il Piemonte"
     title="Trasformazione della vasca in doccia in 8 ore"
-    lead="Togliamo la vecchia vasca e nello stesso spazio montiamo la doccia, con le pareti rivestite in gres nuovo. È un lavoro chiavi in mano di 8 ore, materiali compresi, e il prezzo te lo scriviamo nel preventivo prima di cominciare."
+    lead="Togliamo la vecchia vasca e nello stesso spazio montiamo una doccia nuova, con le pareti nel gres che scegli tu. È un lavoro chiavi in mano di 8 ore, materiali compresi, e il prezzo te lo scriviamo nel preventivo prima di cominciare."
     chips={['Sopralluogo gratuito', 'Prezzo fisso scritto', 'Chiavi in mano in 8 ore']}
     img="solDoccia"
     formTitle="Prenota il sopralluogo gratuito"
@@ -43,7 +44,7 @@ const faqs = [
       <div>
         <h2>Cosa vuol dire trasformare la vasca in doccia</h2>
         <p>Vuol dire togliere la vasca e mettere un piatto doccia nello stesso spazio. I muri restano dove sono e il resto del bagno non si tocca: si lavora nell’ingombro della vasca, che nei condomini degli anni ’60 e ’70 misura spesso circa 170 cm.</p>
-        <p>Di solito ce lo chiede chi ormai fa fatica a scavalcare il bordo. Altri la vasca non la usano da anni, o vogliono recuperare spazio. Nella doccia si entra con un passo basso e ci si lava senza fatica.</p>
+        <p>Molti la vasca non la usano da anni e la tengono solo perché toglierla sembra un cantiere. Altri vogliono un bagno più moderno e più facile da pulire, o un passo basso al posto del bordo da scavalcare. In tutti i casi il lavoro si chiude in un giorno.</p>
       </div>
       <Image src={media.luminoso.src} alt={media.luminoso.alt} widths={[640, 960]} sizes="(max-width: 960px) 100vw, 560px" />
     </div>
@@ -62,8 +63,8 @@ const faqs = [
       <Image src={media.classico.src} alt={media.classico.alt} widths={[640, 960]} sizes="(max-width: 960px) 100vw, 560px" />
       <div>
         <p class="eyebrow">Le scelte</p>
-        <h2>Piatto, pareti e box</h2>
-        <p>Il piatto può essere a filo pavimento, senza scalino, oppure con un bordo basso. Se in casa c’è chi ha problemi di equilibrio o userà una sedia da doccia, ti consigliamo il filo pavimento. Costa di più e lo scarico va controllato bene: lo guardiamo al sopralluogo. Le differenze sono spiegate nella guida <a href={u('/guide/piatto-doccia-filo-pavimento-o-ribassato/')}>piatto a filo pavimento o ribassato</a>.</p>
+        <h2>Pareti, piatto e box: lo stile lo scegli tu</h2>
+        <p>Le pareti della doccia le rivestiamo con gres porcellanato nuovo, ed è lì che il bagno cambia faccia. Il piatto può essere a filo pavimento, senza scalino: il pavimento continua dentro la doccia e la stanza sembra più grande. Oppure con un bordo basso, che costa meno. Per il filo pavimento lo scarico va controllato bene, e lo guardiamo al sopralluogo. Le differenze sono spiegate nella guida <a href={u('/guide/piatto-doccia-filo-pavimento-o-ribassato/')}>piatto a filo pavimento o ribassato</a>.</p>
         <p set:html={h('Il gres delle pareti, il piatto, il box e la rubinetteria li scegli dal catalogo: [OPZIONI DA CATALOGO: colori e formati del gres, colori del piatto, tipi di box (scorrevole, a battente, a nicchia), rubinetteria]')} />
       </div>
     </div>

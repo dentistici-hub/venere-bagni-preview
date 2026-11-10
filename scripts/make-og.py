@@ -80,7 +80,7 @@ def wrap(draw, text, f, maxw):
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     sub_f = font(["arial.ttf", "DejaVuSans.ttf"], 30)
-    # Brand chip (public/logo.png = the logo on its marble plate) in the top-left corner, rounded.
+    # Brand chip (public/logo.png = the logo on its petrol plate) in the top-left corner, rounded.
     chip = Image.open(ROOT / "public" / "logo.png").convert("RGBA")
     chip = chip.resize((340, round(chip.height * 340 / chip.width)), Image.LANCZOS)
     mask = Image.new("L", chip.size, 0)

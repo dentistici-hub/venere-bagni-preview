@@ -42,7 +42,7 @@ export const site = {
 
   // ---- IDENTITY ------------------------------------------------------------------------------------
   brand: 'Venere Bagni', // trading name: logo, titles, schema `name`, OG site_name
-  legalName: 'Italprogetti srls', // footer, privacy, chi-siamo, schema `legalName`
+  legalName: 'Pfggroup srl', // given by the client 2026-11-10; trades as the brand Venere Bagni. Footer, privacy, chi-siamo, schema `legalName`
   vat: '[P.IVA]', // P.IVA, 11 digits: footer, contatti, chi-siamo, schema `vatID`
   rea: '[REA]', // REA number, e.g. 'TO-1234567': chi-siamo, footer, schema `identifier`
   foundingYear: '', // 'YYYY': chi-siamo, schema `foundingDate`. Not given by the client (2026-11-10): leave empty. Years in business: 15.
@@ -74,7 +74,7 @@ export const site = {
   phoneHref: '+390000000000', // CONFIRM: E.164, used in tel: links and schema `telephone`
   whatsapp: '390000000000', // CONFIRM: digits only, for wa.me links
   whatsappLabel: '[WHATSAPP]', // as people read it
-  email: '[EMAIL]', // footer, contatti, schema `email`
+  email: 'pfggroupitalia@gmail.com', // footer, contatti, schema `email`
   hours: hoursText(openingHours) || '[ORARI]', // derived from openingHours above: do not edit here
   openingHours,
 

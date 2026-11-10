@@ -80,6 +80,12 @@ def wrap(draw, text, f, maxw):
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     sub_f = font(["arial.ttf", "DejaVuSans.ttf"], 30)
+    # Brand chip (public/logo.png = the logo on its marble plate) in the top-left corner, rounded.
+    chip = Image.open(ROOT / "public" / "logo.png").convert("RGBA")
+    chip = chip.resize((340, round(chip.height * 340 / chip.width)), Image.LANCZOS)
+    mask = Image.new("L", chip.size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle((0, 0, chip.width - 1, chip.height - 1), 16, fill=255)
+    chip.putalpha(mask)
     for key, photo, title in PAGES:
         img = cover(Image.open(MEDIA / PHOTO[photo]).convert("RGB"))
         band = Image.new("RGBA", (W, BAND), PETROL + (232,))
@@ -97,6 +103,7 @@ def main():
             d.text((60, y), ln, font=tf, fill="white")
             y += size + 10
         d.text((60, H - 58), SUB, font=sub_f, fill=SAND)
+        img.paste(chip, (48, 40), chip)
         img.save(OUT / f"{key}.jpg", "JPEG", quality=84, optimize=True, progressive=True)
         print("og/", key, ".jpg", sep="")
     # The site-wide default (site.ogImage) is the home image, so it never carries stale text.

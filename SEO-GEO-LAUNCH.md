@@ -31,7 +31,7 @@ Rule of thumb before launch: `npm run build`, then search `dist/` for `[` inside
 | `bingVerification` | Bing `msvalidate.01` value | meta tag (skip if Bing imports from Search Console) |
 | `indexNowKey` | 8-128 chars a-z A-Z 0-9 - | builds `/<key>.txt`; used by `scripts/indexnow.mjs` |
 | `ogImage` | Default share image | fallback og:image, schema business `image` |
-| `logo` | Real logo file in `public/` (PNG/SVG, min 112x112) | schema `logo`. Leave `''` until the real logo exists (the current mark is a placeholder drawing) |
+| `logo` | Logo file in `public/` (PNG/SVG, min 112x112) | schema `logo`. Set to `/logo.png` (client logo on marble plate, 2026-11-10). Vector logo lives in `src/components/Logo.astro` |
 | `ga4Id`, `metaPixelId` | Tracking IDs | consent banner + tags (nothing loads while empty) |
 
 Other data files:

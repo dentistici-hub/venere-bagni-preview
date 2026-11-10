@@ -16,7 +16,7 @@ const { minimal = false } = Astro.props;
     ) : (
     <div class="ftr__grid">
       <div>
-        <Logo />
+        <Logo variant="plain" />
         <p>Trasformazione vasca in doccia, vasca con sportello e bagno sicuro a Torino e in tutto il Piemonte.</p>
         <p set:html={h(`${site.legalName} · ${site.street}, ${site.postalCode} ${site.locality} · P.IVA ${site.vat} · REA ${site.rea}`)} />
       </div>

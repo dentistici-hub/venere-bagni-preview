@@ -87,10 +87,10 @@ mark.ph--note { font-size: .72em; vertical-align: .15em; font-weight: 700; lette
 @media (max-width: 760px) { .topbar .t-left { display: none; } .topbar .wrap { justify-content: center; } }
 .hdr { position: sticky; top: 0; z-index: 40; background: rgb(251 248 243 / .96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .hdr .wrap { display: flex; align-items: center; gap: 24px; min-height: 76px; }
-.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--petrol-2); }
-.logo svg { width: 40px; height: 40px; }
-.logo b { font: 600 1.6rem/1 var(--serif); letter-spacing: -.01em; }
-.logo small { display: block; white-space: nowrap; font: 700 .7rem/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--terra-2); margin-top: 3px; }
+.logo { display: inline-flex; align-items: center; flex: none; text-decoration: none; line-height: 0; }
+.logo svg { display: block; height: 44px; width: auto; aspect-ratio: 722 / 166; }
+.logo--chip { padding: 7px 13px; border-radius: 10px; background-size: cover; background-position: center; box-shadow: inset 0 0 0 1px rgb(120 95 70 / .22), 0 1px 2px rgb(27 42 48 / .08); }
+.logo--plain svg { height: 52px; }
 .nav { margin-left: auto; display: flex; gap: 4px; }
 .nav a { padding: 10px 10px; border-radius: 8px; text-decoration: none; color: var(--ink); font-weight: 700; font-size: 1rem; white-space: nowrap; }
 .nav a:hover, .nav a[aria-current='page'] { background: var(--sand); color: var(--petrol-2); }
@@ -314,8 +314,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
 .ftr__grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 32px; }
 .ftr h3 { color: #fff; font: 700 1.05rem var(--sans); margin-bottom: 12px; }
 .ftr ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.ftr .logo { color: #fff; margin-bottom: 14px; }
-.ftr .logo small { color: #f2c7a6; }
+.ftr .logo { margin-bottom: 14px; }
 .ftr__legal { border-top: 1px solid rgb(255 255 255 / .15); margin-top: 36px; padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: .92rem; }
 .ftr__legal button { background: none; border: 0; color: #fff; text-decoration: underline; font: inherit; cursor: pointer; padding: 0; }
 @media (max-width: 960px) { .ftr__grid { grid-template-columns: 1fr 1fr; } }
@@ -409,7 +408,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
   .tbl--stack td:empty { display: none; }
 }
 
-@media (max-width: 480px) { .hdr .wrap { gap: 12px; } .logo small { display: none; } .logo b { font-size: 1.35rem; } .logo svg { width: 34px; height: 34px; } }
+@media (max-width: 480px) { .hdr .wrap { gap: 12px; } .logo svg { height: 34px; } .logo--chip { padding: 6px 10px; } }
 
 /* Guides and Chi siamo */
 .section--tight { padding: clamp(40px, 5vw, 64px) 0; }
@@ -426,7 +425,7 @@ h2.h3 { font-size: clamp(1.3rem, 1.15rem + .6vw, 1.55rem); }
 /* Desktop header: logo + 6 links + CTA must fit the 1180px wrap (measured 2026-11-10: ~27px spare at 1440px). */
 @media (min-width: 1241px) { .hdr .wrap { gap: 16px; } .nav { gap: 0; } .nav a { padding: 10px 8px; } }
 /* Header between the burger breakpoint and ~1320px: tighter so the CTA button never overflows. */
-@media (min-width: 1241px) and (max-width: 1340px) { .hdr .wrap { gap: 14px; } .nav { gap: 0; } .nav a { padding: 10px 7px; font-size: .95rem; } .logo small { display: none; } }
+@media (min-width: 1241px) and (max-width: 1340px) { .hdr .wrap { gap: 14px; } .nav { gap: 0; } .nav a { padding: 10px 7px; font-size: .95rem; } .logo svg { height: 38px; } }
 
 /* ---- Visual refresh 2026-11-10: photo hero, featured before/after, photo band, pull-quote, dark section ---- */
 

@@ -49,6 +49,7 @@ const index = site.indexable && !noindex && !isPreview;
     <meta name="robots" content={index ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, nofollow'} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={u('/apple-touch-icon.png')} />
     <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:locale" content="it_IT" />
     <meta property="og:site_name" content={site.brand} />

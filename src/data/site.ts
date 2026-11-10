@@ -113,8 +113,8 @@ export const site = {
   // Default social image (1200x630, in public/). Per-page images are public/og/<page>.jpg (scripts/make-og.py).
   ogImage: '/og-image.jpg',
   // Logo file for schema `logo` (square or wide PNG/SVG, at least 112x112 px, in public/). '' = no logo in schema.
-  // The current mark in Logo.astro is a placeholder drawing: leave '' until the real logo exists.
-  logo: '',
+  // public/logo.png = the client logo on its marble plate (rendered from Logo.astro, 2026-11-10).
+  logo: '/logo.png',
   // Tracking. Empty = nothing is loaded (consent banner only appears when one is set).
   ga4Id: '',
   metaPixelId: '',

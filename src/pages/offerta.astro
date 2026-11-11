@@ -3,7 +3,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import LeadForm from '../components/LeadForm.astro';
-import BeforeAfter from '../components/BeforeAfter.astro';
+import RealWork from '../components/RealWork.astro';
 import Faq from '../components/Faq.astro';
 import Reviews from '../components/Reviews.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -65,16 +65,10 @@ const reviews = [
   <section class="section" id="prima-dopo">
     <div class="wrap">
       <div class="head head--row">
-        <h2>Tre bagni a Torino e provincia, prima e dopo</h2>
+        <h2>Bagni veri, prima e dopo</h2>
         <p class="muted">Sposta la barra su ogni foto per vedere la differenza.</p>
       </div>
-      <div class="ba-feature">
-        <BeforeAfter size="lg" before="ba1p" after="ba1d" caption="[CITTÀ] · doccia a piatto basso con panca" note="Via la vasca con la tenda: al suo posto una doccia con il piatto basso e una panca per sedersi." />
-        <div class="ba-pair">
-          <BeforeAfter before="ba2p" after="ba2d" caption="[CITTÀ] · doccia in vetro, pareti effetto marmo" note="La vasca sotto la finestra è diventata una doccia chiusa in vetro, con le pareti color sabbia." />
-          <BeforeAfter before="ba4p" after="ba4d" caption="[CITTÀ] · doccia walk-in a filo pavimento" note="In un bagno piccolo, una doccia walk-in con il piatto allo stesso livello del pavimento." />
-        </div>
-      </div>
+      <RealWork />
     </div>
   </section>
 

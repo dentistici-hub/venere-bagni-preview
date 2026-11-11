@@ -618,3 +618,11 @@ h2.h3 { font-size: clamp(1.3rem, 1.15rem + .6vw, 1.55rem); }
 .styles-note { margin-top: 28px; }
 @media (max-width: 960px) { .styles { grid-template-columns: 1fr 1fr; } .parts { grid-template-columns: 1fr; gap: 18px; } }
 @media (max-width: 480px) { .style img { aspect-ratio: 4 / 3; } }
+
+/* Real jobs, portrait before/after (2026-11-11) */
+.ba-real { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.ba--tall .ba__frame { aspect-ratio: 3 / 4; }
+.ba--tall figcaption { font-size: .98rem; }
+.ba--tall .ba__meta { display: block; font-weight: 700; color: var(--ink); }
+@media (max-width: 1100px) { .ba-real { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .ba-real { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; } }

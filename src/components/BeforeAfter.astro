@@ -3,10 +3,10 @@ import { Image } from 'astro:assets';
 import { media } from '../data/media';
 import { h } from '../lib/txt';
 // size "lg" = the featured pair (full container width); note = short line under the caption.
-interface Props { before: string; after: string; caption: string; note?: string; size?: 'lg' | 'sm' }
+interface Props { before: string; after: string; caption: string; note?: string; size?: 'lg' | 'sm' | 'tall' }
 const { before, after, caption, note, size = 'sm' } = Astro.props;
 const b = media[before]; const a = media[after];
-const sizes = size === 'lg' ? '(max-width: 1240px) 100vw, 1180px' : '(max-width: 960px) 100vw, 580px';
+const sizes = size === 'lg' ? '(max-width: 1240px) 100vw, 1180px' : size === 'tall' ? '(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 290px' : '(max-width: 960px) 100vw, 580px';
 ---
 <figure class={`ba ba--${size}`}>
   <div class="ba__frame" data-ba>

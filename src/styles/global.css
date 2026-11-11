@@ -501,7 +501,7 @@ h2.h3 { font-size: clamp(1.3rem, 1.15rem + .6vw, 1.55rem); }
   .xhero h1 { color: #fff; font-size: clamp(2.6rem, 1.6rem + 2.6vw, 3.9rem); text-wrap: balance; text-shadow: 0 2px 24px rgb(0 0 0 / .25); }
   .xhero--page h1 { font-size: clamp(2.3rem, 1.5rem + 2vw, 3.2rem); }
   .xhero .lead { color: #dce9ec; font-size: 1.3rem; }
-  .xhero .eyebrow { color: #ef8350; }
+  .xhero .eyebrow { color: #f39a6c; text-shadow: 0 1px 10px rgb(0 0 0 / .5); }
   .xhero .crumbs, .xhero .crumbs a { color: #c9dcdf; }
   .xhero .crumbs span[aria-current] { color: #fff; }
   .xhero .chips-row li { background: rgb(255 255 255 / .1); border-color: rgb(255 255 255 / .3); color: #fff; backdrop-filter: blur(4px); }
@@ -626,3 +626,32 @@ h2.h3 { font-size: clamp(1.3rem, 1.15rem + .6vw, 1.55rem); }
 .ba--tall .ba__meta { display: block; font-weight: 700; color: var(--ink); }
 @media (max-width: 1100px) { .ba-real { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .ba-real { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; } }
+
+/* Mobile hero (2026-11-11): photo behind the headline, dark petrol fade, white text, form card floating on petrol
+   (same look as desktop instead of flat greige text). */
+@media (max-width: 960px) {
+  .xhero { position: relative; isolation: isolate; display: block; background: var(--petrol-2); color: #e3eef0; padding: 30px 0 40px; }
+  .xhero__photo { position: absolute; top: 0; left: 0; right: 0; height: 600px; width: auto; margin: 0; z-index: -2; }
+  .xhero__photo img { height: 100%; aspect-ratio: auto; border-radius: 0; box-shadow: none; object-position: var(--focus, 62% 40%); }
+  .xhero__photo::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgb(10 56 67 / .28) 0%, rgb(10 56 67 / .5) 35%, rgb(10 56 67 / .9) 75%, var(--petrol-2) 100%); }
+  .xhero__badge { display: none; }
+  .xhero h1 { color: #fff; text-wrap: balance; text-shadow: 0 2px 18px rgb(0 0 0 / .3); }
+  .xhero .lead { color: #eef5f6; text-shadow: 0 1px 12px rgb(0 0 0 / .45); }
+  .xhero .eyebrow { color: #f39a6c; text-shadow: 0 1px 10px rgb(0 0 0 / .5); }
+  .xhero .crumbs, .xhero .crumbs a { color: #c9dcdf; }
+  .xhero .crumbs span[aria-current] { color: #fff; }
+  .xhero .lf { color: var(--ink); }
+  .xhero__form .lf { border: 0; box-shadow: 0 2px 4px rgb(0 0 0 / .1), 0 24px 48px -16px rgb(0 0 0 / .6); }
+  .xhero .chips-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .xhero .chips-row li { background: rgb(255 255 255 / .08); border-color: rgb(255 255 255 / .28); color: #fff; font-size: .98rem; padding: 6px 12px; }
+  .xhero__form .lf { outline: 1px solid rgb(255 255 255 / .14); }
+  .xhero .chips-row svg { color: #43c06e; }
+  .xhero .trust-line, .xhero .hero__alt { color: #cfe0e3; }
+  .xhero .stars { color: #e8c170; }
+  .xhero + .promises { border-top: 1px solid rgb(255 255 255 / .1); }
+  .lf__head { padding: 18px 20px 12px; }
+  .lf__head .lf__title { font-size: 1.35rem; }
+  .lf__head .lf__sub { font-size: .98rem; margin-bottom: 12px; }
+  .lf__step { padding: 18px 20px 22px; }
+}

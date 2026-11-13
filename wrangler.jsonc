@@ -2,7 +2,12 @@
   "name": "venere-bagni-site",
   "main": "./worker/index.js",
   "compatibility_date": "2026-10-06",
-  // CONFIRM at launch: Cloudflare account and custom domain (e.g. www.venerebagni.it). Not deployed yet.
+  // Live 2026-11-13 on the client Cloudflare account (tech.venerebagni@), Profilo is a member. Both hosts serve 200 (no apex<->www redirect; canonical = www).
+  "account_id": "963f315167cb541ae30cb30348371b35",
+  "routes": [
+    { "pattern": "venerebagni.it", "zone_name": "venerebagni.it", "custom_domain": true },
+    { "pattern": "www.venerebagni.it", "zone_name": "venerebagni.it", "custom_domain": true }
+  ],
   "assets": { "directory": "./dist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
   // Secret (not in this file): CRM_INGEST_TOKEN  ->  wrangler secret put CRM_INGEST_TOKEN
   "vars": { "SITO": "venere-bagni" },

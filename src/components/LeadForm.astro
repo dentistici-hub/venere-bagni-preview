@@ -7,7 +7,7 @@
 // Submits JSON to /api/lead (Worker -> Profilo CRM, see worker/index.js); extra fields arrive as CRM custom fields.
 import { site } from '../data/site';
 import { u } from '../lib/url';
-import { h } from '../lib/txt';
+import { h, orLive } from '../lib/txt';
 import Icon from './Icon.astro';
 interface Props { id: string; title?: string; sub?: string }
 const { id, title = 'Prenota il sopralluogo gratuito', sub = 'Tre passaggi, meno di un minuto. Quasi tutto con un tocco.' } = Astro.props;
@@ -73,7 +73,7 @@ const labels = ['Il lavoro', 'Due dettagli', 'Dove e a chi telefoniamo'];
     </div>
     <label class="fld"><span>Il tuo nome</span><input name="name" type="text" autocomplete="name" maxlength="120" /></label>
     <label class="fld"><span>Il tuo numero di telefono</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" />
-      <small class="help" set:html={h('Ti chiamiamo entro [X ORE] per fissare il sopralluogo.')} /></label>
+      <small class="help" set:html={h(orLive('Ti chiamiamo entro [X ORE] per fissare il sopralluogo.', 'Ti chiamiamo noi per fissare il sopralluogo.'))} /></label>
     <label class="fld"><span>La tua email <span class="opt-tag">facoltativa</span></span><input name="email" type="email" autocomplete="email" maxlength="200" /></label>
     <label class="check"><input type="checkbox" name="privacy_consent" /><span>Ho letto l'<a href={u('/privacy/')} target="_blank" rel="noopener">informativa sulla privacy</a> e accetto che {site.brand} usi i miei dati per contattarmi sulla mia richiesta.</span></label>
     <label class="check"><input type="checkbox" name="marketing_consent" /><span>Voglio ricevere ogni tanto novità e offerte di {site.brand} (facoltativo).</span></label>

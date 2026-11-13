@@ -31,7 +31,7 @@ export const site = {
   // ---- INDEXING ------------------------------------------------------------------------------------
   // false until launch: every page gets "noindex, nofollow". The preview build (PUBLIC_PREVIEW=1) is
   // always noindex whatever this says. Set to true only on the production domain at launch.
-  indexable: false,
+  indexable: true, // Denis 2026-11-13: index now; live builds leave out missing data
   // Production domain, no trailing slash. Shows up in: canonical, og:url, JSON-LD @id/url, robots.txt
   // sitemap line, llms.txt links, IndexNow. Also set it in astro.config.mjs (`site`) for the sitemap.
   // The preview build overrides it with PUBLIC_SITE_URL. CONFIRM: final domain (venerebagni.it looked free on 2026-11-09).
@@ -90,7 +90,8 @@ export const site = {
   gbpCid: '', // CID number: kept for reference / Maps links
   // Other profiles of the business (Facebook, Instagram, YouTube, ProntoPro, Edilnet, PagineGialle, Houzz, Instapro...).
   // Full URLs. Shows up in: schema sameAs, Chi siamo. Add only profiles that exist and show the same NAP.
-  sameAs: [] as string[],
+  sameAs: ['https://www.instagram.com/venerebagni/'] as string[],
+  instagram: 'https://www.instagram.com/venerebagni/',
   // Google rating (from the Business Profile). Shows up in visible text when set; never in schema unless
   // ratingInSchema is true. Keep ratingInSchema FALSE: Google's review-snippet rules say a business may not
   // mark up reviews about itself on its own site ("self-serving"), and ratings copied from another site
@@ -109,7 +110,7 @@ export const site = {
   bingVerification: '',
   // IndexNow key (8-128 chars, a-z A-Z 0-9 -). When set, the build writes /<key>.txt and scripts/indexnow.mjs can ping.
   // Generate one at launch, e.g. `node -e "console.log(crypto.randomUUID().replace(/-/g,''))"`.
-  indexNowKey: '',
+  indexNowKey: '641ccd03932d4927b058806cd6f9ca52',
   // Default social image (1200x630, in public/). Per-page images are public/og/<page>.jpg (scripts/make-og.py).
   ogImage: '/og-image.jpg',
   // Logo file for schema `logo` (square or wide PNG/SVG, at least 112x112 px, in public/). '' = no logo in schema.

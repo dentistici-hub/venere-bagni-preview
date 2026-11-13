@@ -1,6 +1,6 @@
 ---
-import { site, nav } from '../data/site';
-import { u } from '../lib/url';
+import { site, nav, filled } from '../data/site';
+import { u, isPreview } from '../lib/url';
 import { h } from '../lib/txt';
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
@@ -11,7 +11,7 @@ const here = Astro.url.pathname;
 <div class="topbar">
   <div class="wrap">
     <span class="t-left">Torino e tutto il Piemonte · Sopralluogo gratuito</span>
-    <span>Chiama: <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} />{site.openingHours.length > 0 && <span class="t-left"> · {site.hours}</span>}</span>
+    {filled(site.phone) || isPreview ? <span>Chiama: <a href={`tel:${site.phoneHref}`} set:html={h(site.phone)} />{site.openingHours.length > 0 && <span class="t-left"> · {site.hours}</span>}</span> : <span><a href={`mailto:${site.email}`}>{site.email}</a></span>}
   </div>
 </div>
 <header class={`hdr${minimal ? ' lp-hdr' : ''}`}>

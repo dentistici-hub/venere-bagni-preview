@@ -1,4 +1,7 @@
 ---
+import { orLive } from '../lib/txt';
+import { isPreview } from '../lib/url';
+import { filled } from '../data/site';
 // Thank-you page after the lead form. Reads ?cap= to prefill the WhatsApp message; ?anteprima=1 (preview build)
 // shows a note that nothing was sent.
 import Base from '../layouts/Base.astro';
@@ -15,12 +18,12 @@ const waText = 'Buongiorno, ho appena inviato la richiesta di sopralluogo dal si
       <Icon n="check" class="thanks__icon" />
       <p class="note" data-preview-note hidden style="text-align:left;margin-bottom:24px">Questa è l’anteprima del sito: la richiesta non è stata inviata a nessuno.</p>
       <h1>Grazie, abbiamo ricevuto la tua richiesta</h1>
-      <p class="lead" style="margin-inline:auto" set:html={h('Ti chiamiamo entro [X ORE] per fissare il sopralluogo gratuito. Se preferisci scrivere, siamo su WhatsApp.')} />
-      <div class="contacts">
+      <p class="lead" style="margin-inline:auto" set:html={h(orLive('Ti chiamiamo entro [X ORE] per fissare il sopralluogo gratuito. Se preferisci scrivere, siamo su WhatsApp.', 'Ti chiamiamo noi per fissare il sopralluogo gratuito.'))} />
+      {(isPreview || filled(site.whatsappLabel)) && <div class="contacts">
         <a class="btn btn--wa" data-wa data-number={site.whatsapp} data-text={waText} href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener">
           <Icon n="wa" /> <span set:html={h(`Scrivici su WhatsApp (${site.whatsappLabel})`)} />
         </a>
-      </div>
+      </div>}
       <p class="muted" set:html={h(`Se è urgente, chiama il ${site.phone} negli orari ${site.hours}.`)} />
       <p style="margin-top:28px"><a class="link-arrow" href={u('/')}>Torna alla pagina iniziale</a></p>
     </div>

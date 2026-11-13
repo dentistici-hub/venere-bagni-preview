@@ -1,4 +1,5 @@
 ---
+import { isPreview } from '../lib/url';
 // Chi siamo: who is behind the site (E-E-A-T for Google, "who runs this" for AI assistants).
 // Company data comes from src/data/site.ts; people and photos are placeholders until the client sends them.
 // Never invent biography details: the [SERVE DATO REALE] marks stay until the real text arrives.
@@ -51,7 +52,7 @@ const profiles = site.sameAs.filter(filled);
         <p set:html={h('Il lavoro lo fa la nostra squadra di posatori [DA CONFERMARE: squadra interna o posatori di fiducia, quante persone, da quanti anni lavorano insieme].')} />
         <p set:html={h('Al sopralluogo viene [NOME E RUOLO DEL TECNICO], che poi segue il tuo lavoro fino alla consegna.')} />
       </div>
-      <div class="photo-ph"><p class="muted" set:html={h('[FOTO DEL TITOLARE E DELLA SQUADRA AL LAVORO: foto vere, non di repertorio]')} /></div>
+      {isPreview && <div class="photo-ph"><p class="muted" set:html={h('[FOTO DEL TITOLARE E DELLA SQUADRA AL LAVORO: foto vere, non di repertorio]')} /></div>}
     </div>
   </section>
 
@@ -79,7 +80,7 @@ const profiles = site.sameAs.filter(filled);
       </div>
       <div>
         <h2>Le recensioni</h2>
-        <p set:html={h(rating)} />
+        {(isPreview || site.rating.value) && <p set:html={h(rating)} />}
         {filled(site.gbpUrl)
           ? <p><a class="link-arrow" href={site.gbpUrl} rel="noopener" target="_blank">Leggi tutte le recensioni su Google</a></p>
           : <p set:html={h('[LINK ALLA SCHEDA GOOGLE CON LE RECENSIONI]')} />}

@@ -655,3 +655,6 @@ h2.h3 { font-size: clamp(1.3rem, 1.15rem + .6vw, 1.55rem); }
   .lf__head .lf__sub { font-size: .98rem; margin-bottom: 12px; }
   .lf__step { padding: 18px 20px 22px; }
 }
+.mbar--short { grid-template-columns: 1fr 1.4fr; }
+/* Live builds drop sentences with missing data: never leave an empty paragraph on screen. */
+p:empty { display: none; }

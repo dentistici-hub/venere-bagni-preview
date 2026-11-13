@@ -1,4 +1,5 @@
 ---
+import { isPreview } from '../../lib/url';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
@@ -88,7 +89,7 @@ const m = media[z.img];
     </div>
   </section>
 
-  <section class="section" id="recensioni">
+  {isPreview && <section class="section" id="recensioni">
     <div class="wrap">
       <div class="head"><h2>Cosa dicono i clienti{z.slug === 'torino' ? ' di Torino' : ''}</h2>
         {z.rating && <p class="muted" set:html={h(`Valutazione Google: ${ratingValue} su 5, ${ratingCount} recensioni.`)} />}
@@ -99,7 +100,7 @@ const m = media[z.img];
         <footer>{z.review.name}<span>{z.review.town} · <mark class="ph ph--label">recensione di esempio</mark></span></footer>
       </figure>
     </div>
-  </section>
+  </section>}
 
   <section class="section section--sand" id="domande">
     <div class="wrap narrow">

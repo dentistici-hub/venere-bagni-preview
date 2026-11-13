@@ -2,6 +2,18 @@ import { isPreview } from './url';
 import { exampleFor } from '../data/examples';
 // Turns copy strings into safe HTML: **bold**, and [PLACEHOLDER] -> highlighted <mark> so the client
 // sees at a glance what still needs real data. "[DA CONFERMARE...]" becomes a small "da confermare" tag.
+// LIVE BUILDS (not preview, 2026-11-13, Denis: leave out what we don't have yet): every sentence that still holds a
+// value placeholder like [TELEFONO] is dropped, and "[DA CONFERMARE...]" notes are removed. Preview builds keep
+// the yellow marks so the client sees what is missing.
+const VALUE_PH = /\[(?!DA CONFERMARE)[^\]]+\](?!\()/;
+export const hasPh = (s: string): boolean => VALUE_PH.test(s);
+// a in preview builds or once it has no missing value; b (a version without the missing data) in live builds.
+export const orLive = (a: string, b: string): string => (isPreview || !hasPh(a) ? a : b);
+export const live = (s: string): string => {
+  if (isPreview) return s;
+  const t = s.replace(/\s?\[DA CONFERMARE[^\]]*\]/g, '');
+  return t.split(/(?<=[.!?])\s+/).filter((x) => !hasPh(x)).join(' ').trim();
+};
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // Value placeholder -> <mark>. In preview builds the mark also carries an example value (data-ex, from
 // src/data/examples.ts) for the presentation mode; production builds render the bare mark.
@@ -13,16 +25,16 @@ const mark = (hint?: string) => (_m: string, key: string, offset: number, str: s
 const gap = (sp: string) => (sp && isPreview ? `<span class="ph-gap">${sp}</span>` : sp);
 // hint: optional context for the example value (e.g. a row name). Ignored in production.
 export const h = (s: string, hint?: string): string =>
-  esc(s)
+  esc(live(s))
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/(\s?)(\[DA CONFERMARE[^\]]*\])/g, (_m, sp: string, m: string) => `${gap(sp)}<mark class="ph ph--note" title="${m.slice(1, -1)}">da confermare</mark>`)
     .replace(/\[([^\]]+)\]/g, mark(hint));
 // Plain text for meta tags and schema: placeholders and markdown removed.
-export const plain = (s: string): string => s.replace(/\s*\[[^\]]*\]/g, '').replace(/\*\*/g, '').replace(/\s{2,}/g, ' ').trim();
+export const plain = (s: string): string => live(s).replace(/\s*\[[^\]]*\]/g, '').replace(/\*\*/g, '').replace(/\s{2,}/g, ' ').trim();
 // Same as h(), but "[DA CONFERMARE: detail]" keeps the detail visible ("da confermare: detail") instead of
 // hiding it in a tooltip. Used on the inner pages, where the detail often says what the client must decide.
 export const hv = (s: string, hint?: string): string =>
-  esc(s)
+  esc(live(s))
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/(\s?)\[DA CONFERMARE([^\]]*)\]/g, (_m, sp: string, d: string) => `${gap(sp)}<mark class="ph ph--note">da confermare${d.trim().startsWith(':') ? d.trim().replace(/^:\s*/, ': ') : d.trim() ? ` ${d.trim()}` : ''}</mark>`)
     .replace(/\[([^\]]+)\]/g, mark(hint));
@@ -33,5 +45,5 @@ export const llm = (s: string): string | null => {
   // Markdown links [text](url) are not placeholders.
   const rest = s.replace(/\[DA CONFERMARE[^\]]*\]/g, '').replace(/\[[^\]]*\]\(/g, '(');
   if (/\[[^\]]*\]/.test(rest)) return null;
-  return s.replace(/\*\*/g, '').replace(/\s{2,}/g, ' ').trim();
+  return (isPreview ? s : s.replace(/\s?\[DA CONFERMARE[^\]]*\]/g, '')).replace(/\*\*/g, '').replace(/\s{2,}/g, ' ').trim();
 };

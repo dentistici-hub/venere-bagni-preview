@@ -1,12 +1,14 @@
 ---
-import { h, hv } from '../lib/txt';
+import { h, hv, hasPh } from '../lib/txt';
+import { isPreview } from '../lib/url';
 import type { Faq } from '../lib/schema';
 interface Props { items: Faq[]; open?: boolean; verbose?: boolean }
 const { items, open = false, verbose = false } = Astro.props;
 const t = verbose ? hv : h;
+const list = isPreview ? items : items.filter((f) => !hasPh(f.a));
 ---
 <div class="faq">
-  {items.map((f, i) => (
+  {list.map((f, i) => (
     <details open={open && i === 0}>
       <summary set:html={t(f.q)} />
       <div class="ans"><p set:html={t(f.a)} /></div>

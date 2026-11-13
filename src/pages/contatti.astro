@@ -3,7 +3,8 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { site, zones } from '../data/site';
 import { u } from '../lib/url';
-import { hv as h } from '../lib/txt';
+import { hv as h, hasPh } from '../lib/txt';
+import { isPreview } from '../lib/url';
 
 const crumbs = [{ name: 'Contatti', path: '/contatti/' }];
 const recapiti: [string, string, string?][] = [
@@ -11,8 +12,14 @@ const recapiti: [string, string, string?][] = [
   ['WhatsApp', site.whatsappLabel, `https://wa.me/${site.whatsapp}`],
   ['Indirizzo', site.street],
   ['Orari', site.hours],
+  ['Email', site.email, `mailto:${site.email}`],
+  ['Instagram', '@venerebagni', site.instagram],
   ['Azienda', `${site.legalName}, P.IVA ${site.vat}`],
 ];
+// Live builds: rows without real data are left out (the company row keeps just the name until the P.IVA exists).
+const rows = isPreview ? recapiti : recapiti
+  .map(([k, v, href]) => (k === 'Azienda' && hasPh(v) ? [k, site.legalName, href] as [string, string, string?] : [k, v, href] as [string, string, string?]))
+  .filter(([, v]) => !hasPh(v));
 ---
 <Base
   title="Contatti | Venere Bagni, Torino e Piemonte"
@@ -32,7 +39,7 @@ const recapiti: [string, string, string?][] = [
       <table class="tbl">
         <caption>Recapiti di Venere Bagni</caption>
         <tbody>
-          {recapiti.map(([k, v, href]) => (
+          {rows.map(([k, v, href]) => (
             <tr><th scope="row">{k}</th><td>{href ? <a href={href} set:html={h(v)} /> : <span set:html={h(v)} />}</td></tr>
           ))}
         </tbody>
@@ -47,7 +54,7 @@ const recapiti: [string, string, string?][] = [
         <p>A Torino, nella sua provincia e nel resto del Piemonte. Queste sono le pagine per zona:</p>
         <ul class="zones">{zones.map((z) => <li><a href={u(`/zone/${z.slug}/`)}>{z.name}</a></li>)}</ul>
       </div>
-      <div class="map-ph"><p class="muted" set:html={h('[MAPPA GOOGLE: inserire dopo conferma dell’indirizzo]')} /></div>
+      {isPreview && <div class="map-ph"><p class="muted" set:html={h('[MAPPA GOOGLE: inserire dopo conferma dell’indirizzo]')} /></div>}
     </div>
   </section>
 </Base>

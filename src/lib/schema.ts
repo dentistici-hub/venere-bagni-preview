@@ -7,6 +7,9 @@ import { site, filled } from '../data/site';
 import { plain } from './txt';
 import { u } from './url';
 
+import { hasPh } from './txt';
+import { isPreview as _pv } from './url';
+const liveFaqs = (l: Faq[]) => (_pv ? l : l.filter((f) => !hasPh(f.a)));
 export interface Faq { q: string; a: string }
 export type PageType = 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage' | 'FAQPage';
 export interface ServiceOpts { name: string; description: string; areaServed?: string }
@@ -98,7 +101,7 @@ export function buildGraph(o: Opts) {
     ...(o.path === '/' || o.pageType === 'AboutPage' || o.pageType === 'ContactPage' ? { about: { '@id': ids.biz() } } : {}),
   };
   if (o.pageType === 'FAQPage' && o.faqs?.length) {
-    page.mainEntity = o.faqs.map((f) => ({ '@type': 'Question', name: plain(f.q), acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } }));
+    page.mainEntity = liveFaqs(o.faqs).map((f) => ({ '@type': 'Question', name: plain(f.q), acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } }));
   }
   graph.push(page);
 
@@ -120,7 +123,7 @@ export function buildGraph(o: Opts) {
   }
   // FAQ markup on pages whose main content is not the FAQ (the FAQ page itself carries it in mainEntity).
   if (o.faqs?.length && o.pageType !== 'FAQPage') {
-    graph.push({ '@type': 'FAQPage', '@id': `${url}#domande`, isPartOf: { '@id': pageId }, mainEntity: o.faqs.map((f) => ({ '@type': 'Question', name: plain(f.q), acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } })) });
+    graph.push({ '@type': 'FAQPage', '@id': `${url}#domande`, isPartOf: { '@id': pageId }, mainEntity: liveFaqs(o.faqs).map((f) => ({ '@type': 'Question', name: plain(f.q), acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } })) });
   }
   if (o.article) {
     const author = filled(site.founder.name)

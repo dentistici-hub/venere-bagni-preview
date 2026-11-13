@@ -1,4 +1,5 @@
 ---
+import { isPreview } from '../lib/url';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import LeadForm from '../components/LeadForm.astro';
@@ -71,7 +72,7 @@ const others = reviews.filter((r) => r !== pull);
           <li><Icon n="check" />Prezzo fisso scritto</li>
           <li><Icon n="check" />Chiavi in mano in 8 ore</li>
         </ul>
-        <p class="trust-line"><span class="stars" aria-hidden="true">★★★★★</span><span set:html={h(`${ratingValue} su 5 da ${ratingCount} recensioni Google`)} /></p>
+        {(isPreview || site.rating.value) && <p class="trust-line"><span class="stars" aria-hidden="true">★★★★★</span><span set:html={h(`${ratingValue} su 5 da ${ratingCount} recensioni Google`)} /></p>}
         <p class="hero__alt" set:html={h(`Preferisci parlare con qualcuno? Chiama il ${site.phone} oppure scrivi su WhatsApp al ${site.whatsappLabel}.`)} />
       </div>
     </div>
@@ -209,21 +210,21 @@ const others = reviews.filter((r) => r !== pull);
     </div>
   </section>
 
-  <section class="section quote-sec" aria-label="La voce di un cliente">
+  {isPreview && <section class="section quote-sec" aria-label="La voce di un cliente">
     <div class="wrap">
       <figure class="pull">
         <blockquote><p set:html={h(pull.text)} /></blockquote>
         <figcaption><span class="stars" aria-label="5 stelle su 5">★★★★★</span><b>{pull.name}</b>, {pull.town} · <mark class="ph ph--label">recensione di esempio</mark></figcaption>
       </figure>
     </div>
-  </section>
+  </section>}
 
-  <section class="section section--sand" id="recensioni">
+  {isPreview && <section class="section section--sand" id="recensioni">
     <div class="wrap">
       <div class="head"><h2>Cosa dicono i clienti</h2><p class="muted" set:html={h(`${ratingValue} su 5 · ${ratingCount} recensioni su Google`)} /></div>
       <Reviews items={others} />
     </div>
-  </section>
+  </section>}
 
   <section class="section" id="zone">
     <div class="wrap">
